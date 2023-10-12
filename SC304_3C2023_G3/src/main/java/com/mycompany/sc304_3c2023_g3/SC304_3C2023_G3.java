@@ -7,5 +7,9 @@ public class SC304_3C2023_G3 {
         System.out.println("Hello World!");
         System.out.println("Hello World!");
         System.out.println("Hello World!");
+        
+        System.out.println("Hello World!");
+           System.out.println("Hello World!");
+              System.out.println("Hello World!");
     }
 }
