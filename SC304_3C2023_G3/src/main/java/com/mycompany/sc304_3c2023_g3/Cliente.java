@@ -43,6 +43,14 @@ public class Cliente extends Persona {
         this.passsword = passsword;
     }
 
+    public String getConfirmarPassword() {
+        return confirmarPassword;
+    }
+
+    public void setConfirmarPassword(String confirmarPassword) {
+        this.confirmarPassword = confirmarPassword;
+    }
+
     public boolean isEstado() {
         return estado;
     }
