@@ -3,7 +3,8 @@ package com.mycompany.sc304_3c2023_g3;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  Clase encolarCliente y Empleado Listo
+ *  Clase activar y desactivar Usuario Revisar 
  */
 
 public class Cola {
@@ -18,12 +19,10 @@ public class Cola {
 
     Empleado e = new Empleado();
     Cliente c = new Cliente();
-    public boolean esVacia() {
-        if (inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+    
+    
+    public boolean esVacia() { // Cambie este porque decia que era redundante, entonces para que sea mas corto
+        return inicio == null;
     }
 
     public void encolarCliente() {
