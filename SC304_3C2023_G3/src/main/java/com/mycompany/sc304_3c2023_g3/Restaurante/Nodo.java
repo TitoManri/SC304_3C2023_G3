@@ -1,4 +1,7 @@
-package com.mycompany.sc304_3c2023_g3;
+package com.mycompany.sc304_3c2023_g3.Restaurante;
+
+import com.mycompany.sc304_3c2023_g3.Restaurante.Empleado;
+import com.mycompany.sc304_3c2023_g3.Restaurante.Cliente;
 
 /**
  *

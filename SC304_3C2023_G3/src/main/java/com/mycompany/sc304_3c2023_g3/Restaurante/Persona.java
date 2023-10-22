@@ -1,4 +1,4 @@
-package com.mycompany.sc304_3c2023_g3;
+package com.mycompany.sc304_3c2023_g3.Restaurante;
 
 /**
  * Agregue una confirmacion de contrasena
