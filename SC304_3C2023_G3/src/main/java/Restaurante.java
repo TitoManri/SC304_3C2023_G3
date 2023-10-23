@@ -1,5 +1,5 @@
 
-package com.mycompany.sc304_3c2023_g3.Restaurante;
+
 
 import java.awt.Dimension;
 import javax.swing.JFrame;

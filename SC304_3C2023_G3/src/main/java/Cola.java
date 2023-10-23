@@ -1,6 +1,4 @@
-package com.mycompany.sc304_3c2023_g3.Restaurante;
 
-import com.mycompany.sc304_3c2023_g3.Restaurante.Cliente;
 import javax.swing.JOptionPane;
 
 /**
