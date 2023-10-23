@@ -1,21 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.mycompany.sc304_3c2023_g3.Restaurante;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-/**
- *
- * @author manri
- */
 public class Restaurante extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Restaurante
-     */
     public Restaurante() {
         initComponents();
         setSize(800, 600);
