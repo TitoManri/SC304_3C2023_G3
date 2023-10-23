@@ -1,4 +1,4 @@
-package Bebidas;
+package Catalogo.Bebidas;
 
 import Catalogo.Catalogo;
 

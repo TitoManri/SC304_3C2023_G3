@@ -1,4 +1,4 @@
-package Platillo;
+package Catalogo.Platillo;
 
 public class Ensalada extends Platillo{
     private String ensaladaCesar;

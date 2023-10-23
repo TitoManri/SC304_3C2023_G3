@@ -1,4 +1,4 @@
-package Postres;
+package Catalogo.Postres;
 
 import Catalogo.Catalogo;
 

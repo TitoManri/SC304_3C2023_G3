@@ -1,4 +1,4 @@
-package Platillo;
+package Catalogo.Platillo;
 
 import Catalogo.Catalogo;
 

@@ -1,4 +1,4 @@
-package Bebidas;
+package Catalogo.Bebidas;
 
 public class OtrasBebidas extends Bebidas{
     private String aguaEmbotellada;
