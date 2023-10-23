@@ -21,7 +21,6 @@ public class Restaurante extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        imageMainScreen = new javax.swing.JLabel();
         tituloMainScreen = new javax.swing.JLabel();
         bienvenido = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
@@ -31,17 +30,16 @@ public class Restaurante extends javax.swing.JFrame {
         logInboton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(34, 38, 37));
 
-        imageMainScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/imageMainScreen.jpg"))); // NOI18N
-
         tituloMainScreen.setFont(new java.awt.Font(".AppleSystemUIFont", 1, 26)); // NOI18N
+        tituloMainScreen.setForeground(new java.awt.Color(255, 255, 255));
         tituloMainScreen.setText("Restaurante Platillo Volador ");
 
         bienvenido.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 16)); // NOI18N
+        bienvenido.setForeground(new java.awt.Color(255, 255, 255));
         bienvenido.setText("Bienvenid@ al Restaurante Platillo Volador! ");
 
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -56,8 +54,10 @@ public class Restaurante extends javax.swing.JFrame {
             }
         });
 
+        usernameTextoLogIn.setForeground(new java.awt.Color(255, 255, 255));
         usernameTextoLogIn.setText("Username");
 
+        contrasenaTextoLogIn.setForeground(new java.awt.Color(255, 255, 255));
         contrasenaTextoLogIn.setText("Contraseña");
 
         logInboton.setText("Log In");
@@ -72,13 +72,12 @@ public class Restaurante extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(imageMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(378, 378, 378)
                         .addComponent(tituloMainScreen))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(401, 401, 401)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(usernameTextoLogIn)
@@ -86,15 +85,12 @@ public class Restaurante extends javax.swing.JFrame {
                             .addComponent(username)
                             .addComponent(contrasena)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(473, 473, 473)
                         .addComponent(logInboton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(imageMainScreen)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(tituloMainScreen)
@@ -110,7 +106,7 @@ public class Restaurante extends javax.swing.JFrame {
                 .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(logInboton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,7 +177,6 @@ public class Restaurante extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenido;
     private javax.swing.JTextField contrasena;
     private javax.swing.JLabel contrasenaTextoLogIn;
-    private javax.swing.JLabel imageMainScreen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logInboton;
     private javax.swing.JLabel tituloMainScreen;
