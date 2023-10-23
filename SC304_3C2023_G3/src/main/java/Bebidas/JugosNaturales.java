@@ -1,4 +1,4 @@
-package Catalogo.Bebidas;
+package Bebidas;
 
 public class JugosNaturales extends Bebidas{
     private String guanabana;

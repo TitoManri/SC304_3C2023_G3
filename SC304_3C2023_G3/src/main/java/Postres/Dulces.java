@@ -1,4 +1,4 @@
-package Catalogo.Postres;
+package Postres;
 
 public class Dulces extends Postres{
     private String arrozConLeche;

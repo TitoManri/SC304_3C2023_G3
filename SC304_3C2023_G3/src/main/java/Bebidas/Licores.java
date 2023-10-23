@@ -1,4 +1,4 @@
-package Catalogo.Bebidas;
+package Bebidas;
 
 public class Licores extends Bebidas{
     private String imperial;

@@ -1,5 +1,5 @@
 
-package Catalogo.Provedores;
+package Provedores;
 /*Todavia falta definir como se van a utilizar los provedores*/
 
 import Catalogo.Catalogo;
