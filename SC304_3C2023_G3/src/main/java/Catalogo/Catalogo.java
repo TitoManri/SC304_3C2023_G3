@@ -1,4 +1,4 @@
-package com.mycompany.sc304_3c2023_g3.Restaurante.Catalogo;
+package Catalogo;
 
 public class Catalogo {
     protected String nombreC;
@@ -8,6 +8,5 @@ public class Catalogo {
 
     public Catalogo() {
     }
-    
-    
+ 
 }
