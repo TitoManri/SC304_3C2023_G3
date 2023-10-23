@@ -1,4 +1,6 @@
-package com.mycompany.sc304_3c2023_g3.Restaurante;
+package com.mycompany.sc304_3c2023_g3.Restaurante.Catalogo.Platillo;
+
+import com.mycompany.sc304_3c2023_g3.Restaurante.Catalogo.Catalogo;
 
 public class Platillo extends Catalogo {
     protected String platosFuertes;
