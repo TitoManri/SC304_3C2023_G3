@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Interfaz.Postres;
+package Interfaz.Platillos;
 
 /**
  *
  * @author manri
  */
-public class Salados extends javax.swing.JPanel {
+public class PlatosFuertes extends javax.swing.JPanel {
 
     /**
-     * Creates new form Salados
+     * Creates new form PlatosFuertes
      */
-    public Salados() {
+    public PlatosFuertes() {
         initComponents();
     }
 
