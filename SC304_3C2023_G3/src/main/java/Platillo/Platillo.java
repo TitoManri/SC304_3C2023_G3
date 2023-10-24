@@ -1,5 +1,4 @@
 package Platillo;
-
 import Catalogo.Catalogo;
 
 public class Platillo extends Catalogo {
@@ -47,4 +46,6 @@ public class Platillo extends Catalogo {
     public void setSopas(String sopas) {
         this.sopas = sopas;
     }
+    
+    //protected NodoLES inicio,fin; //punteros
 }
