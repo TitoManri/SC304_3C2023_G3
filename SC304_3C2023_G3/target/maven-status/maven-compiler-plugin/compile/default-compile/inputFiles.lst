@@ -1,33 +1,35 @@
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/PlatillosFuertes/PlatosFuertes.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Nodo.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Bebidas/OtrasBebidas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Bebidas/JugosNaturales.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Bebida/Gaseosas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Cliente.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Empleado.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Platillo/Ensalada.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/PlatillosFuertes/Entradas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Provedores/Prueba.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Postres/Salados.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Cola.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Persona.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Bebidas/Bebidas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Bebidas/Licores.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Bebidas/OtrasBebidas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Postres/Dulces.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Catalogo/Catalogo.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Postres/Dulces.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Restaurante.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Provedores/Provedores.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/PlatillosFuertes/Ensaladas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Platillo/Entrada.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Platillo/PlatilloFuerte.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Bebidas/JugosNaturales.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Postres/Postres.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Bebidas/Gaseosas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Bebidas/Licores.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/PlatillosFuertes/Sopas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Catalogo.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Platillo/Platillo.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Platillo/Sopas.java
-/Users/manri/Desktop/Proyectos_Fidelitas_Tercer_Cuatri/Estructura_de_Datos/SC304_3C2023_G3/SC304_3C2023_G3/src/main/java/Interfaz/Postres/Salados.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Ensaladas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Empleado.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Dulces.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Salados.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Main\SignIn.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Entrada.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Bebidas\Gaseosas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Persona.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\JugosNaturales.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Main\LogIn.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\PlatosFuertes.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Postres\Salados.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Bebidas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Gaseosas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\ListaEnlazadaSimple\ListaEnlazadaSimple.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Entradas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cliente.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\OtrasBebidas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Postres\Postres.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Nodo.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Ensalada.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Bebidas\JugosNaturales.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Bebidas\Licores.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cola.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Catalogo.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Provedores\Provedores.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Prueba.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Sopas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\NodoLES.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Postres\Dulces.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\PlatilloFuerte.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Platillo.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Bebidas\OtrasBebidas.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Licores.java
+C:\Users\manri\Desktop\Universidad\Tercer Cuatrimestre\Estructura de datos\Proyecto\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Sopas.java
