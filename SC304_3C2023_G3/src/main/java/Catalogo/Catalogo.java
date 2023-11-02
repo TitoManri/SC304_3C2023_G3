@@ -11,10 +11,6 @@ import Catalogo.Provedores.Provedores;
 import javax.swing.JOptionPane;
 
 public class Catalogo {
-    NodoPlatillo platillos;
-    NodoProvedores provedores;
-    NodoBebida bebidas;
-    NodoPostre postres;
     NodoPlatillo inicioPlatillo;
     NodoProvedores inicioProvedores;
     NodoBebida inicioBebida;
