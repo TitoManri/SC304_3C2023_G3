@@ -130,6 +130,76 @@ public class Catalogo {
             aux.setSiguiente(nuevo);
         }
    }
+   
+   public void editarPlatillos() {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre del platillo que desea modificar: ");
+            if (aux.getPlatillo().getNombre().equals(platilloNom)) {
+                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del platillo:");
+                aux.getPlatillo().setNombre(nuevoNom);
+                String nuevaDescr = JOptionPane.showInputDialog("Nueva descripcion: ");
+                aux.getPlatillo().setDescripcion(nuevaDescr);
+                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría del platillo:");
+                aux.getPlatillo().setCategoria(nuevaCateg);
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede modificar el platillo que desea: no coincide con ninguno existente.");   
+            }
+            aux = aux.getSiguiente();
+        } 
+    }
+   
+    public void editarBebidas() {
+        NodoBebida aux = inicioBebida;
+        while (aux != null) {
+            String bebidaNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar: ");
+            if (aux.getBebida().getNombre().equals(bebidaNom)) {
+                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:");
+                aux.getBebida().setNombre(nuevoNom);
+                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:");
+                aux.getBebida().setCategoria(nuevaCateg);
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede modificar la bebida que desea: no coincide con ninguno existente.");   
+            }
+            aux = aux.getSiguiente();
+        }
+    }
+    
+    public void editarPostres() {
+        NodoPostre aux = inicioPostres;
+        while (aux != null) {
+            String postreNom = JOptionPane.showInputDialog("Ingrese el nombre del postre que desea modificar: ");
+            if (aux.getPostre().getNombre().equals(postreNom)) {
+                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del postre:");
+                aux.getPostre().setNombre(nuevoNom);
+                String nuevaDescr = JOptionPane.showInputDialog("Nueva descripcion: ");
+                aux.getPostre().setDescripcion(nuevaDescr);
+                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría del postre:");
+                aux.getPostre().setCategoria(nuevaCateg);
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede modificar el postre que desea: no coincide con ninguno existente.");   
+            }
+            aux = aux.getSiguiente();
+        }
+    }
+    
+    public void editarProvedores() {
+        NodoProvedores aux = inicioProvedores;
+        while (aux != null) {
+            String provedorNom = JOptionPane.showInputDialog("Ingrese el nombre del proveedor que desea modificar: ");
+            if (aux.getProvedores().getNombre().equals(provedorNom)) {
+                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del proveedor:");
+                aux.getProvedores().setNombre(nuevoNom);
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede modificar el proveedor que desea: no coincide con ninguno existente.");   
+            }
+            aux = aux.getSiguiente();
+        }
+    }
 }
     
 
