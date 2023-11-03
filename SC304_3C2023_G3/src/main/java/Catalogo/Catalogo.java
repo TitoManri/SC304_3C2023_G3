@@ -29,7 +29,7 @@ public class Catalogo {
     public boolean esVaciaPlatillos(){
       if(inicioPlatillo==null){
          return true;
-      }else{
+      }else{    
          return false;
       }
    }
