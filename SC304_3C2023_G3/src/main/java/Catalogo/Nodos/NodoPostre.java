@@ -12,10 +12,12 @@ import Catalogo.Postres.Postre;
  */
 public class NodoPostre {
     Postre postre;
+    NodoPostre anterior;
     NodoPostre siguiente;
 
     public NodoPostre() {
         this.siguiente = null;
+        this.anterior = null;
     }
 
     public Postre getPostre() {
@@ -24,6 +26,14 @@ public class NodoPostre {
 
     public void setPostre(Postre postre) {
         this.postre = postre;
+    }
+
+    public NodoPostre getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoPostre anterior) {
+        this.anterior = anterior;
     }
 
     public NodoPostre getSiguiente() {

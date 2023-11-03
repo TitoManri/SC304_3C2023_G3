@@ -7,8 +7,7 @@ package Catalogo.Nodos;
 import Catalogo.Platillo.Platillo;
 
 /**
- *
- * @author manri
+ * 
  */
 public class NodoPlatillo {
     Platillo platillo;

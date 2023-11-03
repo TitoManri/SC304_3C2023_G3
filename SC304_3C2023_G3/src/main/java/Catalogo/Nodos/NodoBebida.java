@@ -8,7 +8,7 @@ import Catalogo.Bebidas.Bebida;
 
 /**
  *
- * @author manri
+ * Lista Circular SImple
  */
 public class NodoBebida {
     Bebida bebida;
