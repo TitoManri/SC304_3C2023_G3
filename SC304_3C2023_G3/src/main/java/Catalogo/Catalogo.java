@@ -11,11 +11,11 @@ import Catalogo.Provedores.Provedores;
 import javax.swing.JOptionPane;
 
 public class Catalogo {
-    //Bebida Lista Enlazada Simple
+    //Bebida Lista Simple Circular 
     NodoBebida inicioBebida;
-    //Platillo Lista Simple Circular 
+    NodoBebida finBebida;
+    //Platillo Lista Enlazada Simple 
     NodoPlatillo inicioPlatillo;
-    NodoPlatillo finPlatillo;
     //Postres Doble Lista Enlazada
     NodoPostre inicioPostre;
     NodoPostre finPostre;
@@ -27,7 +27,7 @@ public class Catalogo {
  
     //Metodos esVacia
     public boolean esVaciaPlatillos(){
-      if(inicioPlatillo==null && finPlatillo==null){
+      if(inicioPlatillo==null){
          return true;
       }else{
          return false;
@@ -43,7 +43,7 @@ public class Catalogo {
    }
    
    public boolean esVaciaBebidas(){
-      if(inicioBebida==null){
+      if(inicioBebida==null&&finBebida==null){
          return true;
       }else{
          return false;
@@ -57,7 +57,7 @@ public class Catalogo {
       }
    }
    
-   //Metodos Platillo Lista Simple Circular
+   //Metodos Platillo Lista Enlazada Simple 
    
     public void agregarPlatillos(){
         String nombre = JOptionPane.showInputDialog("Nombre del platillo:");
@@ -99,26 +99,22 @@ public class Catalogo {
         } 
     }
  
-    //Metodos Bebida Lista Enlazada Simple
+    //Metodos Bebida Lista Simple Circular 
     
    public void agregarBebidas(){
         String nombre = JOptionPane.showInputDialog("Nombre del bebida:");
         String categoria = JOptionPane.showInputDialog("Categoría del bebida:");
         Bebida bebida = new Bebida(nombre, categoria);
-        NodoBebida nuevo=new NodoBebida();
-        nuevo.setBebida(bebida);
-        if(esVaciaBebidas()){
-            inicioBebida=nuevo;
-        }else if(inicioBebida.getSiguiente()==null){
-            inicioBebida.setSiguiente(nuevo);
-        }else{
-            NodoBebida aux=inicioBebida;
-            while(aux.getSiguiente()!=null){
-                aux=aux.getSiguiente();
-            }
-            nuevo.setSiguiente(aux.getSiguiente());
-            aux.setSiguiente(nuevo);
+        NodoBebida nb =new NodoBebida();
+        nb.setBebida(bebida);
+        if (finBebida == null) {
+            finBebida = nb;
+        }else {
+            inicioBebida.setSiguiente(nb);
         }
+
+        inicioBebida = nb;
+        inicioBebida.setSiguiente(finBebida);
    }
    
     public void editarBebidas() {
@@ -141,27 +137,37 @@ public class Catalogo {
     //Metodos Postres Doble Lista Enlazada
    
    public void agregarPostresAlPricipio(){
+    String nombre = JOptionPane.showInputDialog("Nombre del postre:");
+    String descripcion = JOptionPane.showInputDialog("Descripcion: ");
+    String categoria = JOptionPane.showInputDialog("Categoría del postre:");
+    Postre postre = new Postre(nombre,descripcion,categoria);
     NodoPostre np = new NodoPostre(); 
-    if (finPostre == null) { 
-        finPostre = np; 
-        inicioPostre = np; 
-    }else { 
-        np.setSiguiente(finPostre); 
-        finPostre.setAnterior(np); 
-        finPostre = np;
-    }
+    np.setPostre(postre);
+        if (finPostre == null) { 
+            finPostre = np; 
+            inicioPostre = np; 
+        }else { 
+            np.setSiguiente(finPostre); 
+            finPostre.setAnterior(np); 
+            finPostre = np;
+        }
     
    } 
    public void agregarPostresAlFinal(){
+    String nombre = JOptionPane.showInputDialog("Nombre del postre:");
+    String descripcion = JOptionPane.showInputDialog("Descripcion: ");
+    String categoria = JOptionPane.showInputDialog("Categoría del postre:");
+    Postre postre = new Postre(nombre,descripcion,categoria);
     NodoPostre np = new NodoPostre(); 
-    if (inicioPostre == null) { 
-        finPostre = np; 
-        inicioPostre = np; 
-    }else{
-        np.setSiguiente(np);
-        np.setAnterior(inicioPostre);
-        inicioPostre = np;
-    }
+    np.setPostre(postre); 
+        if (inicioPostre == null) { 
+            finPostre = np; 
+            inicioPostre = np; 
+        }else{
+            np.setSiguiente(np);
+            np.setAnterior(inicioPostre);
+            inicioPostre = np;
+        }
    }  
     
    public void editarPostres() {
@@ -205,7 +211,10 @@ public class Catalogo {
     }
    
    public void agregarProvedoresAlFinal(int val){
-        NodoProvedores np = new NodoProvedores(val);      
+        String nombre = JOptionPane.showInputDialog("Nombre del provedores:");
+        Provedores provedor = new Provedores(nombre);
+        NodoProvedores np = new NodoProvedores(); 
+        np.setProvedores(provedor);     
         if (esVaciaProvedores()){
             np.setSiguiente(np);
             np.setSiguiente(np);
