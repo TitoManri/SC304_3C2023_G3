@@ -12,11 +12,13 @@ public class Postre {
    String nombre;
    String descripcion;
    String categoria;
+   String precio;
 
-    public Postre(String nombre, String descripcion, String categoria) {
+    public Postre(String nombre, String descripcion, String categoria,String precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;
+        this.precio = precio;
     }
 
    
@@ -43,7 +45,15 @@ public class Postre {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
    
-   
+    
    
 }

@@ -19,7 +19,9 @@ import javax.swing.*;
 public class CatalogoPlatillos extends javax.swing.JFrame {
     //Platillo Lista Enlazada Simple 
     private NodoPlatillo inicioPlatillo;
-    private static final String RUTA_ARCHIVO = "src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
+    
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
 
     /**
      * Creates new form CatalogoPlatillos
@@ -129,6 +131,11 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         editarPlatillo.setBackground(new java.awt.Color(45, 62, 80));
         editarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarPlatillo.setText("Editar Platillo");
+        editarPlatillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarPlatilloActionPerformed(evt);
+            }
+        });
         getContentPane().add(editarPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 550, 150, 40));
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
@@ -207,13 +214,55 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         @Override
         protected void done() {
-            // Realizar acciones adicionales después de agregar el platillo, if necessary
         }
     };
 
     worker.execute();
     }//GEN-LAST:event_agregarPlatilloActionPerformed
 
+    private void editarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPlatilloActionPerformed
+          try {
+        String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
+
+        if (platilloNom != null) {
+            NodoPlatillo aux = buscarPlatillo(platilloNom);
+
+            if (aux != null) {
+                Platillo bebidaActual = aux.getPlatillo();
+
+                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
+                String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
+                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
+                String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
+
+                if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
+                    Platillo nuevoPlatillo = new Platillo(nuevoNom,nuevaDescripcion, nuevaCateg, nuevoPrecio);
+
+                    aux.setPlatillo(nuevoPlatillo);
+
+                    guardarEnArchivo();
+                    mostrarMensaje("Platillo editado correctamente.");
+                } else {
+                    mostrarMensaje("No se realizaron cambios en el platillo.");
+                }
+            } else {
+                mostrarError("No se encontró el platillo con el nombre proporcionado.");
+            }
+        }
+    } catch (NumberFormatException | HeadlessException e) {
+        mostrarError("Error al editar el platillo: " + e.getMessage());
+    } 
+    }//GEN-LAST:event_editarPlatilloActionPerformed
+    private NodoPlatillo buscarPlatillo(String nombrePlatillo) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
     
 private void agregarPlatilloInBackground(String nombrePlatillo, String descripcion, String categoria, String precio) {
     try {
@@ -221,7 +270,7 @@ private void agregarPlatilloInBackground(String nombrePlatillo, String descripci
 
         if (!platilloYaExiste(platillo.getNombre())) {
             agregarPlatillo(platillo);
-            guardarEnArchivo(); // Guardar el platillo inmediatamente después de agregarlo
+            guardarEnArchivo();
             System.out.println("Datos agregados exitosamente");
             JOptionPane.showMessageDialog(null, "Platillo agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -241,11 +290,11 @@ private void agregarPlatilloInBackground(String nombrePlatillo, String descripci
         NodoPlatillo aux = inicioPlatillo;
         while (aux != null) {
             if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
-                return true; // The platillo already exists in the catalog
+                return true; 
             }
             aux = aux.getSiguiente();
         }
-        return false; // The platillo does not exist in the catalog
+        return false; 
     }
     
 private void guardarEnArchivo() {
@@ -272,7 +321,7 @@ private void guardarEnArchivo() {
                 String categoria = partes[2];
                 String precio = partes[3];
 
-                return new Platillo(nombre, categoria, descripcion, precio); // Corrected parameter order
+                return new Platillo(nombre, categoria, descripcion, precio); 
             } else {
                 return null;
             }
@@ -283,7 +332,7 @@ private void guardarEnArchivo() {
     }
     
 private void cargarDesdeArchivo() {
-    inicioPlatillo = null; // Limpiar la lista antes de cargar desde el archivo
+    inicioPlatillo = null; 
 
     try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
         System.out.println("Trying to load data from the file: " + RUTA_ARCHIVO);
@@ -320,9 +369,11 @@ private void cargarDesdeArchivo() {
         return inicioPlatillo==null;
    }
 
-  
+
+    private void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+    }
     private void mostrarError(String mensaje) {
-    // Implementación para mostrar errores, por ejemplo, usando JOptionPane
     JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 }
     

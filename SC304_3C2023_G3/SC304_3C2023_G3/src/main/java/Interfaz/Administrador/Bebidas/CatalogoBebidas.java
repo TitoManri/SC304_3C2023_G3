@@ -6,8 +6,6 @@ package Interfaz.Administrador.Bebidas;
 import Catalogo.Bebidas.Bebida;
 import Catalogo.Nodos.NodoBebida;
 import java.awt.HeadlessException;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,7 +25,8 @@ public class CatalogoBebidas extends javax.swing.JFrame {
      */
     NodoBebida inicioBebida;
     NodoBebida finBebida;
-    private static final String RUTA_ARCHIVO = "src/main/java/BaseDeDatos/CatalogoBebidas.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;  
     public CatalogoBebidas() {
         initComponents();
         inicioBebida = null; 
@@ -37,13 +36,6 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         jugosNaturalesRadioButton.setActionCommand("Jugos Naturales");
         gaseosasRadioButton.setActionCommand("Gaseosas");
         licoresRadioButton.setActionCommand("Licores");
-        this.addWindowListener(new WindowAdapter() {
-    @Override
-    public void windowClosing(WindowEvent e) {
-        // Cierra los recursos al salir de la aplicación
-        guardarListaEnArchivo(inicioBebida);
-    }
-});
     }
 
     /**
@@ -238,7 +230,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
         @Override
         protected void done() {
-            // Realizar acciones adicionales después de agregar la bebida, si es necesario
+            
         }
     };
 
@@ -248,14 +240,10 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 // Reemplaza la sección de guardarEnArchivo en agregarBebidaInBackground
 private void agregarBebidaInBackground(String nombreBebida, String categoria, String precio) {
     try {
-        System.out.println("Ingresando a agregarBebidaInBackground");  
-
         if (nombreBebida.isEmpty() || categoria.isEmpty() || precio.isEmpty()) {
             mostrarError("Alguno de los campos requeridos no fue completado.");
             return;
         }
-
-        System.out.println("Datos ingresados: " + nombreBebida + ", " + categoria + ", " + precio);  
 
         if (bebidaYaExiste(nombreBebida)) {
             mostrarError("Ya existe una bebida con el mismo nombre.");
@@ -276,7 +264,8 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
             finBebida = nuevoNodo;
         }
 
-        // Reemplaza esta sección con el nuevo código
+        finBebida = agregarNodo(finBebida, bebida); 
+
         try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO, true))) {
             archivo.println(formatoBebida(bebida));
         } catch (IOException e) {
@@ -285,7 +274,6 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
 
         cargarDesdeArchivo();
 
-        System.out.println("Datos agregados exitosamente");  
         JOptionPane.showMessageDialog(null, "Bebida agregada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
     } catch (NumberFormatException e) {
@@ -322,23 +310,19 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
             NodoBebida aux = buscarBebida(bebidaNom);
 
             if (aux != null) {
-                // Obtén la información actual de la bebida
                 Bebida bebidaActual = aux.getBebida();
 
-                // Solicita al usuario los nuevos valores
                 String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
                 String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
                 String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
 
                 if (nuevoNom != null && nuevaCateg != null && nuevoPrecio != null) {
-                    // Crea una nueva bebida con los nuevos valores
                     Bebida nuevaBebida = new Bebida(nuevoNom, nuevaCateg, nuevoPrecio);
 
-                    // Actualiza la información en la lista
                     aux.setBebida(nuevaBebida);
 
-                    // Guarda la lista actualizada en el archivo
-                    guardarEnArchivo();
+                    guardarListaEnArchivo(inicioBebida); 
+
                     mostrarMensaje("Bebida editada correctamente.");
                 } else {
                     mostrarMensaje("No se realizaron cambios en la bebida.");
@@ -461,7 +445,6 @@ private void cargarDesdeArchivo() {
             }
         }
 
-        // Verificar si la lista está vacía después de cargar datos
         if (finBebida != null) {
            
         }

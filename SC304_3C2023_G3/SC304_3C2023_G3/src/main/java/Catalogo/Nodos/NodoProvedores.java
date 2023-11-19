@@ -13,21 +13,13 @@ import Catalogo.Provedores.Provedores;
 public class NodoProvedores {
     
     Provedores provedores;
-    NodoProvedores anterior;
     NodoProvedores siguiente;
-    int tamano;
+    NodoProvedores anterior;
 
-    public NodoProvedores() {
+    public NodoProvedores(Provedores provedores) {
+        this.provedores = provedores;
         this.anterior = null;
         this.siguiente = null;
-    }
-
-    public int getTamano() {
-        return tamano;
-    }
-
-    public void setTamano(int tamano) {
-        this.tamano = tamano;
     }
 
     public Provedores getProvedores() {

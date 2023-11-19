@@ -6,6 +6,7 @@ package Interfaz.Administrador.Proovedores;
 
 import Catalogo.Nodos.NodoProvedores;
 import Catalogo.Provedores.Provedores;
+import java.io.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,12 +18,14 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     //Provedores Doble Lista Circular
     NodoProvedores inicioProvedores;
     NodoProvedores finProvedores;
-    
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
     /**
      * Creates new form CatalogoProvedores
      */
     public CatalogoProvedores() {
         initComponents();
+        cargarDesdeArchivo();
     }
 
     /**
@@ -39,9 +42,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         agregarProveedores = new javax.swing.JButton();
         editarProveedores = new javax.swing.JButton();
         nombrePostreTexto = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaProveedores = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -69,30 +70,36 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         agregarProveedores.setBackground(new java.awt.Color(45, 62, 80));
         agregarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarProveedores.setText("Agregar Proveedores");
+        agregarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarProveedoresActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 200, 40));
 
         editarProveedores.setBackground(new java.awt.Color(45, 62, 80));
         editarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarProveedores.setText("Editar Proveedores");
+        editarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarProveedoresActionPerformed(evt);
+            }
+        });
         getContentPane().add(editarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, 210, 40));
 
         nombrePostreTexto.setBackground(new java.awt.Color(7, 0, 63));
         nombrePostreTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nombrePostreTexto.setForeground(new java.awt.Color(255, 255, 255));
         nombrePostreTexto.setBorder(null);
+        nombrePostreTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePostreTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombrePostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 340, 30));
 
-        listaProveedores.setEditable(false);
-        listaProveedores.setBackground(new java.awt.Color(248, 242, 232));
-        listaProveedores.setColumns(20);
-        listaProveedores.setForeground(new java.awt.Color(0, 0, 0));
-        listaProveedores.setRows(5);
-        jScrollPane1.setViewportView(listaProveedores);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 390, 350));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/AgregarYEditarProovedores.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarProovedores.png"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,6 +112,132 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
 
+    private void nombrePostreTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePostreTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrePostreTextoActionPerformed
+
+    private void agregarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProveedoresActionPerformed
+        String nombreProveedor = nombrePostreTexto.getText();
+
+        if (nombreProveedor.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El nombre del proveedor no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Provedores proveedor = new Provedores(nombreProveedor);
+
+        agregarProveedor(proveedor);
+        limpiarCampos();
+        guardarEnArchivo();
+    }//GEN-LAST:event_agregarProveedoresActionPerformed
+
+    private void editarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProveedoresActionPerformed
+    String nombreProveedorEditar = JOptionPane.showInputDialog("Ingrese el nombre del proveedor a editar:");
+
+    if (nombreProveedorEditar != null && !nombreProveedorEditar.isEmpty()) {
+        NodoProvedores aux = buscarProveedor(nombreProveedorEditar);
+
+        if (aux != null) {
+            String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del proveedor:");
+
+            if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
+                aux.getProvedores().setNombre(nuevoNombre);
+
+                guardarEnArchivo();
+                JOptionPane.showMessageDialog(null, "Proveedor editado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El nuevo nombre del proveedor no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "El nombre del proveedor a editar no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_editarProveedoresActionPerformed
+    private NodoProvedores buscarProveedor(String nombreProveedor) {
+        NodoProvedores aux = inicioProvedores;
+        do {
+            Provedores proveedor = aux.getProvedores();
+            if (proveedor != null && proveedor.getNombre().equalsIgnoreCase(nombreProveedor)) {
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        } while (aux != inicioProvedores);
+        return null;
+    }
+     private void agregarProveedor(Provedores proveedor) {
+        NodoProvedores nuevoNodo = new NodoProvedores(proveedor);
+
+        if (esVaciaProveedores()) {
+            inicioProvedores = nuevoNodo;
+            finProvedores = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(nuevoNodo);
+        } else {
+            finProvedores.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(finProvedores);
+            nuevoNodo.setSiguiente(inicioProvedores);
+            inicioProvedores.setAnterior(nuevoNodo);
+            finProvedores = nuevoNodo;
+        }
+    }
+
+    private boolean esVaciaProveedores() {
+        return inicioProvedores == null && finProvedores == null;
+    }
+
+    private void limpiarCampos() {
+        nombrePostreTexto.setText("");
+    }
+        private Provedores partesProveedor(String linea) {
+        try {
+            String nombre = linea.trim();
+
+            if (!nombre.isEmpty()) {
+                return new Provedores(nombre);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+    private void cargarDesdeArchivo() {
+    try (BufferedReader br = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            Provedores proveedor = partesProveedor(linea);
+            if (proveedor != null) {
+                agregarProveedor(proveedor);
+            }
+        }
+    } catch (IOException e) {
+        mostrarError("Error al cargar desde el archivo: " + e.getMessage());
+    }
+}
+
+    private void guardarEnArchivo() {
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+            NodoProvedores aux = inicioProvedores;
+            do {
+                Provedores proveedor = aux.getProvedores();
+                if (proveedor != null) {
+                    archivo.println(formatoProveedor(proveedor));
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioProvedores);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private String formatoProveedor(Provedores proveedor) {
+        return proveedor.getNombre();
+    }
+    
+    
     /**
      * @param args the command line arguments
      * @return 
@@ -114,64 +247,11 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         return inicioProvedores==null&& finProvedores == null;
    }
    
-    
+    private void mostrarError(String mensaje) {
+    // Lógica para mostrar un mensaje de error, por ejemplo, usando JOptionPane
+    JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+}
  
-   //Metodos Provedores Doble Lista Circular    
-
-   public void agregarProvedoresAlPrincipio(){
-        String nombre = JOptionPane.showInputDialog("Nombre del provedores:");
-        Provedores provedor = new Provedores(nombre);
-        NodoProvedores np = new NodoProvedores(); 
-        np.setProvedores(provedor);
-        if (esVaciaProvedores()){            
-            np.setSiguiente(np);
-            np.setAnterior(np);
-            inicioProvedores = np;
-            finProvedores =  inicioProvedores;            
-        }else{
-            np.setAnterior(finProvedores);
-            finProvedores.setSiguiente(np);
-            inicioProvedores.setAnterior(np);
-            np.setSiguiente(inicioProvedores);
-            inicioProvedores = np;        
-        }  
-    }
-   
-   public void agregarProvedoresAlFinal(int val){
-        String nombre = JOptionPane.showInputDialog("Nombre del provedores:");
-        Provedores provedor = new Provedores(nombre);
-        NodoProvedores np = new NodoProvedores(); 
-        np.setProvedores(provedor);     
-        if (esVaciaProvedores()){
-            np.setSiguiente(np);
-            np.setSiguiente(np);
-            inicioProvedores = np;
-            finProvedores = inicioProvedores;
-        }else{
-            np.setSiguiente(finProvedores);
-            finProvedores.setSiguiente(np);
-            inicioProvedores.setAnterior(np);
-            np.setSiguiente(inicioProvedores);
-            finProvedores = np;    
-        }
-        val++;
-        np.setTamano(val);
-    }
-       
-    public void editarProvedores() {
-        NodoProvedores aux = inicioProvedores;
-        while (aux != null) {
-            String provedorNom = JOptionPane.showInputDialog("Ingrese el nombre del proveedor que desea modificar: ");
-            if (aux.getProvedores().getNombre().equals(provedorNom)) {
-                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del proveedor:");
-                aux.getProvedores().setNombre(nuevoNom);
-                break;
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede modificar el proveedor que desea: no coincide con ninguno existente.");   
-            }
-            aux = aux.getSiguiente();
-        }
-    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -208,10 +288,8 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarProveedores;
     private javax.swing.JButton editarProveedores;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel fondo;
     private javax.swing.JButton limpiar;
-    private javax.swing.JTextArea listaProveedores;
     private javax.swing.JTextField nombrePostreTexto;
     private javax.swing.JButton volverPantallaPrincipal;
     // End of variables declaration//GEN-END:variables

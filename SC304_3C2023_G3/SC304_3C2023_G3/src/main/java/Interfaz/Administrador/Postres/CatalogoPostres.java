@@ -6,6 +6,9 @@ package Interfaz.Administrador.Postres;
 
 import Catalogo.Nodos.NodoPostre;
 import Catalogo.Postres.Postre;
+import java.awt.*;
+import java.io.*;
+import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,8 +25,15 @@ public class CatalogoPostres extends javax.swing.JFrame {
     NodoPostre inicioPostre;
     NodoPostre finPostre;
     
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPostres.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
     public CatalogoPostres() {
         initComponents();
+        cargarDesdeArchivo();
+        buttonGroup1.add(dulceRadioButton);
+        buttonGroup1.add(saladoRadioButton);
+        dulceRadioButton.setActionCommand("Dulce");
+        saladoRadioButton.setActionCommand("Salado");
     }
 
     /**
@@ -35,6 +45,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         dulceRadioButton = new javax.swing.JRadioButton();
         saladoRadioButton = new javax.swing.JRadioButton();
         nombrePostreTexto = new javax.swing.JTextField();
@@ -42,8 +53,6 @@ public class CatalogoPostres extends javax.swing.JFrame {
         agregarPostre = new javax.swing.JButton();
         editarPostre = new javax.swing.JButton();
         volverPantallaPrincipal = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaPostres = new javax.swing.JTextArea();
         ingredientesPostreTexto = new javax.swing.JTextField();
         precioPostre = new javax.swing.JTextField();
         fondo = new javax.swing.JLabel();
@@ -85,11 +94,21 @@ public class CatalogoPostres extends javax.swing.JFrame {
         agregarPostre.setBackground(new java.awt.Color(45, 62, 80));
         agregarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarPostre.setText("Agregar Postre");
+        agregarPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPostreActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregarPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 160, 40));
 
         editarPostre.setBackground(new java.awt.Color(45, 62, 80));
         editarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarPostre.setText("Editar Postre");
+        editarPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarPostreActionPerformed(evt);
+            }
+        });
         getContentPane().add(editarPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 150, 40));
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
@@ -102,15 +121,6 @@ public class CatalogoPostres extends javax.swing.JFrame {
         });
         getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, 300, 60));
 
-        listaPostres.setEditable(false);
-        listaPostres.setBackground(new java.awt.Color(248, 242, 232));
-        listaPostres.setColumns(20);
-        listaPostres.setForeground(new java.awt.Color(0, 0, 0));
-        listaPostres.setRows(5);
-        jScrollPane1.setViewportView(listaPostres);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 400, 370));
-
         ingredientesPostreTexto.setBackground(new java.awt.Color(7, 0, 63));
         ingredientesPostreTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         ingredientesPostreTexto.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,10 +128,11 @@ public class CatalogoPostres extends javax.swing.JFrame {
         getContentPane().add(ingredientesPostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 288, 340, 20));
 
         precioPostre.setBackground(new java.awt.Color(7, 0, 63));
+        precioPostre.setForeground(new java.awt.Color(255, 255, 255));
         precioPostre.setBorder(null);
         getContentPane().add(precioPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 120, 30));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/AgregarYEditarPostres.png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarPostres.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -139,82 +150,235 @@ public class CatalogoPostres extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
 
+    private void agregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPostreActionPerformed
+        ButtonModel botonesRadioButton = buttonGroup1.getSelection();
+        if (botonesRadioButton == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría de platillo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String nombre = nombrePostreTexto.getText().trim();
+        String descripcion = ingredientesPostreTexto.getText().trim();
+        String tipo = botonesRadioButton.getActionCommand();
+        String precio = precioPostre.getText().trim();
+
+        if (!nombre.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
+            agregarPostreInBackground(nombre, descripcion, tipo, precio);
+        } else {
+            mostrarError("Completa todos los campos antes de agregar un postre.");
+        }
+    }//GEN-LAST:event_agregarPostreActionPerformed
+
+    private void editarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPostreActionPerformed
+String nuevoNombre = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre para el postre:", nombrePostreTexto.getText().trim());
+    
+    if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
+        NodoPostre nodo = buscarPostre(nombrePostreTexto.getText().trim());
+        
+        if (nodo != null) {
+            Postre postreActual = nodo.getPostre();
+
+            String nuevaDescripcion = JOptionPane.showInputDialog(this, "Nueva descripción del postre:", postreActual.getDescripcion());
+            String nuevaCategoria = JOptionPane.showInputDialog(this, "Nueva categoría del postre:", postreActual.getCategoria());
+            String nuevoPrecio = JOptionPane.showInputDialog(this, "Nuevo precio del postre:", postreActual.getPrecio());
+
+            if (nuevaDescripcion != null && nuevaCategoria != null && nuevoPrecio != null) {
+                Postre nuevoPostre = new Postre(nuevoNombre, nuevaCategoria, nuevaDescripcion, nuevoPrecio);
+
+                nodo.setPostre(nuevoPostre);
+
+                guardarEnArchivo(); 
+
+                mostrarMensaje("Postre editado correctamente.");
+            } else {
+                mostrarMensaje("No se realizaron cambios en el postre.");
+            }
+        } else {
+            mostrarError("No se encontró el postre con el nombre proporcionado.");
+        }
+    }
+    }//GEN-LAST:event_editarPostreActionPerformed
+
     /**
      * @return 
      */
     
-    public boolean esVaciaPostres(){
-        return inicioPostre==null&&finPostre==null;
-   }
-    
-       //Metodos Postres Doble Lista Enlazada
-   
-   public void agregarPostresAlPricipio(){
-    String nombre = JOptionPane.showInputDialog("Nombre del postre:");
-    String descripcion = JOptionPane.showInputDialog("Descripcion: ");
-    String categoria = JOptionPane.showInputDialog("Categoría del postre:");
-    Postre postre = new Postre(nombre,descripcion,categoria);
-    NodoPostre np = new NodoPostre(); 
-    np.setPostre(postre);
-        if (finPostre == null) { 
-            finPostre = np; 
-            inicioPostre = np; 
-        }else { 
-            np.setSiguiente(finPostre); 
-            finPostre.setAnterior(np); 
-            finPostre = np;
-        }
-    
-   } 
-   public void agregarPostresAlFinal(){
-    String nombre = JOptionPane.showInputDialog("Nombre del postre:");
-    String descripcion = JOptionPane.showInputDialog("Descripcion: ");
-    String categoria = JOptionPane.showInputDialog("Categoría del postre:");
-    Postre postre = new Postre(nombre,descripcion,categoria);
-    NodoPostre np = new NodoPostre(); 
-    np.setPostre(postre); 
-        if (inicioPostre == null) { 
-            finPostre = np; 
-            inicioPostre = np; 
-        }else{
-            np.setSiguiente(np);
-            np.setAnterior(inicioPostre);
-            inicioPostre = np;
-        }
-   }  
-    
-   public void editarPostres() {
+    private NodoPostre buscarPostre(String nombre) {
         NodoPostre aux = inicioPostre;
-        while (aux != null) {
-            String postreNom = JOptionPane.showInputDialog("Ingrese el nombre del postre que desea modificar: ");
-            if (aux.getPostre().getNombre().equals(postreNom)) {
-                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del postre:");
-                aux.getPostre().setNombre(nuevoNom);
-                String nuevaDescr = JOptionPane.showInputDialog("Nueva descripcion: ");
-                aux.getPostre().setDescripcion(nuevaDescr);
-                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría del postre:");
-                aux.getPostre().setCategoria(nuevaCateg);
-                break;
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede modificar el postre que desea: no coincide con ninguno existente.");   
+
+        while (aux != finPostre) {
+            if (aux.getPostre().getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("Postre encontrado: " + aux.getPostre().getNombre());
+                return aux;
             }
             aux = aux.getSiguiente();
         }
-    }     
-   
-    public Postre buscarPostre(String nomPostre){
-        NodoPostre aux = inicioPostre;
-        Postre postre = null;
-        while(aux != null){
-            if (aux.getPostre().getNombre().equals(nomPostre)) {
-                postre = aux.getPostre();
-                break;
-            }
-             aux = aux.getSiguiente();
+
+        if (finPostre != null && finPostre.getPostre().getNombre().equalsIgnoreCase(nombre)) {
+            System.out.println("Postre encontrado: " + finPostre.getPostre().getNombre());
+            return finPostre;
         }
-        return postre;
+
+        System.out.println("Postre no encontrado");
+        return null;
     }
-   
+    
+    private void agregarPostreInBackground(String nombrePostre, String descripcion, String tipo, String precio) {
+    try {
+        Postre postre = new Postre(nombrePostre, tipo, descripcion, precio);
+
+        if (!postreYaExiste(postre.getNombre())) {
+            agregarPostre(postre);
+            guardarEnArchivo(); // Guardar el postre inmediatamente después de agregarlo
+            System.out.println("Datos agregados exitosamente");
+            JOptionPane.showMessageDialog(null, "Postre agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            mostrarError("El postre ya existe en el catálogo.");
+        }
+
+    } catch (NumberFormatException e) {
+        mostrarError("Error al convertir el precio a un número.");
+    } catch (HeadlessException e) {
+        mostrarError("Error al agregar los datos: " + e.getMessage());
+    }
+}
+
+    private void agregarPostre(Postre postre) {
+        try {
+            if (!postreYaExiste(postre.getNombre())) {
+                NodoPostre nuevoNodo = new NodoPostre();
+                nuevoNodo.setPostre(postre);
+
+                if (inicioPostre == null) {
+                    inicioPostre = finPostre = nuevoNodo;
+                    inicioPostre.setSiguiente(finPostre);
+                    finPostre.setAnterior(inicioPostre);
+                } else {
+                    finPostre.setSiguiente(nuevoNodo);
+                    nuevoNodo.setAnterior(finPostre);
+                    finPostre = nuevoNodo;
+                    finPostre.setSiguiente(inicioPostre);
+                    inicioPostre.setAnterior(finPostre);
+                }
+
+                guardarEnArchivo(); // Asegúrate de guardar la lista actualizada en el archivo
+            } else {
+                mostrarError("El postre ya existe en el catálogo.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
+        }
+    }
+
+    private boolean postreYaExiste(String nombre) {
+        NodoPostre aux = inicioPostre;
+        while (aux != finPostre) {
+            if (aux.getPostre().getNombre().equalsIgnoreCase(nombre)) {
+                return true; 
+            }
+            aux = aux.getSiguiente();
+        }
+
+        return finPostre != null && finPostre.getPostre().getNombre().equalsIgnoreCase(nombre);
+    }
+
+    private void guardarEnArchivo() {
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+            NodoPostre aux = inicioPostre;
+            do {
+                Postre postre = aux.getPostre();
+                if (postre != null) {
+                    archivo.println(formatoPostre(postre));
+                }
+                aux = aux.getSiguiente();
+            } while (aux != finPostre);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private Postre partesPostre(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 4) {
+                String nombre = partes[0];
+                String descripcion = partes[1];
+                String tipo = partes[2];
+                String precio = partes[3];
+
+                return new Postre(nombre, tipo, descripcion, precio); // Orden de parámetros corregido
+            } else {
+                System.out.println("Error en el formato de línea: " + linea);
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+
+
+    private void cargarDesdeArchivo() {
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            System.out.println("Intentando cargar datos desde el archivo: " + RUTA_ARCHIVO);
+
+            // Limpiar la lista antes de cargar nuevos datos
+            inicioPostre = null;
+            finPostre = null;
+
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Postre postre = partesPostre(linea);
+                if (postre != null) {
+                    finPostre = agregarNodo(finPostre, postre);
+                    if (inicioPostre == null) {
+                        inicioPostre = finPostre;
+                    }
+                } else {
+                    System.out.println("Error al procesar la línea: " + linea);
+                }
+            }
+
+            // Verificar si la lista está vacía después de cargar datos
+            if (finPostre != null) {
+                // Realizar acciones adicionales si es necesario
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al cargar el archivo: " + e.getMessage());
+        }
+    }
+
+
+    private NodoPostre agregarNodo(NodoPostre fin, Postre postre) {
+        NodoPostre nuevoNodo = new NodoPostre();
+        nuevoNodo.setPostre(postre);
+
+        if (fin == null) {
+            fin = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+        } else {
+            nuevoNodo.setSiguiente(fin.getSiguiente());
+            fin.setSiguiente(nuevoNodo);
+            fin = nuevoNodo;
+        }
+
+        return fin;
+    }
+    
+    private void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void mostrarError(String mensaje) {
+    // Implementación para mostrar errores, por ejemplo, usando JOptionPane
+    JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    private String formatoPostre(Postre postre) {
+    return postre.getNombre() + "," + postre.getDescripcion() + "," + postre.getCategoria() + "," + postre.getPrecio();
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -250,13 +414,12 @@ public class CatalogoPostres extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarPostre;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton dulceRadioButton;
     private javax.swing.JButton editarPostre;
     private javax.swing.JLabel fondo;
     private javax.swing.JTextField ingredientesPostreTexto;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
-    private javax.swing.JTextArea listaPostres;
     private javax.swing.JTextField nombrePostreTexto;
     private javax.swing.JTextField precioPostre;
     private javax.swing.JRadioButton saladoRadioButton;
