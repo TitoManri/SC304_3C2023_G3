@@ -1,3 +1,7 @@
+package Interfaz;
+
+import Transacciones.Arbol;
+import Interfaz.Ordenes.Ordenes;
 
 /**
  *
@@ -7,6 +11,7 @@ public class Transaccion extends javax.swing.JFrame {
 
     public Transaccion() {
         initComponents();
+        
     }
 
 
@@ -23,10 +28,20 @@ public class Transaccion extends javax.swing.JFrame {
 
         pagar.setBorderPainted(false);
         pagar.setContentAreaFilled(false);
+        pagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagarActionPerformed(evt);
+            }
+        });
         getContentPane().add(pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 90));
 
         cancelar.setBorderPainted(false);
         cancelar.setContentAreaFilled(false);
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 200, 80));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Facturacion.jpg"))); // NOI18N
@@ -34,6 +49,17 @@ public class Transaccion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
+        Arbol a = new Arbol();
+        a.agregarAArbol(Ordenes.getOrden());
+    }//GEN-LAST:event_pagarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        Ordenes o = new Ordenes();
+        o.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
 
 
     public static void main(String args[]) {

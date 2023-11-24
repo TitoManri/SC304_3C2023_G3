@@ -2,7 +2,8 @@ package Interfaz.Ordenes;
 
 import Orden.Orden;
 import Orden.LesOrden;
-
+import Interfaz.Transaccion;
+import Interfaz.LogIn;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Ordenes extends javax.swing.JFrame {
     
     public Ordenes() {
         initComponents();
-        lo.agregarOrden(orden);
+        lo.agregarOrden(orden, LogIn.getCliente());
 
     }
 
@@ -111,7 +112,9 @@ public class Ordenes extends javax.swing.JFrame {
     }//GEN-LAST:event_agrPostreActionPerformed
 
     private void terminarOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarOrdActionPerformed
-        //AQUÍ SE LLAMA A LA DE FACTURACIÓN 
+        Transaccion t = new Transaccion();
+        t.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_terminarOrdActionPerformed
 
     private void cancelarOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarOrdActionPerformed

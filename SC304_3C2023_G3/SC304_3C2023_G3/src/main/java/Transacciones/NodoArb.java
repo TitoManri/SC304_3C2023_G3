@@ -1,4 +1,4 @@
-package Arbol;
+package Transacciones;
 
 /**
  *

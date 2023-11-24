@@ -5,18 +5,44 @@
 package Interfaz;
 import javax.swing.*;
 import java.awt.*;
+import Personas.Cliente;
+import Personas.Cola;
 /**
  *
  * @author manri
  */
 public class LogIn extends javax.swing.JFrame {
-
+    private static Cliente cliente = new Cliente();
+    
+    
     /**
      * Creates new form Catalogo
      */
     public LogIn() {
         initComponents();
     }
+
+    public static Cliente getCliente() {
+        return cliente;
+    }
+
+    public static void setCliente(Cliente cliente) {
+        LogIn.cliente = cliente;
+    }
+    
+    //validar si el usuario corresponde a un usuario en la lista de usuarios. 
+    public void usuarioACtual(){
+        String usuario = nombreUsuarioTexto.getText();
+        Cola c = new Cola();
+        Cliente clienteActual = c.buscarCliente(usuario);
+        if (clienteActual.getPasssword().equals(contrasenaTexto.getText())) {
+            setCliente(clienteActual);
+            //y se mueve a la pantalla del menu 
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay usuarios que con ese nombre de usuario o contraseña en el sistema.");
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

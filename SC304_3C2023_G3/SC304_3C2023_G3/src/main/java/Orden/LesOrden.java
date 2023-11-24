@@ -35,9 +35,10 @@ public class LesOrden {
         }
     }
 
-    public void agregarOrden(Orden nuevaOrden) {
+    public void agregarOrden(Orden nuevaOrden, Cliente cliente) {
         double total = 0.0;
         total += calcularTotal();
+        nuevaOrden.setCliente(cliente);
         nuevaOrden.setTotal(total);
 
         NodoOrden nuevo = new NodoOrden();
@@ -117,7 +118,27 @@ public class LesOrden {
 
         return cantidad * precio;
     }
-
+    
+    public void mostrarOrdenes(){
+        if (!esVaciaLes()) {
+            String s = "";
+            NodoOrden aux = inicio;
+            while (aux != null) {
+                s = s + "Cliente: " + aux.getOrden().getCliente().getNombre() + aux.getOrden().getCliente().getApellido() + "\n" + 
+                        "Fecha y hora: " + aux.getOrden().getFechaHora() + "\n" + 
+                        "Número de orden:" + aux.getOrden().getNumOrden() + "\n" + 
+                        "Platillos: " +aux.getOrden().getPlatillos().toString() + "\n"  + 
+                        "Bebidas: "+ aux.getOrden().getBebidas().toString() + "\n" + 
+                        "Postres: "+ aux.getOrden().getPostres().toString() + "\n" + 
+                        "Total: " + aux.getOrden().getTotal() + "-->";
+                aux = aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null, "La lista contiene: \n" + s);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede mostrar la lista, está vacía");
+        }
+    }
+    
 //        public void buscarPorFecha(int año, int mes, int dia) { //esta iría en orden
 //        // Buscar órdenes por fecha (ejemplo: 9 de noviembre de 2023)
 //        LocalDateTime fechaBusqueda = LocalDateTime.of(año, mes, dia, 0, 0);
