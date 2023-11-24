@@ -253,7 +253,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         mostrarError("Error al editar el platillo: " + e.getMessage());
     } 
     }//GEN-LAST:event_editarPlatilloActionPerformed
-    private NodoPlatillo buscarPlatillo(String nombrePlatillo) {
+    public NodoPlatillo buscarPlatillo(String nombrePlatillo) {
         NodoPlatillo aux = inicioPlatillo;
         while (aux != null) {
             if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {

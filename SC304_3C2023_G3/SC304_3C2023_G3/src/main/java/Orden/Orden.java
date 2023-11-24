@@ -9,28 +9,30 @@ import Catalogo.Platillo.Platillo;
 import Catalogo.Postres.Postre;
 import Personas.Cliente;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Orden {
 
     //ATRIBUTOS
+    private static int contadorOrdenes = 100;
     private int numOrden;
     private LocalDateTime fechaHora;
     private Cliente cliente;
     private double total;
-    private Platillo platillo;
-    private Bebida bebida;
-    private Postre postre;
+    private List<Platillo> platillos;
+    private List<Bebida> bebidas;
+    private List<Postre> postres;
 
     //CONSTRUCTOR
     public Orden(){
         this.cliente = null;
         this.fechaHora = LocalDateTime.now();
-        this.numOrden = 100;
-        numOrden++;
+        this.numOrden = ++contadorOrdenes;
         this.total = 0.0;
-        this.platillo = null;
-        this.bebida = null;
-        this.postre = null;
+        this.platillos = new ArrayList<>();
+        this.bebidas = new ArrayList<>();
+        this.postres = new ArrayList<>();
     }
 
     
@@ -59,31 +61,6 @@ public class Orden {
         this.cliente = cliente;
     }
 
-    public Platillo getPlatillo() {
-        return platillo;
-    }
-
-    public void setPlatillo(Platillo platillo) {
-        this.platillo = platillo;
-    }
-
-    public Bebida getBebida() {
-        return bebida;
-    }
-
-    public void setBebida(Bebida bebida) {
-        this.bebida = bebida;
-    }
-
-    public Postre getPostre() {
-        return postre;
-    }
-
-    public void setPostre(Postre postre) {
-        this.postre = postre;
-    }
-
-
     public double getTotal() {
         return total;
     }
@@ -91,5 +68,28 @@ public class Orden {
     public void setTotal(double total) {
         this.total = total;
     }
-    
+
+    public List<Platillo> getPlatillos() {
+        return platillos;
+    }
+
+    public List<Bebida> getBebidas() {
+        return bebidas;
+    }
+
+    public List<Postre> getPostres() {
+        return postres;
+    }
+
+    public void agregarPlatillo(Platillo platillo) {
+        platillos.add(platillo);
+    }
+
+    public void agregarBebida(Bebida bebida) {
+        bebidas.add(bebida);
+    }
+
+    public void agregarPostre(Postre postre) {
+        postres.add(postre);
+    }
 }

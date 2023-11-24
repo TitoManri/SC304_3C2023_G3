@@ -1,6 +1,6 @@
 package Arbol;
 
-import Ordenes.Orden;
+import Orden.Orden;
 
 
 /**

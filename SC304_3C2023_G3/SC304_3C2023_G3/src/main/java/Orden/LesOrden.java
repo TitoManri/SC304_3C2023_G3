@@ -1,15 +1,21 @@
 package Orden;
 
-/*
-Lo de agregar platillo, bebida, postre etc lo hice pensando en llamar esas funciones los botones
-- Al final hay una función comentada que busqué y que tal vez pueda funcionar para hacer la estructura de buscar las facturas por fecha 
- 
+//CAMBIAR LA FUNCIÓN DE CALCULAR TOTAL
+//- Al final hay una función comentada que busqué y que tal vez pueda funcionar para hacer la estructura de buscar las facturas por fecha 
 import javax.swing.JOptionPane;
-import java.time.LocalDateTime;
-import Catalogo.Catalogo;
-import Catalogo.Bebidas.Bebida;
+//PLATILLOS
+import Interfaz.Administrador.Platillos.CatalogoPlatillos;
+import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
+//BEBIDAS
+import Interfaz.Administrador.Bebidas.CatalogoBebidas;
+import Catalogo.Nodos.NodoBebida;
+import Catalogo.Bebidas.Bebida;
+//POSTRES
+import Interfaz.Administrador.Postres.CatalogoPostres;
+import Catalogo.Nodos.NodoPostre;
 import Catalogo.Postres.Postre;
+//CLIENTE
 import Personas.Cliente;
 import Personas.Cola;
 
@@ -29,13 +35,9 @@ public class LesOrden {
         }
     }
 
-    public void agregarOrden() {
-        Orden nuevaOrden = new Orden();
+    public void agregarOrden(Orden nuevaOrden) {
         double total = 0.0;
-        agregarCliente(nuevaOrden, total);
-        agregarPlatillo(nuevaOrden);
-        agregarBebida(nuevaOrden, total);
-        agregarPostre(nuevaOrden, total);
+        total += calcularTotal();
         nuevaOrden.setTotal(total);
 
         NodoOrden nuevo = new NodoOrden();
@@ -46,72 +48,76 @@ public class LesOrden {
         } else {
             inicio.setSiguiente(nuevo);
         }
-
     }
 
-    public void agregarPlatillo(Orden nuevaOrden) {
-        String nomPlatillo = JOptionPane.showInputDialog("Ingrese el platillo que desea: ");
-        Catalogo c = new Catalogo();
-        Platillo platillo = c.buscarPlatillo(nomPlatillo);
+    public void agregarPlatillo(Orden nuevaOrden, String Platillo) {
+        String nomPlatillo = Platillo;
+        calcularTotal();
+        CatalogoPlatillos c = new CatalogoPlatillos();
+        NodoPlatillo platilloNod = c.buscarPlatillo(nomPlatillo);
+        Platillo platillo = platilloNod.getPlatillo();
         if (platillo == null) {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún platillo. Por favor ingrese un platillo del menú.");
-            agregarPlatillo(nuevaOrden);
+            agregarPlatillo(nuevaOrden, Platillo);
         } else {
-            nuevaOrden.setPlatillo(platillo);
+            nuevaOrden.agregarPlatillo(platillo);
         }
     }
 
-    public void agregarCliente(Orden nuevaOrden, double total) {
-        String userCliente = JOptionPane.showInputDialog("Ingrese su usario: ");
-        calcularTotal(total);
+    public void agregarCliente(Orden nuevaOrden, String usuario) {
+        String userCliente = usuario;
+        calcularTotal();
         Cola c = new Cola();
         Cliente cliente = c.buscarCliente(userCliente);
         if (cliente == null) {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún usuario. Por favor ingrese un usuerio en el sistema.");
-            agregarCliente(nuevaOrden, total);
+            agregarCliente(nuevaOrden, usuario);
         } else {
             nuevaOrden.setCliente(cliente);
         }
     }
 
-    public void agregarBebida(Orden nuevaOrden, double total) {
-        String nomBebida = JOptionPane.showInputDialog("Ingrese la bebida que desea: ");
-        calcularTotal(total);
-        Catalogo c = new Catalogo();
-        Bebida bebida = c.buscarBebida(nomBebida);
+    public void agregarBebida(Orden nuevaOrden, String Bebida) {
+        String nomBebida = Bebida;
+        calcularTotal();
+        CatalogoBebidas c = new CatalogoBebidas();
+        NodoBebida bebidaNod = c.buscarBebida(nomBebida);
+        Bebida bebida = bebidaNod.getBebida();
         if (bebida == null) {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ninguna bebida. Por favor ingrese una bebida del menú.");
-            agregarBebida(nuevaOrden, total);
+            agregarBebida(nuevaOrden, Bebida);
         } else {
-            nuevaOrden.setBebida(bebida);
+            nuevaOrden.agregarBebida(bebida);
         }
     }
 
-    public void agregarPostre(Orden nuevaOrden, double total) {
-        String nomPostre = JOptionPane.showInputDialog("Ingrese del postre que desea: ");
-        calcularTotal(total);
-        Catalogo c = new Catalogo();
-        Postre postre = c.buscarPostre(nomPostre);
+    public void agregarPostre(Orden nuevaOrden, String Postre) {
+        String nomPostre = Postre;
+        calcularTotal();
+        CatalogoPostres c = new CatalogoPostres();
+        NodoPostre postreNod = c.buscarPostre(nomPostre);
+        Postre postre = postreNod.getPostre();
         if (postre == null) {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún postre. Por favor ingrese un postre del menú.");
-            agregarPostre(nuevaOrden, total);
+            agregarPostre(nuevaOrden, Postre);
         } else {
-            nuevaOrden.setPostre(postre);
+            nuevaOrden.agregarPostre(postre);
         }
     }
 
-    public void calcularTotal(double total) {
+    public double calcularTotal() {
         int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de este producto que desea: "));
         double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
-        if (precio < 10.0) {
+
+        // Validar el precio
+        while (precio < 10.0) {
             JOptionPane.showMessageDialog(null, "Precio del producto no válido. Ingrese uno de nuevo.");
             precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
         }
-        total += cantidad * precio;
+
+        return cantidad * precio;
     }
 
-    
-    
 //        public void buscarPorFecha(int año, int mes, int dia) { //esta iría en orden
 //        // Buscar órdenes por fecha (ejemplo: 9 de noviembre de 2023)
 //        LocalDateTime fechaBusqueda = LocalDateTime.of(año, mes, dia, 0, 0);
@@ -124,4 +130,3 @@ public class LesOrden {
 //        }
 //    } 
 }
-*/

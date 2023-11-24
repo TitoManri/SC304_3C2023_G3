@@ -202,7 +202,7 @@ String nuevoNombre = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre 
      * @return 
      */
     
-    private NodoPostre buscarPostre(String nombre) {
+    public NodoPostre buscarPostre(String nombre) {
         NodoPostre aux = inicioPostre;
 
         while (aux != finPostre) {

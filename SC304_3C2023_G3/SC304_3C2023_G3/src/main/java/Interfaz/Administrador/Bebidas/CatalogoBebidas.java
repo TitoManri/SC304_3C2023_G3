@@ -376,7 +376,7 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
         }
     }
     
-    private NodoBebida buscarBebida(String nombreBebida) {
+    public NodoBebida buscarBebida(String nombreBebida) {
         NodoBebida aux = inicioBebida;
         while (aux != null) {
             if (aux.getBebida().getNombre().equalsIgnoreCase(nombreBebida)) {
