@@ -119,6 +119,7 @@ public class Ordenes extends javax.swing.JFrame {
 
     private void cancelarOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarOrdActionPerformed
         //AQUÍ SE LLAMA AL MENU PRINCIPAL
+        //borrar datos de la orden actual 
     }//GEN-LAST:event_cancelarOrdActionPerformed
 
     public static void main(String args[]) {

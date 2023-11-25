@@ -65,18 +65,18 @@ public class LesOrden {
         }
     }
 
-    public void agregarCliente(Orden nuevaOrden, String usuario) {
-        String userCliente = usuario;
-        calcularTotal();
-        Cola c = new Cola();
-        Cliente cliente = c.buscarCliente(userCliente);
-        if (cliente == null) {
-            JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún usuario. Por favor ingrese un usuerio en el sistema.");
-            agregarCliente(nuevaOrden, usuario);
-        } else {
-            nuevaOrden.setCliente(cliente);
-        }
-    }
+//    public void agregarCliente(Orden nuevaOrden, String usuario) {
+//        String userCliente = usuario;
+//        calcularTotal();
+//        Cola c = new Cola();
+//        Cliente cliente = c.buscarCliente(userCliente);
+//        if (cliente == null) {
+//            JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún usuario. Por favor ingrese un usuerio en el sistema.");
+//            agregarCliente(nuevaOrden, usuario);
+//        } else {
+//            nuevaOrden.setCliente(cliente);
+//        }
+//    }
 
     public void agregarBebida(Orden nuevaOrden, String Bebida) {
         String nomBebida = Bebida;

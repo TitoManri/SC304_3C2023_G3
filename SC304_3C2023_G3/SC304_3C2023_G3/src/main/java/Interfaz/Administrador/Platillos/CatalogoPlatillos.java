@@ -17,11 +17,12 @@ import javax.swing.*;
  * @author manri
  */
 public class CatalogoPlatillos extends javax.swing.JFrame {
+
     //Platillo Lista Enlazada Simple 
     private NodoPlatillo inicioPlatillo;
-    
+
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
-    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
 
     /**
      * Creates new form CatalogoPlatillos
@@ -41,6 +42,13 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         }
     }
 
+    public NodoPlatillo getInicioPlatillo() {
+        return inicioPlatillo;
+    }
+
+    public void setInicioPlatillo(NodoPlatillo inicioPlatillo) {
+        this.inicioPlatillo = inicioPlatillo;
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,70 +196,70 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
     private void agregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatilloActionPerformed
 
-
-    ButtonModel botonesRadioButton = buttonGroup1.getSelection();
-    if (botonesRadioButton == null) {
-        JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría de platillo.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    String nombrePlatillo = nombrePlatilloTexto.getText();
-    String categoria = botonesRadioButton.getActionCommand();
-    String precio = precioPlatillo.getText();
-    String descripcion = ingredientesPlatilloTexto.getText(); // Obtener los ingredientes
-
-    if (nombrePlatillo.isEmpty() || precio.isEmpty() || categoria.isEmpty() || descripcion.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Alguno de los campos requeridos no fue completado.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-        @Override
-        protected Void doInBackground() throws Exception {
-            agregarPlatilloInBackground(nombrePlatillo, descripcion,categoria, precio);
-            return null;
+  
+        ButtonModel botonesRadioButton = buttonGroup1.getSelection();
+        if (botonesRadioButton == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría de platillo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        @Override
-        protected void done() {
-        }
-    };
+        String nombrePlatillo = nombrePlatilloTexto.getText();
+        String categoria = botonesRadioButton.getActionCommand();
+        String precio = precioPlatillo.getText();
+        String descripcion = ingredientesPlatilloTexto.getText(); // Obtener los ingredientes
 
-    worker.execute();
+        if (nombrePlatillo.isEmpty() || precio.isEmpty() || categoria.isEmpty() || descripcion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Alguno de los campos requeridos no fue completado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                agregarPlatilloInBackground(nombrePlatillo, descripcion, categoria, precio);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+            }
+        };
+
+        worker.execute();
     }//GEN-LAST:event_agregarPlatilloActionPerformed
 
     private void editarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPlatilloActionPerformed
-          try {
-        String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
+        try {
+            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
 
-        if (platilloNom != null) {
-            NodoPlatillo aux = buscarPlatillo(platilloNom);
+            if (platilloNom != null) {
+                NodoPlatillo aux = buscarPlatillo(platilloNom);
 
-            if (aux != null) {
-                Platillo bebidaActual = aux.getPlatillo();
+                if (aux != null) {
+                    Platillo bebidaActual = aux.getPlatillo();
 
-                String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
-                String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
-                String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
-                String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
+                    String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
+                    String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
+                    String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
+                    String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
 
-                if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
-                    Platillo nuevoPlatillo = new Platillo(nuevoNom,nuevaDescripcion, nuevaCateg, nuevoPrecio);
+                    if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
+                        Platillo nuevoPlatillo = new Platillo(nuevoNom, nuevaDescripcion, nuevaCateg, nuevoPrecio);
 
-                    aux.setPlatillo(nuevoPlatillo);
+                        aux.setPlatillo(nuevoPlatillo);
 
-                    guardarEnArchivo();
-                    mostrarMensaje("Platillo editado correctamente.");
+                        guardarEnArchivo();
+                        mostrarMensaje("Platillo editado correctamente.");
+                    } else {
+                        mostrarMensaje("No se realizaron cambios en el platillo.");
+                    }
                 } else {
-                    mostrarMensaje("No se realizaron cambios en el platillo.");
+                    mostrarError("No se encontró el platillo con el nombre proporcionado.");
                 }
-            } else {
-                mostrarError("No se encontró el platillo con el nombre proporcionado.");
             }
+        } catch (NumberFormatException | HeadlessException e) {
+            mostrarError("Error al editar el platillo: " + e.getMessage());
         }
-    } catch (NumberFormatException | HeadlessException e) {
-        mostrarError("Error al editar el platillo: " + e.getMessage());
-    } 
     }//GEN-LAST:event_editarPlatilloActionPerformed
     public NodoPlatillo buscarPlatillo(String nombrePlatillo) {
         NodoPlatillo aux = inicioPlatillo;
@@ -263,55 +271,53 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         }
         return null;
     }
-    
-private void agregarPlatilloInBackground(String nombrePlatillo, String descripcion, String categoria, String precio) {
-    try {
-        Platillo platillo = new Platillo(nombrePlatillo, categoria, descripcion, precio);
 
-        if (!platilloYaExiste(platillo.getNombre())) {
-            agregarPlatillo(platillo);
-            guardarEnArchivo();
-            System.out.println("Datos agregados exitosamente");
-            JOptionPane.showMessageDialog(null, "Platillo agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            mostrarError("El platillo ya existe en el catálogo.");
+    private void agregarPlatilloInBackground(String nombrePlatillo, String descripcion, String categoria, String precio) {
+        try {
+            Platillo platillo = new Platillo(nombrePlatillo, categoria, descripcion, precio);
+
+            if (!platilloYaExiste(platillo.getNombre())) {
+                agregarPlatillo(platillo);
+                guardarEnArchivo();
+                System.out.println("Datos agregados exitosamente");
+                JOptionPane.showMessageDialog(null, "Platillo agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                mostrarError("El platillo ya existe en el catálogo.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
         }
-
-    } catch (NumberFormatException e) {
-        mostrarError("Error al convertir el precio a un número.");
-    } catch (HeadlessException e) {
-        mostrarError("Error al agregar los datos: " + e.getMessage());
     }
-}
 
-
-    
     private boolean platilloYaExiste(String nombre) {
         NodoPlatillo aux = inicioPlatillo;
         while (aux != null) {
             if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
-                return true; 
+                return true;
             }
             aux = aux.getSiguiente();
         }
-        return false; 
+        return false;
     }
-    
-private void guardarEnArchivo() {
-    try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            Platillo platillo = aux.getPlatillo();
-            if (platillo != null) {
-                archivo.println(formatoPlatillo(platillo));
+
+    private void guardarEnArchivo() {
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+            NodoPlatillo aux = inicioPlatillo;
+            while (aux != null) {
+                Platillo platillo = aux.getPlatillo();
+                if (platillo != null) {
+                    archivo.println(formatoPlatillo(platillo));
+                }
+                aux = aux.getSiguiente();
             }
-            aux = aux.getSiguiente();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
-    
+
     private Platillo partesPlatillo(String linea) {
         String[] partes = linea.split(",");
         try {
@@ -321,7 +327,7 @@ private void guardarEnArchivo() {
                 String categoria = partes[2];
                 String precio = partes[3];
 
-                return new Platillo(nombre, categoria, descripcion, precio); 
+                return new Platillo(nombre, categoria, descripcion, precio);
             } else {
                 return null;
             }
@@ -330,81 +336,75 @@ private void guardarEnArchivo() {
             return null;
         }
     }
-    
-private void cargarDesdeArchivo() {
-    inicioPlatillo = null; 
 
-    try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
-        System.out.println("Trying to load data from the file: " + RUTA_ARCHIVO);
+    private void cargarDesdeArchivo() {
+        inicioPlatillo = null;
 
-        String linea;
-        while ((linea = archivo.readLine()) != null) {
-            Platillo platillo = partesPlatillo(linea);
-            if (platillo != null) {
-                agregarPlatillo(platillo);
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            System.out.println("Trying to load data from the file: " + RUTA_ARCHIVO);
+
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Platillo platillo = partesPlatillo(linea);
+                if (platillo != null) {
+                    agregarPlatillo(platillo);
+                }
             }
-        }
 
-        if (inicioPlatillo != null) {
-            System.out.println("Datos cargados exitosamente");
-        } else {
-            System.out.println("El archivo estaba vacío");
-        }
+            if (inicioPlatillo != null) {
+                System.out.println("Datos cargados exitosamente");
+            } else {
+                System.out.println("El archivo estaba vacío");
+            }
 
-    } catch (IOException e) {
-        System.out.println("Error loading the file: " + e.getMessage());
-        JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            System.out.println("Error loading the file: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
-
-
-
-
 
     private String formatoPlatillo(Platillo platillo) {
-    return platillo.getNombre() + "," + platillo.getDescripcion() + "," + platillo.getCategoria() + "," + platillo.getPrecio();
-}
-    
-    public boolean esVaciaPlatillos(){
-        return inicioPlatillo==null;
-   }
+        return platillo.getNombre() + "," + platillo.getDescripcion() + "," + platillo.getCategoria() + "," + platillo.getPrecio();
+    }
 
+    public boolean esVaciaPlatillos() {
+        return inicioPlatillo == null;
+    }
 
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
     }
+
     private void mostrarError(String mensaje) {
-    JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-}
-    
-private void agregarPlatillo(Platillo platillo) {
-    try {
-        if (!platilloYaExiste(platillo.getNombre())) {
-            NodoPlatillo nuevoNodo = new NodoPlatillo();
-            nuevoNodo.setPlatillo(platillo);
-
-            if (inicioPlatillo == null) {
-                inicioPlatillo = nuevoNodo;
-            } else {
-                NodoPlatillo aux = inicioPlatillo;
-                while (aux.getSiguiente() != null) {
-                    aux = aux.getSiguiente();
-                }
-                aux.setSiguiente(nuevoNodo);
-            }
-        } else {
-            mostrarError("El platillo ya existe en el catálogo.");
-        }
-
-    } catch (NumberFormatException e) {
-        mostrarError("Error al convertir el precio a un número.");
-    } catch (HeadlessException e) {
-        mostrarError("Error al agregar los datos: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
 
+    private void agregarPlatillo(Platillo platillo) {
+        try {
+            if (!platilloYaExiste(platillo.getNombre())) {
+                NodoPlatillo nuevoNodo = new NodoPlatillo();
+                nuevoNodo.setPlatillo(platillo);
 
-    
+                if (inicioPlatillo == null) {
+                    inicioPlatillo = nuevoNodo;
+                } else {
+                    NodoPlatillo aux = inicioPlatillo;
+                    while (aux.getSiguiente() != null) {
+                        aux = aux.getSiguiente();
+                    }
+                    aux.setSiguiente(nuevoNodo);
+                }
+            } else {
+                mostrarError("El platillo ya existe en el catálogo.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -431,10 +431,10 @@ private void agregarPlatillo(Platillo platillo) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new CatalogoPlatillos().setVisible(true);
-        }
-    });
+            public void run() {
+                new CatalogoPlatillos().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

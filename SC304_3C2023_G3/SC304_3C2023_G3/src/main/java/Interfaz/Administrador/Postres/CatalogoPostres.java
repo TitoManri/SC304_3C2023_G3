@@ -36,6 +36,17 @@ public class CatalogoPostres extends javax.swing.JFrame {
         saladoRadioButton.setActionCommand("Salado");
     }
 
+    public NodoPostre getInicioPostre() {
+        return inicioPostre;
+    }
+    
+    public boolean esVaciaPostres(){
+        if (inicioPostre == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

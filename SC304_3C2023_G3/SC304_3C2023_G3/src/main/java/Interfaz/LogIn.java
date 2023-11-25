@@ -83,6 +83,11 @@ public class LogIn extends javax.swing.JFrame {
         botonIngresar.setForeground(new java.awt.Color(0, 0, 0));
         botonIngresar.setText("Ingresar");
         botonIngresar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIngresarActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 450, 130, 60));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/InicioSesion.png"))); // NOI18N
@@ -95,6 +100,10 @@ public class LogIn extends javax.swing.JFrame {
     private void nombreUsuarioTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreUsuarioTextoActionPerformed
+
+    private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
+        usuarioACtual();
+    }//GEN-LAST:event_botonIngresarActionPerformed
 
     /**
      * @param args the command line arguments

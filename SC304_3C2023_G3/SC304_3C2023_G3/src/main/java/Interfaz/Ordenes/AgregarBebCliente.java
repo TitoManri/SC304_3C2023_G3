@@ -1,6 +1,9 @@
 package Interfaz.Ordenes;
 
+import Catalogo.Nodos.NodoBebida;
+import Interfaz.Administrador.Bebidas.CatalogoBebidas;
 import Orden.LesOrden;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -8,8 +11,29 @@ import Orden.LesOrden;
  */
 public class AgregarBebCliente extends javax.swing.JFrame {
 
+    DefaultTableModel tab = new DefaultTableModel();
+    
     public AgregarBebCliente() {
         initComponents();
+        String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
+        tab.setColumnIdentifiers(titulo);
+        tablaBebidas.setModel(tab);
+        llenarTabla();
+    }
+    
+    public void llenarTabla(){
+        CatalogoBebidas c = new CatalogoBebidas();
+        if (!c.esVaciaBebidas()) {
+           NodoBebida aux = c.getInicioBebida();
+           tab.addRow(new Object[]{
+           aux.getBebida().getNombre(), aux.getBebida().getCategoria(), aux.getBebida().getPrecio()});
+            while (aux != c.getInicioBebida()) {
+                tab.addRow(new Object[]{
+                aux.getBebida().getNombre(), aux.getBebida().getCategoria(), aux.getBebida().getPrecio(), aux.getBebida()
+                });
+                aux = aux.getSiguiente();
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -19,6 +43,8 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         nombreBebText = new javax.swing.JTextField();
         agregarBeb = new javax.swing.JButton();
         volver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaBebidas = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,6 +67,34 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         volver.setContentAreaFilled(false);
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 170, 50));
 
+        tablaBebidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Categoría", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaBebidas);
+        if (tablaBebidas.getColumnModel().getColumnCount() > 0) {
+            tablaBebidas.getColumnModel().getColumn(0).setResizable(false);
+            tablaBebidas.getColumnModel().getColumn(1).setResizable(false);
+            tablaBebidas.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarBebCliente.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
@@ -49,7 +103,7 @@ public class AgregarBebCliente extends javax.swing.JFrame {
 
     private void agregarBebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBebActionPerformed
         LesOrden lo = new LesOrden();
-        lo.agregarPlatillo(Ordenes.getOrden(), nombreBebText.getText());
+        lo.agregarBebida(Ordenes.getOrden(), nombreBebText.getText());
     }//GEN-LAST:event_agregarBebActionPerformed
 
     public static void main(String args[]) {
@@ -87,7 +141,9 @@ public class AgregarBebCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarBeb;
     private javax.swing.JLabel fondo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreBebText;
+    private javax.swing.JTable tablaBebidas;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

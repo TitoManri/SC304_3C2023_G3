@@ -1,17 +1,39 @@
 package Interfaz.Ordenes;
 
 import Orden.LesOrden;
+import Catalogo.Nodos.NodoPlatillo;
+import javax.swing.table.DefaultTableModel;
+import Interfaz.Administrador.Platillos.CatalogoPlatillos;
 
 /**
  *
  * @author marip
  */
 public class AgregarPlatCliente extends javax.swing.JFrame {
-    
+
+    DefaultTableModel tab = new DefaultTableModel();
+
     public AgregarPlatCliente() {
         initComponents();
+        String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
+        tab.setColumnIdentifiers(titulo);
+        TablaPlatillos.setModel(tab);
+        llenarTabla();
     }
- 
+
+    public void llenarTabla() {
+        CatalogoPlatillos c = new CatalogoPlatillos();
+        if (!c.esVaciaPlatillos()) {
+            NodoPlatillo aux = c.getInicioPlatillo();
+            while (aux != null) {
+                tab.addRow(new Object[]{
+                aux.getPlatillo().getNombre(), aux.getPlatillo().getDescripcion(),  aux.getPlatillo().getCategoria(), aux.getPlatillo().getPrecio()
+                });
+                aux = aux.getSiguiente();
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,6 +41,8 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         nombrePlatText = new javax.swing.JTextField();
         agregarPlat = new javax.swing.JButton();
         volver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaPlatillos = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,6 +64,55 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 170, 60));
+
+        TablaPlatillos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Descripción", "Categoría", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaPlatillos.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(TablaPlatillos);
+        if (TablaPlatillos.getColumnModel().getColumnCount() > 0) {
+            TablaPlatillos.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatillos.getColumnModel().getColumn(1).setResizable(false);
+            TablaPlatillos.getColumnModel().getColumn(2).setResizable(false);
+            TablaPlatillos.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarPlatCliente.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -85,8 +158,10 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaPlatillos;
     private javax.swing.JButton agregarPlat;
     private javax.swing.JLabel fondo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombrePlatText;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
