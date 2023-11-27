@@ -81,15 +81,35 @@ public class Orden {
         return postres;
     }
 
-    public void agregarPlatillo(Platillo platillo) {
-        platillos.add(platillo);
+    public void agregarPlatillo(Platillo platillo, Orden orden) {
+        orden.platillos.add(platillo);
     }
 
-    public void agregarBebida(Bebida bebida) {
-        bebidas.add(bebida);
+    public void agregarBebida(Bebida bebida, Orden orden) {
+        orden.bebidas.add(bebida);
     }
 
-    public void agregarPostre(Postre postre) {
-        postres.add(postre);
+    public void agregarPostre(Postre postre, Orden orden) {
+        orden.postres.add(postre);
+    }
+
+    public double totalOrden(Orden orden) {
+        double totalTransaccion = 0;
+        if (!orden.platillos.isEmpty()) {
+            for (Platillo platillo : orden.platillos) {
+                totalTransaccion += Double.parseDouble(platillo.getPrecio());
+            }
+        }
+        if (!orden.bebidas.isEmpty()) {
+            for (Bebida bebida : orden.bebidas) {
+                totalTransaccion += Double.parseDouble(bebida.getPrecio());
+            }
+        }
+        if (!orden.postres.isEmpty()) {
+            for (Postre postre : orden.postres) {
+                totalTransaccion += Double.parseDouble(postre.getPrecio());
+            }
+        }
+        return totalTransaccion;
     }
 }

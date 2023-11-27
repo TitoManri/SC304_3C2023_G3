@@ -1,8 +1,7 @@
 package Orden;
 
-//CAMBIAR LA FUNCIÓN DE CALCULAR TOTAL
-//- Al final hay una función comentada que busqué y que tal vez pueda funcionar para hacer la estructura de buscar las facturas por fecha 
-import javax.swing.JOptionPane;
+//revisar agregarbebidas, platillos etc
+
 //PLATILLOS
 import Interfaz.Administrador.Platillos.CatalogoPlatillos;
 import Catalogo.Nodos.NodoPlatillo;
@@ -17,8 +16,9 @@ import Catalogo.Nodos.NodoPostre;
 import Catalogo.Postres.Postre;
 //CLIENTE
 import Personas.Cliente;
-import Personas.Cola;
 import java.util.List;
+//OTROS
+import javax.swing.JOptionPane;
 
 public class LesOrden {
 
@@ -62,7 +62,7 @@ public class LesOrden {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún platillo. Por favor ingrese un platillo del menú.");
             agregarPlatillo(nuevaOrden, Platillo);
         } else {
-            nuevaOrden.agregarPlatillo(platillo);
+            nuevaOrden.agregarPlatillo(platillo, nuevaOrden);
         }
     }
 
@@ -89,7 +89,7 @@ public class LesOrden {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ninguna bebida. Por favor ingrese una bebida del menú.");
             agregarBebida(nuevaOrden, Bebida);
         } else {
-            nuevaOrden.agregarBebida(bebida);
+            nuevaOrden.agregarBebida(bebida, nuevaOrden);
         }
     }
 
@@ -103,7 +103,7 @@ public class LesOrden {
             JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún postre. Por favor ingrese un postre del menú.");
             agregarPostre(nuevaOrden, Postre);
         } else {
-            nuevaOrden.agregarPostre(postre);
+            nuevaOrden.agregarPostre(postre, nuevaOrden);
         }
     }
 

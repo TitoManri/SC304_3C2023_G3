@@ -2,6 +2,7 @@ package Interfaz;
 
 import Transacciones.Arbol;
 import Interfaz.Ordenes.Ordenes;
+import Orden.Orden;
 
 /**
  *
@@ -52,7 +53,9 @@ public class Transaccion extends javax.swing.JFrame {
 
     private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
         Arbol a = new Arbol();
-        a.agregarAArbol(Ordenes.getOrden());
+        Orden orden = Ordenes.getOrden();
+        a.agregarAArbol(orden);
+        a.guardarTransaccionArchivo(orden.getFechaHora(), orden.getCliente(), orden.totalOrden(orden));
     }//GEN-LAST:event_pagarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed

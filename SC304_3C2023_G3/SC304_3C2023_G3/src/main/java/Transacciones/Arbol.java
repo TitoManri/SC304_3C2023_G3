@@ -1,6 +1,10 @@
 package Transacciones;
 
 import Orden.Orden;
+import Personas.Cliente;
+import java.io.*;
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -52,6 +56,26 @@ public class Arbol {
             } else {
                 agregarNuevo(raiz.getEnlaceDer(), nuevo);
             }
+        }
+    }
+    
+    public void guardarTransaccionArchivo(LocalDateTime fechaHora, Cliente cliente, double total) {
+        try {
+            DataOutputStream archivo = new DataOutputStream(new FileOutputStream("Ordenes.txt", true));
+
+            String fechaHoraA = fechaHora.toString();
+            String clientenomA = cliente.getNombre() + " " + cliente.getApellido();
+            double totalA = total;
+
+            archivo.writeUTF(fechaHoraA);
+            archivo.writeUTF(clientenomA);
+            archivo.writeDouble(totalA);
+            //JOptionPane.showMessageDialog(null, "Datos guardados correctamente!", "Agregar Datos", JOptionPane.INFORMATION_MESSAGE);
+            archivo.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar los datos: " + e.getMessage(), "Error!",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
