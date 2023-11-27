@@ -18,6 +18,7 @@ import Catalogo.Postres.Postre;
 //CLIENTE
 import Personas.Cliente;
 import Personas.Cola;
+import java.util.List;
 
 public class LesOrden {
 
@@ -77,7 +78,7 @@ public class LesOrden {
 //            nuevaOrden.setCliente(cliente);
 //        }
 //    }
-
+    
     public void agregarBebida(Orden nuevaOrden, String Bebida) {
         String nomBebida = Bebida;
         calcularTotal();
@@ -118,19 +119,19 @@ public class LesOrden {
 
         return cantidad * precio;
     }
-    
-    public void mostrarOrdenes(){
+
+    public void mostrarOrdenes() {
         if (!esVaciaLes()) {
             String s = "";
             NodoOrden aux = inicio;
             while (aux != null) {
-                s = s + "Cliente: " + aux.getOrden().getCliente().getNombre() + aux.getOrden().getCliente().getApellido() + "\n" + 
-                        "Fecha y hora: " + aux.getOrden().getFechaHora() + "\n" + 
-                        "Número de orden:" + aux.getOrden().getNumOrden() + "\n" + 
-                        "Platillos: " +aux.getOrden().getPlatillos().toString() + "\n"  + 
-                        "Bebidas: "+ aux.getOrden().getBebidas().toString() + "\n" + 
-                        "Postres: "+ aux.getOrden().getPostres().toString() + "\n" + 
-                        "Total: " + aux.getOrden().getTotal() + "-->";
+                s = s + "Cliente: " + aux.getOrden().getCliente().getNombre() + aux.getOrden().getCliente().getApellido() + "\n"
+                        + "Fecha y hora: " + aux.getOrden().getFechaHora() + "\n"
+                        + "Número de orden:" + aux.getOrden().getNumOrden() + "\n"
+                        + "Platillos: " + aux.getOrden().getPlatillos().toString() + "\n"
+                        + "Bebidas: " + aux.getOrden().getBebidas().toString() + "\n"
+                        + "Postres: " + aux.getOrden().getPostres().toString() + "\n"
+                        + "Total: " + aux.getOrden().getTotal() + "-->";
                 aux = aux.getSiguiente();
             }
             JOptionPane.showMessageDialog(null, "La lista contiene: \n" + s);
@@ -138,7 +139,63 @@ public class LesOrden {
             JOptionPane.showMessageDialog(null, "No se puede mostrar la lista, está vacía");
         }
     }
+
     
+    //PREGUNTARLE AL PROFE COMO REDIRIGIR LOS BOTONES
+    public void modificarOrdenes(String Platillo) {
+        int numeroOrdenBus = 0;
+        NodoOrden aux = inicio;
+        boolean encontrado = false;
+        String nombrePlatillo = Platillo;
+        while (aux != null && !encontrado) {
+            if (aux.getOrden().getNumOrden() == numeroOrdenBus) {
+                double totalAntes = aux.getOrden().getTotal();
+                int seleccion = 0;
+                if (seleccion == 1) {
+
+                }
+                aux.getOrden().setTotal(totalAntes + calcularTotal());
+
+                encontrado = true;
+            }
+            aux = aux.getSiguiente();
+        }
+
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "No se encontró una orden con el número especificado.");
+        }
+    }
+
+    public void eliminarPlatillo(Orden orden, String nombrePlatillo) {
+        List<Platillo> platillos = orden.getPlatillos();
+        for (int i = 0; i < platillos.size(); i++) {
+            if (platillos.get(i).getNombre().equals(nombrePlatillo)) {
+                platillos.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void eliminarBebida(Orden orden, String nombreBebida) {
+        List<Bebida> bebidas = orden.getBebidas();
+        for (int i = 0; i < bebidas.size(); i++) {
+            if (bebidas.get(i).getNombre().equals(nombreBebida)) {
+                bebidas.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void eliminarPostre(Orden orden, String nombrePostre) {
+        List<Postre> postres = orden.getPostres();
+        for (int i = 0; i < postres.size(); i++) {
+            if (postres.get(i).getNombre().equals(nombrePostre)) {
+                postres.remove(i);
+                break;
+            }
+        }
+    }
+
 //        public void buscarPorFecha(int año, int mes, int dia) { //esta iría en orden
 //        // Buscar órdenes por fecha (ejemplo: 9 de noviembre de 2023)
 //        LocalDateTime fechaBusqueda = LocalDateTime.of(año, mes, dia, 0, 0);
