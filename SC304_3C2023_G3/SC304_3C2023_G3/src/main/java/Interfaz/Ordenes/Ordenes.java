@@ -4,6 +4,7 @@ import Orden.Orden;
 import Orden.LesOrden;
 import Interfaz.Transaccion;
 import Interfaz.LogIn;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,21 +12,33 @@ import Interfaz.LogIn;
  */
 public class Ordenes extends javax.swing.JFrame {
 
-    private static Orden orden = new Orden();
     LesOrden lo = new LesOrden();
-    
+    private Orden orden = null;
+
     public Ordenes() {
         initComponents();
-        lo.agregarOrden(LogIn.getCliente());
+        orden = lo.agregarOrden(LogIn.getCliente());
 
     }
 
-    public static Orden getOrden() {
+    public Orden getOrden() {
         return orden;
     }
 
-    public static void setOrden(Orden orden) {
-        Ordenes.orden = orden;
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
+
+    public void cancelarOrden() {
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que sea cancelar su orden?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            LesOrden lo = new LesOrden();
+            lo.cancelarOrden(orden.getNumOrden());
+            JOptionPane.showMessageDialog(null, "Se eliminó la orden correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha eliminado puede seguir editando");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -120,8 +133,8 @@ public class Ordenes extends javax.swing.JFrame {
     }//GEN-LAST:event_terminarOrdActionPerformed
 
     private void cancelarOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarOrdActionPerformed
+        cancelarOrden();
         //AQUÍ SE LLAMA AL MENU PRINCIPAL
-        //borrar datos de la orden actual 
     }//GEN-LAST:event_cancelarOrdActionPerformed
 
     public static void main(String args[]) {

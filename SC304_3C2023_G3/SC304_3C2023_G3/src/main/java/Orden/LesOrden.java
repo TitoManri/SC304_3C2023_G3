@@ -7,7 +7,6 @@ import Personas.Cliente;
 //OTROS
 import javax.swing.JOptionPane;
 import java.io.*;
-import java.time.LocalDateTime;
 
 public class LesOrden {
 
@@ -25,7 +24,7 @@ public class LesOrden {
         }
     }
 
-    public void agregarOrden(Cliente cliente) {
+    public Orden agregarOrden(Cliente cliente) {
         Orden nuevaOrden = new Orden();
         double total = 0;
         nuevaOrden.setCliente(cliente);
@@ -45,6 +44,7 @@ public class LesOrden {
         } else {
             inicio.setSiguiente(nuevo);
         }
+        return nuevaOrden;
     }
 
     public void mostrarOrdenes() {
