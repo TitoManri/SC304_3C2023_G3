@@ -3,6 +3,7 @@ package Interfaz.Ordenes;
 import Catalogo.Nodos.NodoBebida;
 import Interfaz.Administrador.Bebidas.CatalogoBebidas;
 import Orden.LesOrden;
+import Orden.Orden;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -102,8 +103,8 @@ public class AgregarBebCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarBebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBebActionPerformed
-        LesOrden lo = new LesOrden();
-        lo.agregarBebida(Ordenes.getOrden(), nombreBebText.getText());
+        Orden orden = Ordenes.getOrden();
+        orden.getBebidas().agregarBebida(nombreBebText.getText());
     }//GEN-LAST:event_agregarBebActionPerformed
 
     public static void main(String args[]) {

@@ -1,9 +1,9 @@
 package Interfaz.Ordenes;
 
-import Catalogo.Bebidas.Bebida;
 import Orden.LesOrden;
 import Orden.Orden;
-import java.util.List;
+import Orden.bebidasLes;
+import Orden.nodoBebidas;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,15 +22,17 @@ public class EliminarBebCliente extends javax.swing.JFrame {
     }
 
     public void llenarTabla(Orden orden) {
-        List<Bebida> bebidas = orden.getBebidas();
-        if (!bebidas.isEmpty()) {
-            for (Bebida bebida : bebidas) {
+        bebidasLes bebidasOrden = orden.getBebidas();
+        nodoBebidas aux = bebidasOrden.getInicio();
+        if (!bebidasOrden.esVaciaBebidas()) {
+            while (aux != null) {
                 tab.addRow(new Object[]{
-                    bebida.getNombre(), bebida.getCategoria(), bebida.getPrecio()
+                    aux.getBebida().getNombre(), aux.getBebida(), aux.getBebida().getCategoria(), aux.getBebida().getPrecio()
                 });
+                aux = aux.getSiguiente();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La orden no tiene postres.");
+            JOptionPane.showMessageDialog(null, "La orden no tiene bebidas.");
         }
     }
 
@@ -131,8 +133,7 @@ public class EliminarBebCliente extends javax.swing.JFrame {
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         String nomBebida = jTextField1.getText();
         if (!nomBebida.isEmpty()) {
-            LesOrden lesOrden = new LesOrden();
-            lesOrden.eliminarBebida(orden, nomBebida);
+            orden.getBebidas().eliminarBebida(nomBebida);
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la bebida a eliminar.");
         }

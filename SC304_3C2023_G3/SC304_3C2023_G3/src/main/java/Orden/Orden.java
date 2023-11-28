@@ -3,14 +3,9 @@ package Orden;
 /*
  
  */
-
-import Catalogo.Bebidas.Bebida;
-import Catalogo.Platillo.Platillo;
-import Catalogo.Postres.Postre;
 import Personas.Cliente;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Orden {
 
@@ -20,9 +15,9 @@ public class Orden {
     private LocalDateTime fechaHora;
     private Cliente cliente;
     private double total;
-    private List<Platillo> platillos;
-    private List<Bebida> bebidas;
-    private List<Postre> postres;
+    private platillosLes platillos;
+    private bebidasLes bebidas;
+    private postresLes postres;
 
     //CONSTRUCTOR
     public Orden(){
@@ -30,12 +25,11 @@ public class Orden {
         this.fechaHora = LocalDateTime.now();
         this.numOrden = ++contadorOrdenes;
         this.total = 0.0;
-        this.platillos = new ArrayList<>();
-        this.bebidas = new ArrayList<>();
-        this.postres = new ArrayList<>();
+        this.platillos = null;
+        this.bebidas = null;
+        this.postres = null;
     }
-
-    
+   
     //GETTERS Y SETTERS
     public int getNumOrden() {
         return numOrden;
@@ -69,49 +63,30 @@ public class Orden {
         this.total = total;
     }
 
-    public List<Platillo> getPlatillos() {
+    public platillosLes getPlatillos() {
         return platillos;
     }
 
-    public List<Bebida> getBebidas() {
+    public void setPlatillos(platillosLes platillos) {
+        this.platillos = platillos;
+    }
+
+    public bebidasLes getBebidas() {
         return bebidas;
     }
 
-    public List<Postre> getPostres() {
+    public void setBebidas(bebidasLes bebidas) {
+        this.bebidas = bebidas;
+    }
+
+    public postresLes getPostres() {
         return postres;
     }
 
-    public void agregarPlatillo(Platillo platillo, Orden orden) {
-        orden.platillos.add(platillo);
+    public void setPostres(postresLes postres) {
+        this.postres = postres;
     }
 
-    public void agregarBebida(Bebida bebida, Orden orden) {
-        orden.bebidas.add(bebida);
-    }
+    
 
-    public void agregarPostre(Postre postre, Orden orden) {
-        orden.postres.add(postre);
-    }
-
-//    BORRAR
-//    public double totalOrden(Orden orden) {
-//        double totalTransaccion = 0;
-//        if (!orden.platillos.isEmpty()) {
-//            for (Platillo platillo : orden.platillos) {
-//                totalTransaccion += Double.parseDouble(platillo.getPrecio());
-//            }
-//        }
-//        if (!orden.bebidas.isEmpty()) {
-//            for (Bebida bebida : orden.bebidas) {
-//                totalTransaccion += Double.parseDouble(bebida.getPrecio());
-//            }
-//        }
-//        if (!orden.postres.isEmpty()) {
-//            for (Postre postre : orden.postres) {
-//                totalTransaccion += Double.parseDouble(postre.getPrecio());
-//            }
-//        }
-//        orden.setTotal(totalTransaccion);
-//        return totalTransaccion;
-//    }
 }

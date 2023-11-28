@@ -4,6 +4,7 @@ import Orden.LesOrden;
 import Catalogo.Nodos.NodoPlatillo;
 import javax.swing.table.DefaultTableModel;
 import Interfaz.Administrador.Platillos.CatalogoPlatillos;
+import Orden.Orden;
 
 /**
  *
@@ -121,8 +122,8 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatActionPerformed
-        LesOrden lo = new LesOrden();
-        lo.agregarPlatillo(Ordenes.getOrden(), nombrePlatText.getText());
+        Orden orden = Ordenes.getOrden();
+        orden.getPlatillos().agregarPlatillo(nombrePlatText.getText());
     }//GEN-LAST:event_agregarPlatActionPerformed
 
     public static void main(String args[]) {

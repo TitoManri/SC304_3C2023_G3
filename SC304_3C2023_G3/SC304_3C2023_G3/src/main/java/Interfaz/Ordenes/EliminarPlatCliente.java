@@ -3,6 +3,10 @@ package Interfaz.Ordenes;
 import Orden.Orden;
 import Catalogo.Platillo.Platillo;
 import Orden.LesOrden;
+import Orden.bebidasLes;
+import Orden.nodoBebidas;
+import Orden.nodoPlatillos;
+import Orden.platillosLes;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
@@ -14,7 +18,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     
     public EliminarPlatCliente(Orden orden) {
         this.orden = orden;
-        String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
+        String[] titulo = new String[]{"Nombre", "Características", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         jTable1.setModel(tab);
         llenarTabla(orden);
@@ -22,17 +26,18 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     }
     
     private void llenarTabla(Orden orden) {
-    List<Platillo> platillosOrden = orden.getPlatillos();
-    
-    if (!platillosOrden.isEmpty()) {
-        for (Platillo platillo : platillosOrden) {
-            tab.addRow(new Object[]{
-                platillo.getNombre(), platillo.getDescripcion(), platillo.getCategoria(), platillo.getPrecio()
-            });
+    platillosLes platillosOrden = orden.getPlatillos();
+        nodoPlatillos aux = platillosOrden.getInicio();
+        if (!platillosOrden.esVaciaPlatillos()) {
+            while (aux != null) {
+                tab.addRow(new Object[]{
+                    aux.getPlatillo().getNombre(), aux.getPlatillo().getDescripcion(),aux.getPlatillo(), aux.getPlatillo().getCategoria(), aux.getPlatillo().getPrecio()
+                });
+                aux = aux.getSiguiente();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La orden no tiene bebidas.");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "La orden no tiene platillos.");
-    }
 }
 
     @SuppressWarnings("unchecked")
@@ -132,8 +137,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         String nomPlatillo = jTextField1.getText();
         if (!nomPlatillo.isEmpty()) {
-            LesOrden lesOrden = new LesOrden();
-            lesOrden.eliminarBebida(orden, nomPlatillo);
+            orden.getPlatillos().eliminarPlatillo(nomPlatillo);
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre del platillo a eliminar.");
         }

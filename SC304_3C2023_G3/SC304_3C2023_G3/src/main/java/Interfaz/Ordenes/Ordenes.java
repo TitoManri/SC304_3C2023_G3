@@ -16,7 +16,7 @@ public class Ordenes extends javax.swing.JFrame {
     
     public Ordenes() {
         initComponents();
-        lo.agregarOrden(orden, LogIn.getCliente());
+        lo.agregarOrden(LogIn.getCliente());
 
     }
 

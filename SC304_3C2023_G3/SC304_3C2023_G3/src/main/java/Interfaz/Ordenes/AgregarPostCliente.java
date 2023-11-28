@@ -3,6 +3,7 @@ package Interfaz.Ordenes;
 import Catalogo.Nodos.NodoPostre;
 import Interfaz.Administrador.Postres.CatalogoPostres;
 import Orden.LesOrden;
+import Orden.Orden;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -103,8 +104,8 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostActionPerformed
-        LesOrden lo = new LesOrden();
-        lo.agregarPostre(Ordenes.getOrden(), postNomText.getText());
+        Orden orden = Ordenes.getOrden();
+        orden.getPostres().agregarPostre(postNomText.getText());
     }//GEN-LAST:event_AgregarPostActionPerformed
 
     public static void main(String args[]) {
