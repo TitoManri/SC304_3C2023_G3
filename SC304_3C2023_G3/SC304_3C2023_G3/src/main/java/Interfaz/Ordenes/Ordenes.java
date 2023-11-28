@@ -112,6 +112,8 @@ public class Ordenes extends javax.swing.JFrame {
     }//GEN-LAST:event_agrPostreActionPerformed
 
     private void terminarOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarOrdActionPerformed
+        LesOrden lo = new LesOrden();
+        orden.setTotal(lo.calcularTotal(orden));
         Transaccion t = new Transaccion();
         t.setVisible(true);
         this.dispose();
