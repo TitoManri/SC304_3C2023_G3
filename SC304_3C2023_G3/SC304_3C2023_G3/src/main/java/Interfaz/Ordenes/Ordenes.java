@@ -12,21 +12,21 @@ import javax.swing.JOptionPane;
  */
 public class Ordenes extends javax.swing.JFrame {
 
+    private static Orden orden = new Orden();
     LesOrden lo = new LesOrden();
-    private Orden orden = null;
-
+    
     public Ordenes() {
         initComponents();
-        orden = lo.agregarOrden(LogIn.getCliente());
+        lo.agregarOrden(LogIn.getCliente());
 
     }
 
-    public Orden getOrden() {
+    public static Orden getOrden() {
         return orden;
     }
 
-    public void setOrden(Orden orden) {
-        this.orden = orden;
+    public static void setOrden(Orden orden) {
+        Ordenes.orden = orden;
     }
 
     public void cancelarOrden() {
