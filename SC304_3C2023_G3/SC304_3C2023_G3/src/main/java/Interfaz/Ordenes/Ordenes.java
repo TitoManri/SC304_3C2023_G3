@@ -12,13 +12,12 @@ import javax.swing.JOptionPane;
  */
 public class Ordenes extends javax.swing.JFrame {
 
-    private static Orden orden = new Orden();
     LesOrden lo = new LesOrden();
-    
+    private static Orden orden;
+
     public Ordenes() {
         initComponents();
-        lo.agregarOrden(LogIn.getCliente());
-
+        orden = lo.agregarOrden(LogIn.getCliente());
     }
 
     public static Orden getOrden() {
