@@ -1,8 +1,14 @@
 package Interfaz.Ordenes;
+import Orden.Orden;
 
 public class OpcionesModOrden extends javax.swing.JFrame {
 
-    public OpcionesModOrden() {
+    private Orden orden;
+    
+    public OpcionesModOrden(Orden orden) {
+        this.orden = orden;
+        setResizable(false);
+        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -24,6 +30,11 @@ public class OpcionesModOrden extends javax.swing.JFrame {
 
         AgregarPlatillo.setBorderPainted(false);
         AgregarPlatillo.setContentAreaFilled(false);
+        AgregarPlatillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarPlatilloActionPerformed(evt);
+            }
+        });
         getContentPane().add(AgregarPlatillo);
         AgregarPlatillo.setBounds(50, 180, 260, 110);
 
@@ -39,26 +50,51 @@ public class OpcionesModOrden extends javax.swing.JFrame {
 
         AgregarPostre.setBorderPainted(false);
         AgregarPostre.setContentAreaFilled(false);
+        AgregarPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarPostreActionPerformed(evt);
+            }
+        });
         getContentPane().add(AgregarPostre);
         AgregarPostre.setBounds(705, 183, 270, 110);
 
         EliminarPlatillo.setBorderPainted(false);
         EliminarPlatillo.setContentAreaFilled(false);
+        EliminarPlatillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarPlatilloActionPerformed(evt);
+            }
+        });
         getContentPane().add(EliminarPlatillo);
         EliminarPlatillo.setBounds(45, 353, 270, 110);
 
         EliminarBebida.setBorderPainted(false);
         EliminarBebida.setContentAreaFilled(false);
+        EliminarBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarBebidaActionPerformed(evt);
+            }
+        });
         getContentPane().add(EliminarBebida);
         EliminarBebida.setBounds(375, 353, 270, 110);
 
         EliminarPostre.setBorderPainted(false);
         EliminarPostre.setContentAreaFilled(false);
+        EliminarPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarPostreActionPerformed(evt);
+            }
+        });
         getContentPane().add(EliminarPostre);
         EliminarPostre.setBounds(705, 353, 270, 110);
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
         getContentPane().add(volver);
         volver.setBounds(805, 513, 200, 70);
 
@@ -71,12 +107,36 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBebidaActionPerformed
-        // TODO add your handling code here:
+        //Falta agregar
     }//GEN-LAST:event_AgregarBebidaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void AgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPlatilloActionPerformed
+        //Falta agregar
+    }//GEN-LAST:event_AgregarPlatilloActionPerformed
+
+    private void AgregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostreActionPerformed
+        //Falta agregar
+    }//GEN-LAST:event_AgregarPostreActionPerformed
+
+    private void EliminarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPlatilloActionPerformed
+        EliminarPlatCliente eliminarPla = new EliminarPlatCliente(orden);
+        eliminarPla.setVisible(true);
+    }//GEN-LAST:event_EliminarPlatilloActionPerformed
+
+    private void EliminarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBebidaActionPerformed
+        EliminarBebCliente eliminarBeb = new EliminarBebCliente(orden);
+        eliminarBeb.setVisible(true);
+    }//GEN-LAST:event_EliminarBebidaActionPerformed
+
+    private void EliminarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPostreActionPerformed
+        EliminarPostCliente eliminarPos = new EliminarPostCliente(orden);
+        eliminarPos.setVisible(true);
+    }//GEN-LAST:event_EliminarPostreActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        //volver al menú 
+    }//GEN-LAST:event_volverActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -104,7 +164,7 @@ public class OpcionesModOrden extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OpcionesModOrden().setVisible(true);
+//                new OpcionesModOrden().setVisible(true);
             }
         });
     }

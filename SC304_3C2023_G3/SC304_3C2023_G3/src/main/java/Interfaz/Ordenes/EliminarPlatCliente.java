@@ -1,10 +1,39 @@
 package Interfaz.Ordenes;
 
+import Orden.Orden;
+import Catalogo.Platillo.Platillo;
+import Orden.LesOrden;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+
 public class EliminarPlatCliente extends javax.swing.JFrame {
 
-    public EliminarPlatCliente() {
+    private Orden orden;
+    DefaultTableModel tab = new DefaultTableModel();
+    
+    public EliminarPlatCliente(Orden orden) {
+        this.orden = orden;
+        String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
+        tab.setColumnIdentifiers(titulo);
+        jTable1.setModel(tab);
+        llenarTabla(orden);
         initComponents();
     }
+    
+    private void llenarTabla(Orden orden) {
+    List<Platillo> platillosOrden = orden.getPlatillos();
+    
+    if (!platillosOrden.isEmpty()) {
+        for (Platillo platillo : platillosOrden) {
+            tab.addRow(new Object[]{
+                platillo.getNombre(), platillo.getDescripcion(), platillo.getCategoria(), platillo.getPrecio()
+            });
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "La orden no tiene platillos.");
+    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,11 +96,21 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
 
         Eliminar.setBorderPainted(false);
         Eliminar.setContentAreaFilled(false);
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(Eliminar);
         Eliminar.setBounds(115, 483, 200, 70);
 
         Volver.setBorderPainted(false);
         Volver.setContentAreaFilled(false);
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(Volver);
         Volver.setBounds(325, 483, 200, 70);
 
@@ -85,6 +124,20 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        // volver al menú
+    }//GEN-LAST:event_VolverActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        String nomPlatillo = jTextField1.getText();
+        if (!nomPlatillo.isEmpty()) {
+            LesOrden lesOrden = new LesOrden();
+            lesOrden.eliminarBebida(orden, nomPlatillo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre del platillo a eliminar.");
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -113,7 +166,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarPlatCliente().setVisible(true);
+//                new EliminarPlatCliente().setVisible(true); ------- Preguntar al profe
             }
         });
     }

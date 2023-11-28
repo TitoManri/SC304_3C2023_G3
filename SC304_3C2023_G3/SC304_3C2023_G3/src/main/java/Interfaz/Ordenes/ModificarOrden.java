@@ -1,6 +1,9 @@
 package Interfaz.Ordenes;
 
 import javax.swing.table.DefaultTableModel;
+import Orden.Orden;
+import Orden.LesOrden;
+import javax.swing.JOptionPane;
 
 public class ModificarOrden extends javax.swing.JFrame {
 
@@ -11,6 +14,7 @@ public class ModificarOrden extends javax.swing.JFrame {
         String[] titulo = new String[]{"Orden #", "Cliente", "Hora"};
         tab.setColumnIdentifiers(titulo);
         TablaOrdenes.setModel(tab);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -102,6 +106,11 @@ public class ModificarOrden extends javax.swing.JFrame {
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
         getContentPane().add(volver);
         volver.setBounds(320, 480, 180, 60);
 
@@ -114,16 +123,30 @@ public class ModificarOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        // TODO add your handling code here:
+        LesOrden lo = new LesOrden();
+        try {
+            int numeroOrdenBus = Integer.parseInt(numeroOrden.getText());
+            Orden orden = lo.encontrarOrden(numeroOrdenBus);
+
+            if (orden != null) {
+                OpcionesModOrden opc = new OpcionesModOrden(orden);
+                opc.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró una orden con el número especificado.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número de orden válido.");
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void numeroOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroOrdenActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_numeroOrdenActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        // volver al menú
+    }//GEN-LAST:event_volverActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,9 +1,37 @@
 package Interfaz.Ordenes;
 
+import Catalogo.Bebidas.Bebida;
+import Orden.LesOrden;
+import Orden.Orden;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class EliminarBebCliente extends javax.swing.JFrame {
 
-    public EliminarBebCliente() {
+    private Orden orden;
+    DefaultTableModel tab = new DefaultTableModel();
+
+    public EliminarBebCliente(Orden orden) {
+        this.orden = orden;
+        String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
+        tab.setColumnIdentifiers(titulo);
+        jTable1.setModel(tab);
+        llenarTabla(orden);
         initComponents();
+    }
+
+    public void llenarTabla(Orden orden) {
+        List<Bebida> bebidas = orden.getBebidas();
+        if (!bebidas.isEmpty()) {
+            for (Bebida bebida : bebidas) {
+                tab.addRow(new Object[]{
+                    bebida.getNombre(), bebida.getCategoria(), bebida.getPrecio()
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La orden no tiene postres.");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -67,11 +95,21 @@ public class EliminarBebCliente extends javax.swing.JFrame {
 
         Volver.setBorderPainted(false);
         Volver.setContentAreaFilled(false);
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(Volver);
         Volver.setBounds(330, 490, 190, 70);
 
         Eliminar.setBorderPainted(false);
         Eliminar.setContentAreaFilled(false);
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(Eliminar);
         Eliminar.setBounds(115, 483, 200, 70);
 
@@ -85,6 +123,20 @@ public class EliminarBebCliente extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        // volver al menú
+    }//GEN-LAST:event_VolverActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        String nomBebida = jTextField1.getText();
+        if (!nomBebida.isEmpty()) {
+            LesOrden lesOrden = new LesOrden();
+            lesOrden.eliminarBebida(orden, nomBebida);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la bebida a eliminar.");
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -113,7 +165,7 @@ public class EliminarBebCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarBebCliente().setVisible(true);
+//                new EliminarBebCliente().setVisible(true);  -----Preguntar al profe
             }
         });
     }

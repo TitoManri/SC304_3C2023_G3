@@ -1,6 +1,7 @@
 package Orden;
 
 //revisar agregarbebidas, platillos etc
+//falta calcular los totales despues de modificar una orden
 //PLATILLOS
 import Interfaz.Administrador.Platillos.CatalogoPlatillos;
 import Catalogo.Nodos.NodoPlatillo;
@@ -19,6 +20,7 @@ import java.util.List;
 //OTROS
 import javax.swing.JOptionPane;
 import Orden.Orden;
+import java.io.*;
 
 public class LesOrden {
 
@@ -124,31 +126,22 @@ public class LesOrden {
         }
     }
 
-    //PREGUNTARLE AL PROFE COMO REDIRIGIR LOS BOTONES -- corregir la parte comentada
-    public void modificarOrdenes(String Platillo) {
-        int numeroOrdenBus = 0;
-        NodoOrden aux = inicio;
-        boolean encontrado = false;
-        String nombrePlatillo = Platillo;
-        while (aux != null && !encontrado) {
-            if (aux.getOrden().getNumOrden() == numeroOrdenBus) {
-                double totalAntes = aux.getOrden().getTotal();
-                int seleccion = 0;
-                if (seleccion == 1) {
-
-                }
-                //aux.getOrden().setTotal(totalAntes + calcularTotal());
-
-                encontrado = true;
-            }
-            aux = aux.getSiguiente();
-        }
-
-        if (!encontrado) {
-            JOptionPane.showMessageDialog(null, "No se encontró una orden con el número especificado.");
-        }
-    }
-
+    //BORRAR
+//    public void modificarOrdenes(int numeroOrden) {
+//        NodoOrden aux = inicio;
+//        boolean encontrado = false;
+//        while (aux != null && !encontrado) {
+//            if (aux.getOrden().getNumOrden() == numeroOrden) {
+//                encontrado = true;
+//            }
+//            aux = aux.getSiguiente();
+//        }
+//
+//        if (!encontrado) {
+//            JOptionPane.showMessageDialog(null, "No se encontró una orden con el número especificado.");
+//        }
+//    }
+    
     public void eliminarPlatillo(Orden orden, String nombrePlatillo) {
         List<Platillo> platillos = orden.getPlatillos();
         for (int i = 0; i < platillos.size(); i++) {
@@ -200,6 +193,49 @@ public class LesOrden {
         return totalTransaccion;
     }
 
+    public Orden encontrarOrden(int numeroOrden) {
+        NodoOrden aux = inicio;
+
+        while (aux != null) {
+            if (aux.getOrden().getNumOrden() == numeroOrden) {
+                return aux.getOrden();
+            }
+            aux = aux.getSiguiente();
+        }
+        return null; 
+    }
+      
+    //Le falta la interfaz
+    public void cancelarOrden(int numeroOrden) {
+    NodoOrden anterior = null;
+    NodoOrden actual = inicio;
+    
+    while (actual != null && actual.getOrden().getNumOrden() != numeroOrden) {
+        anterior = actual;
+        actual = actual.getSiguiente();
+    }
+
+    //CAMBIAR EL ARCHIVO Y REVISAR
+    if (actual != null) {
+        try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream("aaaa.txt", true))) {
+            outputStream.writeUTF("Fecha y hora: " + actual.getOrden().getFechaHora() + "\n");
+            outputStream.writeUTF("Cliente: " + actual.getOrden().getCliente().getNombre() + " " + actual.getOrden().getCliente().getApellido() + "\n");
+            outputStream.writeDouble(actual.getOrden().getTotal());
+            
+            JOptionPane.showMessageDialog(null, "Orden cancelada correctamente.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar la información de la orden.");
+        }
+        
+        if (anterior != null) {
+            anterior.setSiguiente(actual.getSiguiente());
+        } else {
+            inicio = actual.getSiguiente();
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "No se encontró una orden con el número especificado.");
+    }
+}
 //        public void buscarPorFecha(int año, int mes, int dia) { //esta iría en orden
 //        // Buscar órdenes por fecha (ejemplo: 9 de noviembre de 2023)
 //        LocalDateTime fechaBusqueda = LocalDateTime.of(año, mes, dia, 0, 0);
