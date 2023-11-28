@@ -93,23 +93,25 @@ public class Orden {
         orden.postres.add(postre);
     }
 
-    public double totalOrden(Orden orden) {
-        double totalTransaccion = 0;
-        if (!orden.platillos.isEmpty()) {
-            for (Platillo platillo : orden.platillos) {
-                totalTransaccion += Double.parseDouble(platillo.getPrecio());
-            }
-        }
-        if (!orden.bebidas.isEmpty()) {
-            for (Bebida bebida : orden.bebidas) {
-                totalTransaccion += Double.parseDouble(bebida.getPrecio());
-            }
-        }
-        if (!orden.postres.isEmpty()) {
-            for (Postre postre : orden.postres) {
-                totalTransaccion += Double.parseDouble(postre.getPrecio());
-            }
-        }
-        return totalTransaccion;
-    }
+//    BORRAR
+//    public double totalOrden(Orden orden) {
+//        double totalTransaccion = 0;
+//        if (!orden.platillos.isEmpty()) {
+//            for (Platillo platillo : orden.platillos) {
+//                totalTransaccion += Double.parseDouble(platillo.getPrecio());
+//            }
+//        }
+//        if (!orden.bebidas.isEmpty()) {
+//            for (Bebida bebida : orden.bebidas) {
+//                totalTransaccion += Double.parseDouble(bebida.getPrecio());
+//            }
+//        }
+//        if (!orden.postres.isEmpty()) {
+//            for (Postre postre : orden.postres) {
+//                totalTransaccion += Double.parseDouble(postre.getPrecio());
+//            }
+//        }
+//        orden.setTotal(totalTransaccion);
+//        return totalTransaccion;
+//    }
 }

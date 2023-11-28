@@ -1,7 +1,6 @@
 package Orden;
 
 //revisar agregarbebidas, platillos etc
-
 //PLATILLOS
 import Interfaz.Administrador.Platillos.CatalogoPlatillos;
 import Catalogo.Nodos.NodoPlatillo;
@@ -19,6 +18,7 @@ import Personas.Cliente;
 import java.util.List;
 //OTROS
 import javax.swing.JOptionPane;
+import Orden.Orden;
 
 public class LesOrden {
 
@@ -38,7 +38,6 @@ public class LesOrden {
 
     public void agregarOrden(Orden nuevaOrden, Cliente cliente) {
         double total = 0.0;
-        total += calcularTotal();
         nuevaOrden.setCliente(cliente);
         nuevaOrden.setTotal(total);
 
@@ -54,7 +53,6 @@ public class LesOrden {
 
     public void agregarPlatillo(Orden nuevaOrden, String Platillo) {
         String nomPlatillo = Platillo;
-        calcularTotal();
         CatalogoPlatillos c = new CatalogoPlatillos();
         NodoPlatillo platilloNod = c.buscarPlatillo(nomPlatillo);
         Platillo platillo = platilloNod.getPlatillo();
@@ -66,22 +64,8 @@ public class LesOrden {
         }
     }
 
-//    public void agregarCliente(Orden nuevaOrden, String usuario) {
-//        String userCliente = usuario;
-//        calcularTotal();
-//        Cola c = new Cola();
-//        Cliente cliente = c.buscarCliente(userCliente);
-//        if (cliente == null) {
-//            JOptionPane.showMessageDialog(null, "No se encontró coincidencia con ningún usuario. Por favor ingrese un usuerio en el sistema.");
-//            agregarCliente(nuevaOrden, usuario);
-//        } else {
-//            nuevaOrden.setCliente(cliente);
-//        }
-//    }
-    
     public void agregarBebida(Orden nuevaOrden, String Bebida) {
         String nomBebida = Bebida;
-        calcularTotal();
         CatalogoBebidas c = new CatalogoBebidas();
         NodoBebida bebidaNod = c.buscarBebida(nomBebida);
         Bebida bebida = bebidaNod.getBebida();
@@ -95,7 +79,6 @@ public class LesOrden {
 
     public void agregarPostre(Orden nuevaOrden, String Postre) {
         String nomPostre = Postre;
-        calcularTotal();
         CatalogoPostres c = new CatalogoPostres();
         NodoPostre postreNod = c.buscarPostre(nomPostre);
         Postre postre = postreNod.getPostre();
@@ -107,19 +90,20 @@ public class LesOrden {
         }
     }
 
-    public double calcularTotal() {
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de este producto que desea: "));
-        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
-
-        // Validar el precio
-        while (precio < 10.0) {
-            JOptionPane.showMessageDialog(null, "Precio del producto no válido. Ingrese uno de nuevo.");
-            precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
-        }
-
-        return cantidad * precio;
-    }
-
+//    BORRAR
+//    public double calcularTotal() {
+//        int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de este producto que desea: "));
+//        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
+//
+//        // Validar el precio
+//        while (precio < 10.0) {
+//            JOptionPane.showMessageDialog(null, "Precio del producto no válido. Ingrese uno de nuevo.");
+//            precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
+//        }
+//
+//        return cantidad * precio;
+//    }
+    
     public void mostrarOrdenes() {
         if (!esVaciaLes()) {
             String s = "";
@@ -140,8 +124,7 @@ public class LesOrden {
         }
     }
 
-    
-    //PREGUNTARLE AL PROFE COMO REDIRIGIR LOS BOTONES
+    //PREGUNTARLE AL PROFE COMO REDIRIGIR LOS BOTONES -- corregir la parte comentada
     public void modificarOrdenes(String Platillo) {
         int numeroOrdenBus = 0;
         NodoOrden aux = inicio;
@@ -154,7 +137,7 @@ public class LesOrden {
                 if (seleccion == 1) {
 
                 }
-                aux.getOrden().setTotal(totalAntes + calcularTotal());
+                //aux.getOrden().setTotal(totalAntes + calcularTotal());
 
                 encontrado = true;
             }
@@ -194,6 +177,27 @@ public class LesOrden {
                 break;
             }
         }
+    }
+
+    public double calcularTotal(Orden orden) {
+        double totalTransaccion = 0;
+        if (!orden.getPlatillos().isEmpty()) {
+            for (Platillo platillo : orden.getPlatillos()) {
+                totalTransaccion += Double.parseDouble(platillo.getPrecio());
+            }
+        }
+        if (!orden.getBebidas().isEmpty()) {
+            for (Bebida bebida : orden.getBebidas()) {
+                totalTransaccion += Double.parseDouble(bebida.getPrecio());
+            }
+        }
+        if (!orden.getPostres().isEmpty()) {
+            for (Postre postre : orden.getPostres()) {
+                totalTransaccion += Double.parseDouble(postre.getPrecio());
+            }
+        }
+        orden.setTotal(totalTransaccion);
+        return totalTransaccion;
     }
 
 //        public void buscarPorFecha(int año, int mes, int dia) { //esta iría en orden
