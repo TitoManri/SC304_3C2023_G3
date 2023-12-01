@@ -1,44 +1,54 @@
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoProvedores.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Sopas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Proovedores\CatalogoProvedores.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\Transaccion.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Postres\Postre.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\SignIn.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoPlatillo.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Salados.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Empleado.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\LesOrden.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Entradas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\NodoArb.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\PlatosFuertes.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\Orden.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\LogIn.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Transaccion.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Bebidas\CatalogoBebidas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\Arbol.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoPostre.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\Ordenes.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Dulces.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Catalogos.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoBebida.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\ModificarOrden.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\JugosNaturales.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Provedores\Proovedores.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\PaginaInicio.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\OtrasBebidas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cola.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Bebida.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Ensaldas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarPlatCliente.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Provedores\Provedores.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Persona.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Nodo.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Postres\CatalogoPostres.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\Gaseosas.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarPostCliente.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Platillo.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\NodoOrden.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarBebCliente.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\Licores.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Platillos\CatalogoPlatillos.java
-C:\Users\Nigel\OneDrive\Desktop\Estructuras proyecto\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Nodo.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Sopas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\Licores.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\nodoPostres.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\OpcionesModOrden.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\bebidasLes.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Catalogos.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\platillosLes.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\Arbol.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Postres\Postre.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoBebida.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoPostre.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Proovedores\CatalogoProvedores.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarPlatCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\NodoArb.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\nodoPlatillos.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Provedores\Proovedores.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\NodoOrden.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\PlatosFuertes.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\LogIn.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Postres\CatalogoPostres.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Transacciones\Transaccion.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Transaccion.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cola.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\ModificarOrden.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarPostCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Cliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\OtrasBebidas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoProvedores.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\EliminarBebCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\SignIn.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\postresLes.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\AgregarBebCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Dulces.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\LesOrden.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\nodoBebidas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Provedores\Provedores.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\Ordenes.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Bebidas\CatalogoBebidas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Orden\Orden.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\EliminarPlatCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\Platillos\CatalogoPlatillos.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Platillo\Platillo.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Entradas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\Gaseosas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Administrador\PaginaInicio.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Ordenes\EliminarPostCliente.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Bebidas\Bebida.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Cliente\Bebidas\JugosNaturales.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Catalogo\Nodos\NodoPlatillo.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Persona.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Platillos\Ensaldas.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Personas\Empleado.java
+C:\Users\manri\Desktop\SC304_3C2023_G3\SC304_3C2023_G3\SC304_3C2023_G3\src\main\java\Interfaz\Postres\Salados.java
