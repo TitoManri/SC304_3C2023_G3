@@ -1,1 +1,2 @@
-Manri,Gaseosas,100
+cola loca,Gaseosas,2500
+coca cola,Gaseosas,5000

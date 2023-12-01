@@ -4,6 +4,7 @@ import Orden.LesOrden;
 import Orden.Orden;
 import Orden.bebidasLes;
 import Orden.nodoBebidas;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +15,8 @@ public class EliminarBebCliente extends javax.swing.JFrame {
 
     public EliminarBebCliente(Orden orden) {
         this.orden = orden;
+        this.setLocationRelativeTo(null);
+        setResizable(false);
         String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         jTable1.setModel(tab);
@@ -42,13 +45,12 @@ public class EliminarBebCliente extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txtNomBebida = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -86,14 +88,15 @@ public class EliminarBebCliente extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(582, 92, 400, 410);
 
-        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNomBebida.setBackground(new java.awt.Color(0, 0, 51));
+        txtNomBebida.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        txtNomBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNomBebidaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(100, 270, 410, 50);
+        getContentPane().add(txtNomBebida);
+        txtNomBebida.setBounds(100, 270, 410, 50);
 
         Volver.setBorderPainted(false);
         Volver.setContentAreaFilled(false);
@@ -122,16 +125,16 @@ public class EliminarBebCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txtNomBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomBebidaActionPerformed
+
+    }//GEN-LAST:event_txtNomBebidaActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         // volver al menú
     }//GEN-LAST:event_VolverActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        String nomBebida = jTextField1.getText();
+        String nomBebida = txtNomBebida.getText();
         if (!nomBebida.isEmpty()) {
             orden.getBebidas().eliminarBebida(nomBebida);
         } else {
@@ -177,6 +180,6 @@ public class EliminarBebCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtNomBebida;
     // End of variables declaration//GEN-END:variables
 }

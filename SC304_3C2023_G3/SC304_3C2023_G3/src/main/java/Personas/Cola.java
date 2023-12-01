@@ -1,6 +1,5 @@
 package Personas;
 
-
 import Personas.Empleado;
 import Personas.Cliente;
 import javax.swing.JOptionPane;

@@ -1,9 +1,7 @@
 package Personas;
 
-
 import Personas.Empleado;
 import Personas.Cliente;
-
 
 /**
  *

@@ -16,6 +16,8 @@ public class AgregarBebCliente extends javax.swing.JFrame {
     
     public AgregarBebCliente() {
         initComponents();
+        setResizable(false);
+        this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         tablaBebidas.setModel(tab);
@@ -66,6 +68,11 @@ public class AgregarBebCliente extends javax.swing.JFrame {
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 170, 50));
 
         tablaBebidas.setModel(new javax.swing.table.DefaultTableModel(
@@ -106,6 +113,12 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         Orden orden = Ordenes.getOrden();
         orden.getBebidas().agregarBebida(nombreBebText.getText());
     }//GEN-LAST:event_agregarBebActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        Ordenes apc=new Ordenes();
+        apc.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -14,6 +14,8 @@ public class Transaccion extends javax.swing.JFrame {
     public Transaccion() {
         initComponents();
         mostrarDatos();
+        setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     public void mostrarDatos() {
@@ -77,6 +79,11 @@ public class Transaccion extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 80, 20));
 
         fechaText.setBackground(new java.awt.Color(204, 204, 204));
+        fechaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaTextActionPerformed(evt);
+            }
+        });
         getContentPane().add(fechaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 220, -1));
 
         clienteText.setBackground(new java.awt.Color(204, 204, 204));
@@ -125,6 +132,10 @@ public class Transaccion extends javax.swing.JFrame {
         o.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void fechaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaTextActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

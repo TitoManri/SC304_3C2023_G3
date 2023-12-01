@@ -3,6 +3,7 @@ package Interfaz.Ordenes;
 import javax.swing.table.DefaultTableModel;
 import Orden.Orden;
 import Orden.LesOrden;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class ModificarOrden extends javax.swing.JFrame {
@@ -11,6 +12,7 @@ public class ModificarOrden extends javax.swing.JFrame {
 
     public ModificarOrden() {
         initComponents();
+        this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Orden #", "Cliente", "Hora"};
         tab.setColumnIdentifiers(titulo);
         TablaOrdenes.setModel(tab);
@@ -21,7 +23,7 @@ public class ModificarOrden extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        numeroOrden = new javax.swing.JTextField();
+        txtNomBebida = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaOrdenes = new javax.swing.JTable();
         modificar = new javax.swing.JButton();
@@ -33,15 +35,16 @@ public class ModificarOrden extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        numeroOrden.setBackground(new java.awt.Color(0, 0, 51));
-        numeroOrden.setToolTipText("");
-        numeroOrden.addActionListener(new java.awt.event.ActionListener() {
+        txtNomBebida.setBackground(new java.awt.Color(0, 0, 51));
+        txtNomBebida.setForeground(new java.awt.Color(255, 255, 255));
+        txtNomBebida.setToolTipText("");
+        txtNomBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numeroOrdenActionPerformed(evt);
+                txtNomBebidaActionPerformed(evt);
             }
         });
-        getContentPane().add(numeroOrden);
-        numeroOrden.setBounds(80, 260, 420, 60);
+        getContentPane().add(txtNomBebida);
+        txtNomBebida.setBounds(80, 260, 420, 60);
 
         TablaOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +128,7 @@ public class ModificarOrden extends javax.swing.JFrame {
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         LesOrden lo = new LesOrden();
         try {
-            int numeroOrdenBus = Integer.parseInt(numeroOrden.getText());
+            int numeroOrdenBus = Integer.parseInt(txtNomBebida.getText());
             Orden orden = lo.encontrarOrden(numeroOrdenBus);
 
             if (orden != null) {
@@ -139,9 +142,9 @@ public class ModificarOrden extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_modificarActionPerformed
 
-    private void numeroOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroOrdenActionPerformed
-
-    }//GEN-LAST:event_numeroOrdenActionPerformed
+    private void txtNomBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomBebidaActionPerformed
+        txtNomBebida.setForeground(Color.WHITE);
+    }//GEN-LAST:event_txtNomBebidaActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // volver al menú
@@ -184,7 +187,7 @@ public class ModificarOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
-    private javax.swing.JTextField numeroOrden;
+    private javax.swing.JTextField txtNomBebida;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

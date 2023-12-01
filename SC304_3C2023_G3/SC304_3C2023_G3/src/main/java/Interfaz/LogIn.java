@@ -20,6 +20,8 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
+        setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     public static Cliente getCliente() {

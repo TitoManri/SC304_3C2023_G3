@@ -13,6 +13,8 @@ public class EliminarPostCliente extends javax.swing.JFrame {
 
     public EliminarPostCliente(Orden orden) {
         this.orden = orden;
+        this.setLocationRelativeTo(null);
+        setResizable(false);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         jTable1.setModel(tab);

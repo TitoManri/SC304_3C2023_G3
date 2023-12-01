@@ -18,6 +18,8 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     
     public EliminarPlatCliente(Orden orden) {
         this.orden = orden;
+        this.setLocationRelativeTo(null);
+        setResizable(false);
         String[] titulo = new String[]{"Nombre", "Características", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         jTable1.setModel(tab);

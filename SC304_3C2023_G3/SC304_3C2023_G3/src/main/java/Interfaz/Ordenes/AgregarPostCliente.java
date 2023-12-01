@@ -16,6 +16,8 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     
     public AgregarPostCliente() {
         initComponents();
+        setResizable(false);
+        this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         tablaPostres.setModel(tab);
@@ -66,7 +68,12 @@ public class AgregarPostCliente extends javax.swing.JFrame {
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 170, 60));
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 170, 30));
 
         tablaPostres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +114,12 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         Orden orden = Ordenes.getOrden();
         orden.getPostres().agregarPostre(postNomText.getText());
     }//GEN-LAST:event_AgregarPostActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        Ordenes apc=new Ordenes();
+        apc.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

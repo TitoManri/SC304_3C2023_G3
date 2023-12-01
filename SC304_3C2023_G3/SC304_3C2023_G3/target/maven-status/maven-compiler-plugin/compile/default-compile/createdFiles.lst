@@ -23,11 +23,13 @@ Interfaz\Ordenes\EliminarBebCliente$2.class
 Interfaz\Provedores\Proovedores$1.class
 Interfaz\Ordenes\EliminarPostCliente.class
 Transacciones\Arbol.class
+Interfaz\Ordenes\AgregarBebCliente$4.class
 Interfaz\Ordenes\EliminarPlatCliente$4.class
 Interfaz\Cliente\Bebidas\JugosNaturales.class
 Catalogo\Nodos\NodoBebida.class
 Interfaz\Ordenes\ModificarOrden$4.class
 Interfaz\Transaccion$1.class
+Interfaz\Transaccion$4.class
 Interfaz\Ordenes\ModificarOrden$1.class
 Interfaz\Ordenes\OpcionesModOrden$3.class
 Orden\nodoPostres.class
@@ -131,6 +133,7 @@ Interfaz\LogIn$2.class
 Interfaz\Administrador\Postres\CatalogoPostres$6.class
 Orden\nodoBebidas.class
 Interfaz\Platillos\Ensaldas$1.class
+Interfaz\Ordenes\AgregarPostCliente$4.class
 Interfaz\Administrador\Bebidas\CatalogoBebidas$11.class
 Interfaz\Ordenes\EliminarBebCliente.class
 Interfaz\Administrador\Bebidas\CatalogoBebidas.class
@@ -138,6 +141,7 @@ Interfaz\Cliente\SignIn$3.class
 Interfaz\Ordenes\OpcionesModOrden$1.class
 Interfaz\Administrador\Platillos\CatalogoPlatillos$5.class
 Interfaz\Postres\Dulces$1.class
+Interfaz\Ordenes\AgregarPlatCliente$4.class
 Interfaz\Administrador\Bebidas\CatalogoBebidas$7.class
 Interfaz\Platillos\Entradas$1.class
 Interfaz\Administrador\PaginaInicio.class

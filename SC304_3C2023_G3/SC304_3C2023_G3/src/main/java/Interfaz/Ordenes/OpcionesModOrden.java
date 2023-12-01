@@ -7,8 +7,8 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     
     public OpcionesModOrden(Orden orden) {
         this.orden = orden;
+        this.setLocationRelativeTo(null);
         setResizable(false);
-        setLocationRelativeTo(null);
         initComponents();
     }
 

@@ -1,7 +1,5 @@
 package Personas;
 
-
-
 /**
  * Agregue una confirmacion de contrasena
  */
