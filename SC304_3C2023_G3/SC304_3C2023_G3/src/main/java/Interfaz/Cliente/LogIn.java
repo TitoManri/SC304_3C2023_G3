@@ -4,16 +4,20 @@
  */
 package Interfaz.Cliente;
 import Interfaz.Administrador.PaginaInicio;
+import Interfaz.Cliente.Ordenes.Ordenes;
+import Personas.Cliente;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author manri
  */
 public class LogIn extends javax.swing.JFrame {
     
-    
-    /**
-     * Creates new form Catalogo
-     */
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Usuarios.txt";
+    String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     public LogIn() {
         initComponents();
         setResizable(false);
@@ -101,25 +105,68 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioTextoActionPerformed
 
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
-
+        SignIn x = new SignIn();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
         String usuario = nombreUsuarioTexto.getText();
         String contrasena = contrasenaTexto.getText();
-        if(usuario.equals("Admin") || contrasena.equals("123")){
+        if(usuario.equals("Admin") && contrasena.equals("123")){
             PaginaInicio x = new PaginaInicio();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
+        } else if (validarUsuario(usuario, contrasena)){
+            Ordenes x = new Ordenes();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
             this.dispose();
-        } else {
-            
+        } else{
+            JOptionPane.showMessageDialog(null, "Usuario y/o contrasena incorrectas");
         }
-            
-        
     }//GEN-LAST:event_botonIngresarActionPerformed
 
+    private boolean validarUsuario(String usuario, String contrasena) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                Cliente cliente = partesCliente(linea);
+                if (cliente != null && cliente.getNombreUsuario().equals(usuario) && cliente.getContrasena().equals(contrasena)) {
+                    return true; 
+                }
+            }
+        } catch (IOException e) {
+            mostrarError("Error al validar el usuario: " + e.getMessage());
+        }
+        return false; 
+    }
+    
+    private Cliente partesCliente(String linea) {
+        String[] partes = linea.split(",");
+
+        if (partes.length == 5) { 
+            String nombre = partes[0].trim();
+            String apellidos = partes[1].trim();
+            String nombreUsuario = partes[2].trim();
+            String contrasena = partes[3].trim();
+            String confirmarContrasena = partes[4].trim();
+
+            return new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
+        } else {
+            mostrarError("Formato de línea inválido en el archivo de usuarios.");
+            return null;
+        }
+    }
+    
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
     private void contrasenaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_contrasenaTextoActionPerformed

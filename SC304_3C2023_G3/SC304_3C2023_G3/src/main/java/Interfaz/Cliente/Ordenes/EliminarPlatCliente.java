@@ -1,18 +1,19 @@
 package Interfaz.Cliente.Ordenes;
 
+import Catalogo.Nodos.NodoPlatillo;
 import Orden.Orden;
 import Catalogo.Platillo.Platillo;
-import Orden.LesOrden;
-import Orden.bebidasLes;
-import Orden.nodoBebidas;
-import Orden.nodoPlatillos;
-import Orden.platillosLes;
-import java.util.List;
+import java.awt.HeadlessException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
 public class EliminarPlatCliente extends javax.swing.JFrame {
-
+    private NodoPlatillo inicioPlatillo;
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
     private Orden orden;
     DefaultTableModel tab = new DefaultTableModel();
     
@@ -22,25 +23,111 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
         setResizable(false);
         String[] titulo = new String[]{"Nombre", "Características", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
-        jTable1.setModel(tab);
-        llenarTabla(orden);
+        tabla.setModel(tab);
+        llenarTabla();
         initComponents();
+        cargarDesdeArchivo();
     }
     
-    private void llenarTabla(Orden orden) {
-    platillosLes platillosOrden = orden.getPlatillos();
-        nodoPlatillos aux = platillosOrden.getInicio();
-        if (!platillosOrden.esVaciaPlatillos()) {
-            while (aux != null) {
-                tab.addRow(new Object[]{
-                    aux.getPlatillo().getNombre(), aux.getPlatillo().getDescripcion(),aux.getPlatillo(), aux.getPlatillo().getCategoria(), aux.getPlatillo().getPrecio()
-                });
-                aux = aux.getSiguiente();
+         //Metodos Iniciales
+    private void cargarDesdeArchivo() {
+        inicioPlatillo = null;
+
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Platillo platillo = partesPlatillo(linea);
+                if (platillo != null) {
+                    agregarPlatillo(platillo);
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "La orden no tiene bebidas.");
+
+            if (inicioPlatillo != null) {
+                llenarTabla();
+            } 
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-}
+    }
+    
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
+
+            NodoPlatillo aux = inicioPlatillo;
+            do {
+                if (aux != null) {
+                    Platillo platillo = aux.getPlatillo();
+                    if (platillo != null) {
+                        model.addRow(new Object[]{platillo.getNombre(), platillo.getDescripcion(),platillo.getCategoria(), platillo.getPrecio()});
+                    } 
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioPlatillo);
+        }
+
+    private Platillo partesPlatillo(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 4) {
+                String nombre = partes[0];
+                String descripcion = partes[1];
+                String categoria = partes[2];
+                String precio = partes[3];
+
+                return new Platillo(nombre, categoria, descripcion, precio);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+    
+    private void agregarPlatillo(Platillo platillo) {
+        try {
+            if (!platilloYaExiste(platillo.getNombre())) {
+                NodoPlatillo nuevoNodo = new NodoPlatillo();
+                nuevoNodo.setPlatillo(platillo);
+
+                if (inicioPlatillo == null) {
+                    inicioPlatillo = nuevoNodo;
+                } else {
+                    NodoPlatillo aux = inicioPlatillo;
+                    while (aux.getSiguiente() != null) {
+                        aux = aux.getSiguiente();
+                    }
+                    aux.setSiguiente(nuevoNodo);
+                }
+            } else {
+                mostrarError("El platillo ya existe en el catálogo.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
+        }
+    }
+    
+    private boolean platilloYaExiste(String nombre) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,7 +135,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         Eliminar = new javax.swing.JButton();
         Volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -65,7 +152,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
         getContentPane().add(jTextField1);
         jTextField1.setBounds(90, 270, 420, 50);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,12 +177,12 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            tabla.getColumnModel().getColumn(3).setResizable(false);
         }
 
         getContentPane().add(jScrollPane1);
@@ -182,7 +269,7 @@ public class EliminarPlatCliente extends javax.swing.JFrame {
     private javax.swing.JButton Volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

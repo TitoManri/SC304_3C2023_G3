@@ -23,7 +23,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     //Platillo Lista Enlazada Simple 
     private NodoPlatillo inicioPlatillo;
 
-    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
 
     /**

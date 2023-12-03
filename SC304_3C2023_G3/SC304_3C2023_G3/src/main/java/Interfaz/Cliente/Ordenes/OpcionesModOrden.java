@@ -1,4 +1,5 @@
 package Interfaz.Cliente.Ordenes;
+import Interfaz.Cliente.SignIn;
 import Orden.Orden;
 
 public class OpcionesModOrden extends javax.swing.JFrame {
@@ -107,30 +108,51 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBebidaActionPerformed
-        //Falta agregar
+        AgregarBebCliente x = new AgregarBebCliente();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_AgregarBebidaActionPerformed
 
     private void AgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPlatilloActionPerformed
-        //Falta agregar
+         AgregarPlatCliente x = new AgregarPlatCliente();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_AgregarPlatilloActionPerformed
 
     private void AgregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostreActionPerformed
-        //Falta agregar
+        AgregarPostCliente x = new AgregarPostCliente();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_AgregarPostreActionPerformed
 
     private void EliminarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPlatilloActionPerformed
-        EliminarPlatCliente eliminarPla = new EliminarPlatCliente(orden);
-        eliminarPla.setVisible(true);
+        EliminarPlatCliente x = new EliminarPlatCliente(orden);
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_EliminarPlatilloActionPerformed
 
     private void EliminarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBebidaActionPerformed
-        EliminarBebCliente eliminarBeb = new EliminarBebCliente(orden);
-        eliminarBeb.setVisible(true);
+        EliminarBebCliente x = new EliminarBebCliente(orden);
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_EliminarBebidaActionPerformed
 
     private void EliminarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPostreActionPerformed
-        EliminarPostCliente eliminarPos = new EliminarPostCliente(orden);
-        eliminarPos.setVisible(true);
+        EliminarPostCliente x = new EliminarPostCliente(orden);
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_EliminarPostreActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed

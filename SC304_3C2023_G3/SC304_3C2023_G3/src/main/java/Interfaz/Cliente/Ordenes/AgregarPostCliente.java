@@ -1,9 +1,14 @@
 package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoPostre;
+import Catalogo.Postres.Postre;
 import Interfaz.Administrador.Postres.CatalogoPostres;
 import Orden.LesOrden;
 import Orden.Orden;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,7 +16,13 @@ import javax.swing.table.DefaultTableModel;
  * @author marip
  */
 public class AgregarPostCliente extends javax.swing.JFrame {
-
+    
+    NodoPostre inicioPostre;
+    NodoPostre finPostre;
+    
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPostres.txt";
+    String RUTA_ARCHIVO_POSTRES = System.getProperty("user.dir") + "/" + ruta;
+    
     DefaultTableModel tab = new DefaultTableModel();
     
     public AgregarPostCliente() {
@@ -20,25 +31,88 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
-        tablaPostres.setModel(tab);
+        tabla.setModel(tab);
         llenarTabla();
+        cargarDesdeArchivo();
     }
     
-    public void llenarTabla(){
-        CatalogoPostres c = new CatalogoPostres();
-        if (!c.esVaciaPostres()) {
-           NodoPostre aux = c.getInicioPostre();
-           tab.addRow(new Object[]{
-           aux.getPostre().getNombre(), aux.getPostre().getDescripcion(), aux.getPostre().getCategoria(), aux.getPostre().getPrecio()});
-            while (aux != c.getInicioPostre()) {
-                tab.addRow(new Object[]{
-                aux.getPostre().getNombre(), aux.getPostre().getDescripcion(), aux.getPostre().getCategoria(), aux.getPostre().getPrecio()
-                });
-                aux = aux.getSiguiente();
+    private void cargarDesdeArchivo() {
+    try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO_POSTRES))) {
+        String linea;
+        while ((linea = archivo.readLine()) != null) {
+            Postre bebida = partesPostre(linea);
+            if (bebida != null) {
+                finPostre = agregarNodo(finPostre, bebida);
+                if (inicioPostre == null) {
+                    inicioPostre= finPostre;
+                }
             }
         }
+
+        if (finPostre != null) {
+           llenarTabla();
+        }
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
+
+            NodoPostre aux = inicioPostre;
+            do {
+                if (aux != null) {
+                    Postre postre = aux.getPostre();
+                    if (postre != null) {
+                        model.addRow(new Object[]{postre.getNombre(), postre.getCategoria(), postre.getDescripcion(),postre.getPrecio()});
+                    } else {
+                    }
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioPostre);
+        }
+    
+    
+    private NodoPostre agregarNodo(NodoPostre fin, Postre postre) {
+        NodoPostre nuevoNodo = new NodoPostre();
+        nuevoNodo.setPostre(postre);
+
+        if (fin == null) {
+            fin = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+        } else {
+            nuevoNodo.setSiguiente(fin.getSiguiente());
+            fin.setSiguiente(nuevoNodo);
+            fin = nuevoNodo;
+        }
+
+        return fin;
     }
 
+    private Postre partesPostre(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 4) {
+                String nombre = partes[0];
+                String descripcion = partes[1];
+                String tipo = partes[2];
+                String precio = partes[3];
+
+                return new Postre(nombre, tipo, descripcion, precio); // Orden de parámetros corregido
+            } else {
+                System.out.println("Error en el formato de línea: " + linea);
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,7 +121,7 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         AgregarPost = new javax.swing.JButton();
         volver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaPostres = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,7 +149,7 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 170, 30));
 
-        tablaPostres.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,12 +168,12 @@ public class AgregarPostCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaPostres);
-        if (tablaPostres.getColumnModel().getColumnCount() > 0) {
-            tablaPostres.getColumnModel().getColumn(0).setResizable(false);
-            tablaPostres.getColumnModel().getColumn(1).setResizable(false);
-            tablaPostres.getColumnModel().getColumn(2).setResizable(false);
-            tablaPostres.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            tabla.getColumnModel().getColumn(3).setResizable(false);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
@@ -158,7 +232,7 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField postNomText;
-    private javax.swing.JTable tablaPostres;
+    private javax.swing.JTable tabla;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

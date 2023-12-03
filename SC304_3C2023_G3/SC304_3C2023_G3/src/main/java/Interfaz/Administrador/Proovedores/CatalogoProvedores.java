@@ -20,7 +20,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     //Provedores Doble Lista Circular
     NodoProvedores inicioProvedores;
     NodoProvedores finProvedores;
-    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
     /**
      * Creates new form CatalogoProvedores

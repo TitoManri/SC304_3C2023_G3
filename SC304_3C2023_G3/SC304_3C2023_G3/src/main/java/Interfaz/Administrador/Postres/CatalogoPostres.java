@@ -28,7 +28,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
     NodoPostre inicioPostre;
     NodoPostre finPostre;
     
-    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoPostres.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPostres.txt";
     String RUTA_ARCHIVO_POSTRES = System.getProperty("user.dir") + "/" + ruta; 
     public CatalogoPostres() {
         initComponents();

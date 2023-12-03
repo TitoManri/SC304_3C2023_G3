@@ -27,7 +27,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
      */
     NodoBebida inicioBebida;
     NodoBebida finBebida;
-    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoBebidas.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;  
     public CatalogoBebidas() {
         initComponents();

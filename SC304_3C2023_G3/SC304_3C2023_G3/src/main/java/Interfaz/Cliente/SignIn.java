@@ -7,6 +7,8 @@ package Interfaz.Cliente;
 import Personas.Cliente;
 import Personas.NodoCliente;
 import java.awt.HeadlessException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,13 +21,14 @@ import javax.swing.SwingWorker;
  */
 public class SignIn extends javax.swing.JFrame {
 
-    private static final String ruta = "src/main/java/BaseDeDatos/Usuarios.txt";
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Usuarios.txt";
     String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     private NodoCliente inicio;
     private NodoCliente fin;
     
     public SignIn() {
         initComponents();
+        cargarDesdeArchivo();
     }
 
     /**
@@ -135,8 +138,28 @@ public class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreTextoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        LogIn x = new LogIn();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private void cargarDesdeArchivo() {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                Cliente clientes = partesCliente(linea);
+                if (clientes != null) {
+                    encolarCliente(clientes);
+
+                }
+            }
+        } catch (IOException e) {
+            mostrarError("Error al cargar desde el archivo: " + e.getMessage());
+        }
+    }
+    
     public boolean esVaciaCliente() {
         return inicio == null || fin == null;
     }
@@ -179,9 +202,10 @@ public class SignIn extends javax.swing.JFrame {
     private void agregarClienteInBackground(String nombre, String apellidos, String nombreUsuario, String contrasena, String confirmarContrasena) {
     try {
         Cliente cliente = new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
-
+        
         if (!clienteYaExiste(cliente.getNombreUsuario())) {
             encolarCliente(cliente);
+            
             guardarEnArchivo();
             JOptionPane.showMessageDialog(null, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -217,6 +241,23 @@ public class SignIn extends javax.swing.JFrame {
         }
     }
     
+        private Cliente partesCliente(String linea) {
+        String[] partes = linea.split(",");
+
+        if (partes.length == 5) { 
+            String nombre = partes[0].trim();
+            String apellidos = partes[1].trim();
+            String nombreUsuario = partes[2].trim();
+            String contrasena = partes[3].trim();
+            String confirmarContrasena = partes[4].trim();
+
+            return new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
+        } else {
+            mostrarError("Formato de línea inválido en el archivo de usuarios.");
+            return null;
+        }
+    }
+    
     private void guardarEnArchivo() {
     try (PrintWriter archivo = new PrintWriter(new FileWriter(rutaArchivo))) {
         NodoCliente aux = inicio;
@@ -231,10 +272,8 @@ public class SignIn extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
     private String formatoCliente(Cliente cliente) {
-
-
-    // Ejemplo:
     return cliente.getNombre() + "," + cliente.getApellidos() + "," + cliente.getNombreUsuario() + "," + cliente.getContrasena() + "," + cliente.getConfirmarContrasena();
 }
     

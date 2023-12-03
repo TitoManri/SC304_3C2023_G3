@@ -1,50 +1,116 @@
 package Interfaz.Cliente.Ordenes;
 
+import Catalogo.Bebidas.Bebida;
+import Catalogo.Nodos.NodoBebida;
 import Orden.LesOrden;
 import Orden.Orden;
 import Orden.bebidasLes;
 import Orden.nodoBebidas;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EliminarBebCliente extends javax.swing.JFrame {
-
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
+    NodoBebida inicioBebida;
+    NodoBebida finBebida;
     private Orden orden;
     DefaultTableModel tab = new DefaultTableModel();
 
     public EliminarBebCliente(Orden orden) {
+        initComponents();
         this.orden = orden;
         this.setLocationRelativeTo(null);
         setResizable(false);
         String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
-        jTable1.setModel(tab);
-        llenarTabla(orden);
-        initComponents();
+        tabla.setModel(tab);
+        llenarTabla();
+        cargarDesdeArchivo();
     }
 
-    public void llenarTabla(Orden orden) {
-        bebidasLes bebidasOrden = orden.getBebidas();
-        nodoBebidas aux = bebidasOrden.getInicio();
-        if (!bebidasOrden.esVaciaBebidas()) {
-            while (aux != null) {
-                tab.addRow(new Object[]{
-                    aux.getBebida().getNombre(), aux.getBebida(), aux.getBebida().getCategoria(), aux.getBebida().getPrecio()
-                });
-                aux = aux.getSiguiente();
+        private void cargarDesdeArchivo() {
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Bebida bebida = partesBebida(linea);
+                if (bebida != null) {
+                    finBebida = agregarNodo(finBebida, bebida);
+                    if (inicioBebida == null) {
+                        inicioBebida = finBebida;
+                    }
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "La orden no tiene bebidas.");
+
+            if (finBebida != null) {
+                llenarTabla();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
 
+            NodoBebida aux = inicioBebida;
+            do {
+                if (aux != null) {
+                    Bebida bebida = aux.getBebida();
+                    if (bebida != null) {
+                        model.addRow(new Object[]{bebida.getNombre(), bebida.getCategoria(), bebida.getPrecio()});
+                    } else {
+                    }
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioBebida);
+        }
+
+    private NodoBebida agregarNodo(NodoBebida fin, Bebida bebida) {
+        NodoBebida nuevoNodo = new NodoBebida();
+        nuevoNodo.setBebida(bebida);
+
+        if (fin == null) {
+            fin = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+        } else {
+            nuevoNodo.setSiguiente(fin.getSiguiente());
+            fin.setSiguiente(nuevoNodo);
+            fin = nuevoNodo;
+        }
+
+        return fin;
+    }  
+    
+     private Bebida partesBebida(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 3) {
+                String nombre = partes[0];
+                String categoria = partes[1];
+                String precio = partes[2];
+                return new Bebida(nombre, categoria, precio);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         txtNomBebida = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
@@ -53,7 +119,7 @@ public class EliminarBebCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -78,11 +144,11 @@ public class EliminarBebCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
         }
 
         getContentPane().add(jScrollPane1);
@@ -179,7 +245,7 @@ public class EliminarBebCliente extends javax.swing.JFrame {
     private javax.swing.JButton Volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField txtNomBebida;
     // End of variables declaration//GEN-END:variables
 }
