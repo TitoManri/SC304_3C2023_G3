@@ -1,9 +1,9 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import Orden.Orden;
 import Orden.LesOrden;
-import Interfaz.Transaccion;
-import Interfaz.LogIn;
+import Interfaz.Cliente.Transaccion;
+import Interfaz.Cliente.LogIn;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +19,7 @@ public class Ordenes extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setResizable(false);
-        orden = lo.agregarOrden(LogIn.getCliente());
+        //orden = lo.agregarOrden(LogIn.getCliente());
     }
 
     public static Orden getOrden() {

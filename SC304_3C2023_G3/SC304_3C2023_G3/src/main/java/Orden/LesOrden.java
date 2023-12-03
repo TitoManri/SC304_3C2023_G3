@@ -17,11 +17,7 @@ public class LesOrden {
     }
 
     public boolean esVaciaLes() {
-        if (inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return inicio == null;
     }
 
     public Orden agregarOrden(Cliente cliente) {
@@ -52,7 +48,7 @@ public class LesOrden {
             String s = "";
             NodoOrden aux = inicio;
             while (aux != null) {
-                s = s + "Cliente: " + aux.getOrden().getCliente().getNombre() + aux.getOrden().getCliente().getApellido() + "\n"
+                s = s + "Cliente: " + aux.getOrden().getCliente().getNombre() + aux.getOrden().getCliente().getApellidos() + "\n"
                         + "Fecha y hora: " + aux.getOrden().getFechaHora() + "\n"
                         + "Número de orden:" + aux.getOrden().getNumOrden() + "\n"
                         + "Platillos: " + aux.getOrden().getPlatillos().mostrarPlatillos() + "\n"
@@ -98,7 +94,7 @@ public class LesOrden {
         if (actual != null) {
             try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream("aaaa.txt", true))) {
                 outputStream.writeUTF("Fecha y hora: " + actual.getOrden().getFechaHora() + "\n");
-                outputStream.writeUTF("Cliente: " + actual.getOrden().getCliente().getNombre() + " " + actual.getOrden().getCliente().getApellido() + "\n");
+                outputStream.writeUTF("Cliente: " + actual.getOrden().getCliente().getNombre() + " " + actual.getOrden().getCliente().getApellidos() + "\n");
                 outputStream.writeDouble(actual.getOrden().getTotal());
 
                 JOptionPane.showMessageDialog(null, "Orden cancelada correctamente.");

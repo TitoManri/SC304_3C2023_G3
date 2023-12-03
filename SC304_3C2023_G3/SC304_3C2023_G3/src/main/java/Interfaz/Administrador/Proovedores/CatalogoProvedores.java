@@ -6,8 +6,10 @@ package Interfaz.Administrador.Proovedores;
 
 import Catalogo.Nodos.NodoProvedores;
 import Catalogo.Provedores.Provedores;
+import Interfaz.Administrador.PaginaInicio;
 import java.io.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +20,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     //Provedores Doble Lista Circular
     NodoProvedores inicioProvedores;
     NodoProvedores finProvedores;
-    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
+    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
     /**
      * Creates new form CatalogoProvedores
@@ -26,6 +28,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     public CatalogoProvedores() {
         initComponents();
         cargarDesdeArchivo();
+        llenarTabla(); 
     }
 
     /**
@@ -42,6 +45,8 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         agregarProveedores = new javax.swing.JButton();
         editarProveedores = new javax.swing.JButton();
         nombrePostreTexto = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,6 +103,128 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         });
         getContentPane().add(nombrePostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 340, 30));
 
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 420, 410));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarProovedores.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -109,13 +236,59 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
-        // TODO add your handling code here:
+        PaginaInicio x = new PaginaInicio();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
 
     private void nombrePostreTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePostreTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombrePostreTextoActionPerformed
 
+    //Metodos Iniciales
+    private boolean esVaciaProveedores() {
+        return inicioProvedores == null && finProvedores == null;
+    }
+    
+    private void cargarDesdeArchivo() {
+        try (BufferedReader br = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                Provedores proveedor = partesProveedor(linea);
+                if (proveedor != null) {
+                    agregarProveedor(proveedor);
+                    llenarTabla();
+                }
+            }
+        } catch (IOException e) {
+            mostrarError("Error al cargar desde el archivo: " + e.getMessage());
+        }
+    }
+    
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
+
+            NodoProvedores aux = inicioProvedores;
+            do {
+                if (aux != null) {
+                    Provedores provedor = aux.getProvedores();
+                    if (provedor != null) {
+                        model.addRow(new Object[]{provedor.getNombre()});
+                    } else {
+                    }
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioProvedores);
+        }
+
+    
+    //Metodos para Agregar Proveedores
+    
     private void agregarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProveedoresActionPerformed
         String nombreProveedor = nombrePostreTexto.getText();
 
@@ -129,8 +302,26 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         agregarProveedor(proveedor);
         limpiarCampos();
         guardarEnArchivo();
+        llenarTabla();
     }//GEN-LAST:event_agregarProveedoresActionPerformed
+    
+    private void agregarProveedor(Provedores proveedor) {
+        NodoProvedores nuevoNodo = new NodoProvedores(proveedor);
 
+        if (esVaciaProveedores()) {
+            inicioProvedores = nuevoNodo;
+            finProvedores = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(nuevoNodo);
+        } else {
+            finProvedores.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(finProvedores);
+            nuevoNodo.setSiguiente(inicioProvedores);
+            inicioProvedores.setAnterior(nuevoNodo);
+            finProvedores = nuevoNodo;
+        }
+    }
+    
     private void editarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProveedoresActionPerformed
     String nombreProveedorEditar = JOptionPane.showInputDialog("Ingrese el nombre del proveedor a editar:");
 
@@ -144,6 +335,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
                 aux.getProvedores().setNombre(nuevoNombre);
 
                 guardarEnArchivo();
+                llenarTabla();
                 JOptionPane.showMessageDialog(null, "Proveedor editado exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "El nuevo nombre del proveedor no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -166,27 +358,40 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         } while (aux != inicioProvedores);
         return null;
     }
-     private void agregarProveedor(Provedores proveedor) {
-        NodoProvedores nuevoNodo = new NodoProvedores(proveedor);
+  
+    //Metodo para Guardar
+    
+    private void guardarEnArchivo() {
+           try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+               NodoProvedores aux = inicioProvedores;
+               do {
+                   Provedores proveedor = aux.getProvedores();
+                   if (proveedor != null) {
+                       archivo.println(formatoProveedor(proveedor));
+                   }
+                   aux = aux.getSiguiente();
+               } while (aux != inicioProvedores);
+           } catch (IOException e) {
+               JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           }
+   }
+    
 
-        if (esVaciaProveedores()) {
-            inicioProvedores = nuevoNodo;
-            finProvedores = nuevoNodo;
-            nuevoNodo.setSiguiente(nuevoNodo);
-            nuevoNodo.setAnterior(nuevoNodo);
-        } else {
-            finProvedores.setSiguiente(nuevoNodo);
-            nuevoNodo.setAnterior(finProvedores);
-            nuevoNodo.setSiguiente(inicioProvedores);
-            inicioProvedores.setAnterior(nuevoNodo);
-            finProvedores = nuevoNodo;
-        }
+    
+    //Metodo para el formato
+
+    private String formatoProveedor(Provedores proveedor) {
+        return proveedor.getNombre();
     }
 
-    private boolean esVaciaProveedores() {
-        return inicioProvedores == null && finProvedores == null;
+    //Metodo Error
+    
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
-
+ 
+    //Metodo para limpiar
+    
     private void limpiarCampos() {
         nombrePostreTexto.setText("");
     }
@@ -204,55 +409,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
             return null;
         }
     }
-    private void cargarDesdeArchivo() {
-    try (BufferedReader br = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            Provedores proveedor = partesProveedor(linea);
-            if (proveedor != null) {
-                agregarProveedor(proveedor);
-            }
-        }
-    } catch (IOException e) {
-        mostrarError("Error al cargar desde el archivo: " + e.getMessage());
-    }
-}
-
-    private void guardarEnArchivo() {
-        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
-            NodoProvedores aux = inicioProvedores;
-            do {
-                Provedores proveedor = aux.getProvedores();
-                if (proveedor != null) {
-                    archivo.println(formatoProveedor(proveedor));
-                }
-                aux = aux.getSiguiente();
-            } while (aux != inicioProvedores);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private String formatoProveedor(Provedores proveedor) {
-        return proveedor.getNombre();
-    }
-    
-    
-    /**
-     * @param args the command line arguments
-     * @return 
-     */
-    
-    public boolean esVaciaProvedores(){
-        return inicioProvedores==null&& finProvedores == null;
-   }
-   
-    private void mostrarError(String mensaje) {
-    // Lógica para mostrar un mensaje de error, por ejemplo, usando JOptionPane
-    JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-}
- 
-    
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -289,8 +446,10 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     private javax.swing.JButton agregarProveedores;
     private javax.swing.JButton editarProveedores;
     private javax.swing.JLabel fondo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
     private javax.swing.JTextField nombrePostreTexto;
+    private javax.swing.JTable tabla;
     private javax.swing.JButton volverPantallaPrincipal;
     // End of variables declaration//GEN-END:variables
 }

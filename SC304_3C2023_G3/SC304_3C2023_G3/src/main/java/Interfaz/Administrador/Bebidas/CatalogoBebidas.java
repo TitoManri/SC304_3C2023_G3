@@ -5,6 +5,7 @@
 package Interfaz.Administrador.Bebidas;
 import Catalogo.Bebidas.Bebida;
 import Catalogo.Nodos.NodoBebida;
+import Interfaz.Administrador.PaginaInicio;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ import java.io.PrintWriter;
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author manri
@@ -25,7 +27,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
      */
     NodoBebida inicioBebida;
     NodoBebida finBebida;
-    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
+    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoBebidas.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;  
     public CatalogoBebidas() {
         initComponents();
@@ -36,11 +38,10 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         jugosNaturalesRadioButton.setActionCommand("Jugos Naturales");
         gaseosasRadioButton.setActionCommand("Gaseosas");
         licoresRadioButton.setActionCommand("Licores");
+        llenarTabla();
     }
 
-    public NodoBebida getInicioBebida() {
-        return inicioBebida;
-    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +50,8 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         nombreBebidaTexto = new javax.swing.JTextField();
         precioBebida = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         otrasBebidasRadioButton = new javax.swing.JRadioButton();
         jugosNaturalesRadioButton = new javax.swing.JRadioButton();
         gaseosasRadioButton = new javax.swing.JRadioButton();
@@ -83,6 +86,58 @@ public class CatalogoBebidas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(precioBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 130, 20));
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre ", "Categoria", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 430, -1));
 
         buttonGroup1.add(otrasBebidasRadioButton);
         otrasBebidasRadioButton.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -202,9 +257,58 @@ public class CatalogoBebidas extends javax.swing.JFrame {
     private void precioBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioBebidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_precioBebidaActionPerformed
+  
+  //Metodos Iniciales  
+    public NodoBebida getInicioBebida() {
+        return inicioBebida;
+    }
+    private void cargarDesdeArchivo() {
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Bebida bebida = partesBebida(linea);
+                if (bebida != null) {
+                    finBebida = agregarNodo(finBebida, bebida);
+                    if (inicioBebida == null) {
+                        inicioBebida = finBebida;
+                    }
+                }
+            }
+
+            if (finBebida != null) {
+                llenarTabla();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
+
+            NodoBebida aux = inicioBebida;
+            do {
+                if (aux != null) {
+                    Bebida bebida = aux.getBebida();
+                    if (bebida != null) {
+                        model.addRow(new Object[]{bebida.getNombre(), bebida.getCategoria(), bebida.getPrecio()});
+                    } else {
+                    }
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioBebida);
+        }
+
+        public boolean esVaciaBebidas(){
+            return inicioBebida==null&&finBebida==null;
+    }
+        
+    //Metodos para Agregar Bebida    
 
     private void agregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBebidaActionPerformed
-    System.out.println("Botón de agregar bebida presionado");  // Agrega esta línea
     ButtonModel botonesRadioButton = buttonGroup1.getSelection();
     if (botonesRadioButton == null) {
         JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría de bebida.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -236,54 +340,43 @@ public class CatalogoBebidas extends javax.swing.JFrame {
     worker.execute();
     }//GEN-LAST:event_agregarBebidaActionPerformed
     
-// Reemplaza la sección de guardarEnArchivo en agregarBebidaInBackground
-private void agregarBebidaInBackground(String nombreBebida, String categoria, String precio) {
-    try {
-        if (nombreBebida.isEmpty() || categoria.isEmpty() || precio.isEmpty()) {
-            mostrarError("Alguno de los campos requeridos no fue completado.");
-            return;
+
+    private void agregarBebidaInBackground(String nombreBebida, String categoria, String precio) {
+        try {
+            if (nombreBebida.isEmpty() || categoria.isEmpty() || precio.isEmpty()) {
+                mostrarError("Alguno de los campos requeridos no fue completado.");
+                return;
+            }
+
+            if (bebidaYaExiste(nombreBebida)) {
+                mostrarError("Ya existe una bebida con el mismo nombre.");
+                return;
+            }
+
+            Bebida bebida = new Bebida(nombreBebida, categoria, precio);
+            NodoBebida nuevoNodo = new NodoBebida();
+            nuevoNodo.setBebida(bebida);
+
+            if (finBebida == null) {
+                finBebida = nuevoNodo;
+                inicioBebida = nuevoNodo;
+                nuevoNodo.setSiguiente(nuevoNodo);
+            } else {
+                nuevoNodo.setSiguiente(finBebida.getSiguiente());
+                finBebida.setSiguiente(nuevoNodo);
+                finBebida = nuevoNodo;
+            }
+
+            guardarListaEnArchivo(inicioBebida);
+            llenarTabla();
+            JOptionPane.showMessageDialog(null, "Bebida agregada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
         }
-
-        if (bebidaYaExiste(nombreBebida)) {
-            mostrarError("Ya existe una bebida con el mismo nombre.");
-            return;
-        }
-
-        Bebida bebida = new Bebida(nombreBebida, categoria, precio);
-        NodoBebida nuevoNodo = new NodoBebida();
-        nuevoNodo.setBebida(bebida);
-
-        if (finBebida == null) {
-            finBebida = nuevoNodo;
-            inicioBebida = nuevoNodo;
-            nuevoNodo.setSiguiente(nuevoNodo);
-        } else {
-            nuevoNodo.setSiguiente(finBebida.getSiguiente());
-            finBebida.setSiguiente(nuevoNodo);
-            finBebida = nuevoNodo;
-        }
-
-        finBebida = agregarNodo(finBebida, bebida); 
-
-        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO, true))) {
-            archivo.println(formatoBebida(bebida));
-        } catch (IOException e) {
-            mostrarError("Error al guardar en el archivo: " + e.getMessage());
-        }
-
-        cargarDesdeArchivo();
-
-        JOptionPane.showMessageDialog(null, "Bebida agregada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (NumberFormatException e) {
-        mostrarError("Error al convertir el precio a un número.");
-    } catch (HeadlessException e) {
-        mostrarError("Error al agregar los datos: " + e.getMessage());
     }
-}
-
-
-
 
     private boolean bebidaYaExiste(String nombre) {
         if (finBebida != null) {
@@ -300,7 +393,25 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
 
         return false; // La bebida no existe en el catálogo
     }
+    
+    private NodoBebida agregarNodo(NodoBebida fin, Bebida bebida) {
+        NodoBebida nuevoNodo = new NodoBebida();
+        nuevoNodo.setBebida(bebida);
 
+        if (fin == null) {
+            fin = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+        } else {
+            nuevoNodo.setSiguiente(fin.getSiguiente());
+            fin.setSiguiente(nuevoNodo);
+            fin = nuevoNodo;
+        }
+
+        return fin;
+    }  
+    
+    //Metodos Editar Bebidas
+    
     private void editarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBebidaActionPerformed
     try {
         String bebidaNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
@@ -321,6 +432,7 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
                     aux.setBebida(nuevaBebida);
 
                     guardarListaEnArchivo(inicioBebida); 
+                    llenarTabla();
 
                     mostrarMensaje("Bebida editada correctamente.");
                 } else {
@@ -335,21 +447,18 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
     }
     }//GEN-LAST:event_editarBebidaActionPerformed
       
-    private NodoBebida agregarNodo(NodoBebida fin, Bebida bebida) {
-    NodoBebida nuevoNodo = new NodoBebida();
-    nuevoNodo.setBebida(bebida);
-
-    if (fin == null) {
-        fin = nuevoNodo;
-        nuevoNodo.setSiguiente(nuevoNodo);
-    } else {
-        nuevoNodo.setSiguiente(fin.getSiguiente());
-        fin.setSiguiente(nuevoNodo);
-        fin = nuevoNodo;
+    public NodoBebida buscarBebida(String nombreBebida) {
+        NodoBebida aux = inicioBebida;
+        while (aux != null) {
+            if (aux.getBebida().getNombre().equalsIgnoreCase(nombreBebida)) {
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
     }
-
-    return fin;
-}
+        
+    //Metodos para guardar en el archivo
     
     private void guardarListaEnArchivo(NodoBebida inicio) {
         PrintWriter archivo = null;
@@ -361,9 +470,7 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
                 Bebida bebida = aux.getBebida();
                 if (bebida != null) {
                     archivo.println(formatoBebida(bebida));
-                } else {
-                    System.out.println("Advertencia: Se encontró un nodo con bebida nula.");
-                }
+                } 
                 aux = aux.getSiguiente();
             } while (aux != inicio);
         } catch (IOException e) {
@@ -374,19 +481,44 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
             }
         }
     }
+
+
     
-    public NodoBebida buscarBebida(String nombreBebida) {
-        NodoBebida aux = inicioBebida;
-        while (aux != null) {
-            if (aux.getBebida().getNombre().equalsIgnoreCase(nombreBebida)) {
-                return aux;
+    //Volver al Catalogo Principal
+   
+    private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
+        PaginaInicio x = new PaginaInicio();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
+    
+    //Metodos para el Archivo    
+
+    private String formatoBebida(Bebida bebida) {
+        return bebida.getNombre() + "," + bebida.getCategoria() + "," + bebida.getPrecio();
+    }
+
+     private Bebida partesBebida(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 3) {
+                String nombre = partes[0];
+                String categoria = partes[1];
+                String precio = partes[2];
+                return new Bebida(nombre, categoria, precio);
+            } else {
+                return null;
             }
-            aux = aux.getSiguiente();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
-        return null;
     }
     
-    
+    //Metodos para Errores y Mensajes
+     
     private void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(null, "Error: " + mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -394,83 +526,7 @@ private void agregarBebidaInBackground(String nombreBebida, String categoria, St
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
     }
-    private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
-
-    /**
-     * @return 
-     */
-    
-    public boolean esVaciaBebidas(){
-        return inicioBebida==null&&finBebida==null;
-   }
-    
-    //Metodos Bebida Lista Simple Circular 
-    
-private void guardarEnArchivo() {
-    try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
-        if (finBebida != null) {
-            NodoBebida aux = finBebida.getSiguiente();
-
-            do {
-                Bebida bebida = aux.getBebida();
-                if (bebida != null) {
-                    archivo.println(formatoBebida(bebida));
-                }
-                aux = aux.getSiguiente();
-            } while (aux != finBebida.getSiguiente());
-        }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
-private String formatoBebida(Bebida bebida) {
-    return bebida.getNombre() + "," + bebida.getCategoria() + "," + bebida.getPrecio();
-}
-
-private void cargarDesdeArchivo() {
-    try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
-        System.out.println("Intentando cargar datos desde el archivo: " + RUTA_ARCHIVO);
-
-        String linea;
-        while ((linea = archivo.readLine()) != null) {
-            Bebida bebida = partesBebida(linea);
-            if (bebida != null) {
-                finBebida = agregarNodo(finBebida, bebida);
-                if (inicioBebida == null) {
-                    inicioBebida = finBebida;
-                }
-            }
-        }
-
-        if (finBebida != null) {
-           
-        }
-
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
-
-    
-    private Bebida partesBebida(String linea) {
-    String[] partes = linea.split(";");
-    try {
-        if (partes.length == 3) {
-            String nombre = partes[0];
-            String categoria = partes[1];
-            String precio = partes[2];
-            return new Bebida(nombre, categoria, precio);
-        } else {
-            return null;
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
-        return null;
-    }
-}
-        
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -507,12 +563,14 @@ private void cargarDesdeArchivo() {
     private javax.swing.JButton editarBebida;
     private javax.swing.JLabel fondo;
     private javax.swing.JRadioButton gaseosasRadioButton;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton jugosNaturalesRadioButton;
     private javax.swing.JRadioButton licoresRadioButton;
     private javax.swing.JButton limpiar;
     private javax.swing.JTextField nombreBebidaTexto;
     private javax.swing.JRadioButton otrasBebidasRadioButton;
     private javax.swing.JTextField precioBebida;
+    private javax.swing.JTable tabla;
     private javax.swing.JButton volverPantallaPrincipal;
     // End of variables declaration//GEN-END:variables
 }

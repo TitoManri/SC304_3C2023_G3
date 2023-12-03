@@ -4,6 +4,12 @@
  */
 package Interfaz.Administrador;
 
+import Interfaz.Administrador.Bebidas.CatalogoBebidas;
+import Interfaz.Administrador.Platillos.CatalogoPlatillos;
+import Interfaz.Administrador.Postres.CatalogoPostres;
+import Interfaz.Administrador.Proovedores.CatalogoProvedores;
+import Interfaz.Cliente.LogIn;
+
 
 /**
  *
@@ -27,21 +33,122 @@ public class PaginaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        botonVolver = new javax.swing.JButton();
+        botonCatalogoPlatillos = new javax.swing.JButton();
+        botonCatalogoBebidas = new javax.swing.JButton();
+        botonCatalogoPostres = new javax.swing.JButton();
+        botonCatalogoProveedores = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonVolver.setBackground(new java.awt.Color(255, 255, 255));
+        botonVolver.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonVolver.setForeground(new java.awt.Color(0, 0, 0));
+        botonVolver.setText("Volver a Inicio de Sesion");
+        botonVolver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 360, 40));
+
+        botonCatalogoPlatillos.setBackground(new java.awt.Color(255, 255, 255));
+        botonCatalogoPlatillos.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCatalogoPlatillos.setForeground(new java.awt.Color(0, 0, 0));
+        botonCatalogoPlatillos.setText("Catalogo Platillos");
+        botonCatalogoPlatillos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCatalogoPlatillos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCatalogoPlatillosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCatalogoPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 200, 80));
+
+        botonCatalogoBebidas.setBackground(new java.awt.Color(255, 255, 255));
+        botonCatalogoBebidas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCatalogoBebidas.setForeground(new java.awt.Color(0, 0, 0));
+        botonCatalogoBebidas.setText("Catalogo Bebidas");
+        botonCatalogoBebidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCatalogoBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCatalogoBebidasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCatalogoBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 200, 80));
+
+        botonCatalogoPostres.setBackground(new java.awt.Color(255, 255, 255));
+        botonCatalogoPostres.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCatalogoPostres.setForeground(new java.awt.Color(0, 0, 0));
+        botonCatalogoPostres.setText("Catalogo Postres");
+        botonCatalogoPostres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCatalogoPostres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCatalogoPostresActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCatalogoPostres, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 200, 80));
+
+        botonCatalogoProveedores.setBackground(new java.awt.Color(255, 255, 255));
+        botonCatalogoProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCatalogoProveedores.setForeground(new java.awt.Color(0, 0, 0));
+        botonCatalogoProveedores.setText("Catalogo proveedores");
+        botonCatalogoProveedores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCatalogoProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCatalogoProveedoresActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCatalogoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 200, 80));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/catalogoimagen.png"))); // NOI18N
+        fondo.setToolTipText("");
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonCatalogoPlatillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoPlatillosActionPerformed
+        CatalogoPlatillos x = new CatalogoPlatillos();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_botonCatalogoPlatillosActionPerformed
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+        LogIn x = new LogIn();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonCatalogoBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoBebidasActionPerformed
+        CatalogoBebidas x = new CatalogoBebidas();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_botonCatalogoBebidasActionPerformed
+
+    private void botonCatalogoPostresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoPostresActionPerformed
+        CatalogoPostres x = new CatalogoPostres();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_botonCatalogoPostresActionPerformed
+
+    private void botonCatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoProveedoresActionPerformed
+        CatalogoProvedores x = new CatalogoProvedores();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_botonCatalogoProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +186,11 @@ public class PaginaInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCatalogoBebidas;
+    private javax.swing.JButton botonCatalogoPlatillos;
+    private javax.swing.JButton botonCatalogoPostres;
+    private javax.swing.JButton botonCatalogoProveedores;
+    private javax.swing.JButton botonVolver;
+    private javax.swing.JLabel fondo;
     // End of variables declaration//GEN-END:variables
 }

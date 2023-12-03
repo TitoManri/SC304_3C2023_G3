@@ -1,8 +1,7 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoBebida;
 import Interfaz.Administrador.Bebidas.CatalogoBebidas;
-import Orden.LesOrden;
 import Orden.Orden;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +23,7 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         llenarTabla();
     }
     
-    public void llenarTabla(){
+    private void llenarTabla(){
         CatalogoBebidas c = new CatalogoBebidas();
         if (!c.esVaciaBebidas()) {
            NodoBebida aux = c.getInicioBebida();

@@ -1,55 +1,69 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import Orden.Orden;
-import Orden.nodoPostres;
-import Orden.postresLes;
-import javax.swing.JOptionPane;
+import Catalogo.Platillo.Platillo;
+import Orden.LesOrden;
+import Orden.bebidasLes;
+import Orden.nodoBebidas;
+import Orden.nodoPlatillos;
+import Orden.platillosLes;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
-public class EliminarPostCliente extends javax.swing.JFrame {
+public class EliminarPlatCliente extends javax.swing.JFrame {
 
     private Orden orden;
     DefaultTableModel tab = new DefaultTableModel();
-
-    public EliminarPostCliente(Orden orden) {
+    
+    public EliminarPlatCliente(Orden orden) {
         this.orden = orden;
         this.setLocationRelativeTo(null);
         setResizable(false);
-        String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
+        String[] titulo = new String[]{"Nombre", "Características", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         jTable1.setModel(tab);
         llenarTabla(orden);
         initComponents();
     }
-
-    public void llenarTabla(Orden orden) {
-        postresLes postresOrden = orden.getPostres();
-        nodoPostres aux = postresOrden.getInicio();
-        if (!postresOrden.esVaciaPostres()) {
+    
+    private void llenarTabla(Orden orden) {
+    platillosLes platillosOrden = orden.getPlatillos();
+        nodoPlatillos aux = platillosOrden.getInicio();
+        if (!platillosOrden.esVaciaPlatillos()) {
             while (aux != null) {
                 tab.addRow(new Object[]{
-                    aux.getPostre().getNombre(), aux.getPostre().getDescripcion(), aux.getPostre().getCategoria(), aux.getPostre().getPrecio()
+                    aux.getPlatillo().getNombre(), aux.getPlatillo().getDescripcion(),aux.getPlatillo(), aux.getPlatillo().getCategoria(), aux.getPlatillo().getPrecio()
                 });
                 aux = aux.getSiguiente();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La orden no tiene postres.");
+            JOptionPane.showMessageDialog(null, "La orden no tiene bebidas.");
         }
-    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
         Eliminar = new javax.swing.JButton();
-        volver = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(90, 270, 420, 50);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,16 +99,7 @@ public class EliminarPostCliente extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(572, 92, 410, 410);
-
-        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(100, 270, 410, 50);
+        jScrollPane1.setBounds(562, 92, 420, 410);
 
         Eliminar.setBorderPainted(false);
         Eliminar.setContentAreaFilled(false);
@@ -104,19 +109,19 @@ public class EliminarPostCliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Eliminar);
-        Eliminar.setBounds(115, 490, 200, 60);
+        Eliminar.setBounds(115, 483, 200, 70);
 
-        volver.setBorderPainted(false);
-        volver.setContentAreaFilled(false);
-        volver.addActionListener(new java.awt.event.ActionListener() {
+        Volver.setBorderPainted(false);
+        Volver.setContentAreaFilled(false);
+        Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                volverActionPerformed(evt);
+                VolverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver);
-        volver.setBounds(325, 490, 200, 60);
+        getContentPane().add(Volver);
+        Volver.setBounds(325, 483, 200, 70);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EliminarPostres.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EliminarPlatillos.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 600);
 
@@ -127,18 +132,18 @@ public class EliminarPostCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        // volver al menú
+    }//GEN-LAST:event_VolverActionPerformed
+
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        String nomPostre = jTextField1.getText();
-        if (!nomPostre.isEmpty()) {
-            orden.getPostres().eliminarPostre(nomPostre);
+        String nomPlatillo = jTextField1.getText();
+        if (!nomPlatillo.isEmpty()) {
+            orden.getPlatillos().eliminarPlatillo(nomPlatillo);
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre del postre a eliminar.");
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre del platillo a eliminar.");
         }
     }//GEN-LAST:event_EliminarActionPerformed
-
-    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        // volver al menú
-    }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -154,30 +159,30 @@ public class EliminarPostCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarPostCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarPostCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarPostCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarPostCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new EliminarPostCliente().setVisible(true); -----Preguntar al profe
+//                new EliminarPlatCliente().setVisible(true); ------- Preguntar al profe
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
+    private javax.swing.JButton Volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

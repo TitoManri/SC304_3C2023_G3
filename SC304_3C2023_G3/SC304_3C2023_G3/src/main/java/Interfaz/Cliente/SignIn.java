@@ -4,15 +4,26 @@
  */
 package Interfaz.Cliente;
 
+import Personas.Cliente;
+import Personas.NodoCliente;
+import java.awt.HeadlessException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+
 /**
  *
  * @author manri
  */
 public class SignIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SignIn
-     */
+    private static final String ruta = "src/main/java/BaseDeDatos/Usuarios.txt";
+    String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
+    private NodoCliente inicio;
+    private NodoCliente fin;
+    
     public SignIn() {
         initComponents();
     }
@@ -53,18 +64,33 @@ public class SignIn extends javax.swing.JFrame {
         apellidosTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         apellidosTexto.setForeground(new java.awt.Color(0, 0, 0));
         apellidosTexto.setBorder(null);
+        apellidosTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apellidosTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(apellidosTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 200, 30));
 
         nombreUsuarioTexto.setBackground(new java.awt.Color(245, 222, 180));
         nombreUsuarioTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         nombreUsuarioTexto.setForeground(new java.awt.Color(0, 0, 0));
         nombreUsuarioTexto.setBorder(null);
+        nombreUsuarioTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreUsuarioTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombreUsuarioTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 370, 30));
 
         contrasenaTexto.setBackground(new java.awt.Color(245, 222, 180));
         contrasenaTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         contrasenaTexto.setForeground(new java.awt.Color(0, 0, 0));
         contrasenaTexto.setBorder(null);
+        contrasenaTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contrasenaTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(contrasenaTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 370, 30));
 
         confirmarContrasenaTexto.setBackground(new java.awt.Color(245, 222, 180));
@@ -78,6 +104,11 @@ public class SignIn extends javax.swing.JFrame {
         registroBoton.setForeground(new java.awt.Color(0, 0, 0));
         registroBoton.setText("Registrarme");
         registroBoton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registroBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registroBotonActionPerformed(evt);
+            }
+        });
         getContentPane().add(registroBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 240, 40));
 
         jButton2.setBackground(new java.awt.Color(245, 222, 180));
@@ -92,7 +123,7 @@ public class SignIn extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 190, -1));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Registro.png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registro.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -106,6 +137,127 @@ public class SignIn extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+    public boolean esVaciaCliente() {
+        return inicio == null || fin == null;
+    }
+    private void registroBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroBotonActionPerformed
+        String nombre = nombreTexto.getText();
+        String apellidos = apellidosTexto.getText();
+        String nombreUsuario = nombreUsuarioTexto.getText();
+        String contrasena = contrasenaTexto.getText();
+        String confirmarContrasena = confirmarContrasenaTexto.getText();
+
+        if (nombre.isEmpty() || apellidos.isEmpty() || nombreUsuario.isEmpty() || contrasena.isEmpty() || confirmarContrasena.isEmpty()) {
+            mostrarError("Todos los campos son obligatorios.");
+            return;
+        }
+
+        if (!contrasena.equals(confirmarContrasena)) {
+            mostrarError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        if (contrasena.length() < 8) {
+            mostrarError("La contraseña debe tener al menos 8 caracteres.");
+            return;
+        }
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                agregarClienteInBackground(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+            }
+        };
+
+        worker.execute();
+    }//GEN-LAST:event_registroBotonActionPerformed
+    private void agregarClienteInBackground(String nombre, String apellidos, String nombreUsuario, String contrasena, String confirmarContrasena) {
+    try {
+        Cliente cliente = new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
+
+        if (!clienteYaExiste(cliente.getNombreUsuario())) {
+            encolarCliente(cliente);
+            guardarEnArchivo();
+            JOptionPane.showMessageDialog(null, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            mostrarError("El cliente ya existe en la base de datos.");
+        }
+
+    } catch (HeadlessException e) {
+        mostrarError("Error al agregar los datos del cliente: " + e.getMessage());
+    }
+}
+    
+     public boolean clienteYaExiste(String nombreUsuario) {
+        NodoCliente aux = inicio;
+        while (aux != null) {
+            if (aux.getElementoC() != null && aux.getElementoC().getNombreUsuario().equalsIgnoreCase(nombreUsuario)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    
+    public void encolarCliente(Cliente cliente) {
+        NodoCliente nuevo = new NodoCliente();
+        nuevo.setElementoC(cliente);
+
+        if (esVaciaCliente()) {
+            inicio = nuevo;
+            fin = nuevo;
+        } else {
+            fin.setSiguiente(nuevo);
+            fin = nuevo;
+        }
+    }
+    
+    private void guardarEnArchivo() {
+    try (PrintWriter archivo = new PrintWriter(new FileWriter(rutaArchivo))) {
+        NodoCliente aux = inicio;
+        while (aux != null) {
+            Cliente cliente = aux.getElementoC();
+            if (cliente != null) {
+                archivo.println(formatoCliente(cliente));
+            }
+            aux = aux.getSiguiente();
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    private String formatoCliente(Cliente cliente) {
+
+
+    // Ejemplo:
+    return cliente.getNombre() + "," + cliente.getApellidos() + "," + cliente.getNombreUsuario() + "," + cliente.getContrasena() + "," + cliente.getConfirmarContrasena();
+}
+    
+    //Metodos Mensaje y Error
+    private void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void apellidosTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellidosTextoActionPerformed
+
+    private void nombreUsuarioTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreUsuarioTextoActionPerformed
+
+    private void contrasenaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contrasenaTextoActionPerformed
 
     /**
      * @param args the command line arguments

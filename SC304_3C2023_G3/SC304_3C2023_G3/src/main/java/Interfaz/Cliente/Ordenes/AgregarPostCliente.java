@@ -1,4 +1,4 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoPostre;
 import Interfaz.Administrador.Postres.CatalogoPostres;

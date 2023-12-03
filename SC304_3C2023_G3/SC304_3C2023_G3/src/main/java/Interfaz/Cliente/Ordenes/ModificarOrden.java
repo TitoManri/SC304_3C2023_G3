@@ -1,4 +1,4 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import javax.swing.table.DefaultTableModel;
 import Orden.Orden;

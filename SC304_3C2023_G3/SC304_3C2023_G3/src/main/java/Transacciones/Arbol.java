@@ -30,7 +30,7 @@ public class Arbol {
     public void agregarAArbol(Orden orden){
         Transaccion t = new Transaccion();   
         t.setFechaHora(orden.getFechaHora());
-        t.setNombreCliente(orden.getCliente().getNombre() + orden.getCliente().getApellido());
+        t.setNombreCliente(orden.getCliente().getNombre() + orden.getCliente().getApellidos());
         t.setMontoPagar(orden.getTotal());
         
         NodoArb nuevo = new NodoArb();
@@ -64,7 +64,7 @@ public class Arbol {
             DataOutputStream archivo = new DataOutputStream(new FileOutputStream("Ordenes.txt", true));
 
             String fechaHoraA = fechaHora.toString();
-            String clientenomA = cliente.getNombre() + " " + cliente.getApellido();
+            String clientenomA = cliente.getNombre() + " " + cliente.getApellidos();
             double totalA = total;
 
             archivo.writeUTF(fechaHoraA);

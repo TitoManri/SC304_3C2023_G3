@@ -1,7 +1,7 @@
-package Interfaz;
+package Interfaz.Cliente;
 
 import Transacciones.Arbol;
-import Interfaz.Ordenes.Ordenes;
+import Interfaz.Cliente.Ordenes.Ordenes;
 import Orden.Orden;
 import javax.swing.JOptionPane;
 
@@ -25,7 +25,7 @@ public class Transaccion extends javax.swing.JFrame {
             fechaText.setText(orden.getFechaHora().toString());
             fechaText.setEditable(false);
 
-            String nombre = orden.getCliente().getNombre() + " " + orden.getCliente().getApellido();
+            String nombre = orden.getCliente().getNombre() + " " + orden.getCliente().getApellidos();
             clienteText.setText(nombre);
             clienteText.setEditable(false);
 

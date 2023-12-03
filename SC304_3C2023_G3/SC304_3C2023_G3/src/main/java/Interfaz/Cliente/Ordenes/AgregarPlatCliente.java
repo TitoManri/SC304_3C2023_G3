@@ -1,4 +1,4 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 
 import Orden.LesOrden;
 import Catalogo.Nodos.NodoPlatillo;
@@ -53,6 +53,11 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
 
         nombrePlatText.setBackground(new java.awt.Color(0, 0, 51));
         nombrePlatText.setForeground(new java.awt.Color(255, 255, 255));
+        nombrePlatText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePlatTextActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombrePlatText, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 390, 50));
 
         agregarPlat.setBorderPainted(false);
@@ -138,6 +143,10 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         apc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
+
+    private void nombrePlatTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePlatTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrePlatTextActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

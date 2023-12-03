@@ -6,11 +6,13 @@ package Interfaz.Administrador.Platillos;
 
 import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
+import Interfaz.Administrador.PaginaInicio;
 import java.awt.HeadlessException;
 import java.io.*;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +23,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     //Platillo Lista Enlazada Simple 
     private NodoPlatillo inicioPlatillo;
 
-    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
+    private static final String ruta = "src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
 
     /**
@@ -39,7 +41,9 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         platosFuertesRadioButton.setActionCommand("Platos Fuertes");
         if (inicioPlatillo == null) {
             cargarDesdeArchivo();
+            
         }
+        llenarTabla();
     }
 
     public NodoPlatillo getInicioPlatillo() {
@@ -59,12 +63,15 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jSeparator1 = new javax.swing.JSeparator();
         sopasRadioButton = new javax.swing.JRadioButton();
         platosFuertesRadioButton = new javax.swing.JRadioButton();
         ensaladasRadioButton = new javax.swing.JRadioButton();
         entradasRadioButton = new javax.swing.JRadioButton();
         nombrePlatilloTexto = new javax.swing.JTextField();
         limpiar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         agregarPlatillo = new javax.swing.JButton();
         editarPlatillo = new javax.swing.JButton();
         volverPantallaPrincipal = new javax.swing.JButton();
@@ -125,6 +132,131 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 160, 40));
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Categoria", "Ingredientes", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            tabla.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 430, 400));
 
         agregarPlatillo.setBackground(new java.awt.Color(45, 62, 80));
         agregarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
@@ -191,12 +323,62 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
-        // TODO add your handling code here:
+       PaginaInicio x = new PaginaInicio();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_volverPantallaPrincipalActionPerformed
 
-    private void agregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatilloActionPerformed
+    //Metodos Iniciales
+    private void cargarDesdeArchivo() {
+        inicioPlatillo = null;
 
-  
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Platillo platillo = partesPlatillo(linea);
+                if (platillo != null) {
+                    agregarPlatillo(platillo);
+                }
+            }
+
+            if (inicioPlatillo != null) {
+                llenarTabla();
+            } 
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void llenarTabla() {
+            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+            model.setRowCount(0);
+
+            NodoPlatillo aux = inicioPlatillo;
+            do {
+                if (aux != null) {
+                    Platillo platillo = aux.getPlatillo();
+                    if (platillo != null) {
+                        model.addRow(new Object[]{platillo.getNombre(), platillo.getDescripcion(),platillo.getCategoria(), platillo.getPrecio()});
+                    } 
+                } else {
+                    break;
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicioPlatillo);
+        }
+    
+    
+    public boolean esVaciaPlatillos() {
+        return inicioPlatillo == null;
+    }
+
+    
+    //Metodos para Agregar Platillos
+    
+    private void agregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatilloActionPerformed
         ButtonModel botonesRadioButton = buttonGroup1.getSelection();
         if (botonesRadioButton == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría de platillo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -227,51 +409,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         worker.execute();
     }//GEN-LAST:event_agregarPlatilloActionPerformed
-
-    private void editarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPlatilloActionPerformed
-        try {
-            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
-
-            if (platilloNom != null) {
-                NodoPlatillo aux = buscarPlatillo(platilloNom);
-
-                if (aux != null) {
-                    Platillo bebidaActual = aux.getPlatillo();
-
-                    String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
-                    String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
-                    String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
-                    String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
-
-                    if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
-                        Platillo nuevoPlatillo = new Platillo(nuevoNom, nuevaDescripcion, nuevaCateg, nuevoPrecio);
-
-                        aux.setPlatillo(nuevoPlatillo);
-
-                        guardarEnArchivo();
-                        mostrarMensaje("Platillo editado correctamente.");
-                    } else {
-                        mostrarMensaje("No se realizaron cambios en el platillo.");
-                    }
-                } else {
-                    mostrarError("No se encontró el platillo con el nombre proporcionado.");
-                }
-            }
-        } catch (NumberFormatException | HeadlessException e) {
-            mostrarError("Error al editar el platillo: " + e.getMessage());
-        }
-    }//GEN-LAST:event_editarPlatilloActionPerformed
-    public NodoPlatillo buscarPlatillo(String nombrePlatillo) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
-                return aux;
-            }
-            aux = aux.getSiguiente();
-        }
-        return null;
-    }
-
+    
     private void agregarPlatilloInBackground(String nombrePlatillo, String descripcion, String categoria, String precio) {
         try {
             Platillo platillo = new Platillo(nombrePlatillo, categoria, descripcion, precio);
@@ -279,7 +417,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
             if (!platilloYaExiste(platillo.getNombre())) {
                 agregarPlatillo(platillo);
                 guardarEnArchivo();
-                System.out.println("Datos agregados exitosamente");
+                llenarTabla();
                 JOptionPane.showMessageDialog(null, "Platillo agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 mostrarError("El platillo ya existe en el catálogo.");
@@ -291,94 +429,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
             mostrarError("Error al agregar los datos: " + e.getMessage());
         }
     }
-
-    private boolean platilloYaExiste(String nombre) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
-        }
-        return false;
-    }
-
-    private void guardarEnArchivo() {
-        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
-            NodoPlatillo aux = inicioPlatillo;
-            while (aux != null) {
-                Platillo platillo = aux.getPlatillo();
-                if (platillo != null) {
-                    archivo.println(formatoPlatillo(platillo));
-                }
-                aux = aux.getSiguiente();
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private Platillo partesPlatillo(String linea) {
-        String[] partes = linea.split(",");
-        try {
-            if (partes.length == 4) {
-                String nombre = partes[0];
-                String descripcion = partes[1];
-                String categoria = partes[2];
-                String precio = partes[3];
-
-                return new Platillo(nombre, categoria, descripcion, precio);
-            } else {
-                return null;
-            }
-        } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
-            return null;
-        }
-    }
-
-    private void cargarDesdeArchivo() {
-        inicioPlatillo = null;
-
-        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
-            System.out.println("Trying to load data from the file: " + RUTA_ARCHIVO);
-
-            String linea;
-            while ((linea = archivo.readLine()) != null) {
-                Platillo platillo = partesPlatillo(linea);
-                if (platillo != null) {
-                    agregarPlatillo(platillo);
-                }
-            }
-
-            if (inicioPlatillo != null) {
-                System.out.println("Datos cargados exitosamente");
-            } else {
-                System.out.println("El archivo estaba vacío");
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error loading the file: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private String formatoPlatillo(Platillo platillo) {
-        return platillo.getNombre() + "," + platillo.getDescripcion() + "," + platillo.getCategoria() + "," + platillo.getPrecio();
-    }
-
-    public boolean esVaciaPlatillos() {
-        return inicioPlatillo == null;
-    }
-
-    private void mostrarMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
+    
     private void agregarPlatillo(Platillo platillo) {
         try {
             if (!platilloYaExiste(platillo.getNombre())) {
@@ -403,6 +454,115 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         } catch (HeadlessException e) {
             mostrarError("Error al agregar los datos: " + e.getMessage());
         }
+    }
+    
+    private boolean platilloYaExiste(String nombre) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    
+    private void editarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPlatilloActionPerformed
+        try {
+            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
+
+            if (platilloNom != null) {
+                NodoPlatillo aux = buscarPlatillo(platilloNom);
+
+                if (aux != null) {
+                    Platillo bebidaActual = aux.getPlatillo();
+
+                    String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
+                    String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
+                    String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
+                    String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
+
+                    if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
+                        Platillo nuevoPlatillo = new Platillo(nuevoNom, nuevaDescripcion, nuevaCateg, nuevoPrecio);
+
+                        aux.setPlatillo(nuevoPlatillo);
+
+                        guardarEnArchivo();
+                        llenarTabla();
+                        mostrarMensaje("Platillo editado correctamente.");
+                    } else {
+                        mostrarMensaje("No se realizaron cambios en el platillo.");
+                    }
+                } else {
+                    mostrarError("No se encontró el platillo con el nombre proporcionado.");
+                }
+            }
+        } catch (NumberFormatException | HeadlessException e) {
+            mostrarError("Error al editar el platillo: " + e.getMessage());
+        }
+    }//GEN-LAST:event_editarPlatilloActionPerformed
+    
+    public NodoPlatillo buscarPlatillo(String nombrePlatillo) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
+
+    //Guardar en Archivo
+    
+    private void guardarEnArchivo() {
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+            NodoPlatillo aux = inicioPlatillo;
+            while (aux != null) {
+                Platillo platillo = aux.getPlatillo();
+                if (platillo != null) {
+                    archivo.println(formatoPlatillo(platillo));
+                }
+                aux = aux.getSiguiente();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    //Metodos para el Archivo
+    
+    private Platillo partesPlatillo(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 4) {
+                String nombre = partes[0];
+                String descripcion = partes[1];
+                String categoria = partes[2];
+                String precio = partes[3];
+
+                return new Platillo(nombre, categoria, descripcion, precio);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+    
+    private String formatoPlatillo(Platillo platillo) {
+        return platillo.getNombre() + "," + platillo.getDescripcion() + "," + platillo.getCategoria() + "," + platillo.getPrecio();
+    }
+
+
+    //Metodos Mensaje y Error
+    private void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public static void main(String args[]) {
@@ -445,11 +605,14 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     private javax.swing.JRadioButton entradasRadioButton;
     private javax.swing.JLabel fondo;
     private javax.swing.JTextField ingredientesPlatilloTexto;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton limpiar;
     private javax.swing.JTextField nombrePlatilloTexto;
     private javax.swing.JRadioButton platosFuertesRadioButton;
     private javax.swing.JTextField precioPlatillo;
     private javax.swing.JRadioButton sopasRadioButton;
+    private javax.swing.JTable tabla;
     private javax.swing.JButton volverPantallaPrincipal;
     // End of variables declaration//GEN-END:variables
 }

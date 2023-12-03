@@ -1,1 +1,7 @@
-si,si,Salado,1000
+a,a,Dulce,1000
+aa,a,Dulce,1000
+aaaaaa,Salado,a,1000
+asdas,dadsasd,Dulce,1000
+chiasd,Salado,asdasd,19000
+picha,a,Dulce,1000
+pichasasas,a,Dulce,1000

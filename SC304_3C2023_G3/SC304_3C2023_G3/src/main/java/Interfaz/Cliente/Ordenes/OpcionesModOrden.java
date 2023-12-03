@@ -1,4 +1,4 @@
-package Interfaz.Ordenes;
+package Interfaz.Cliente.Ordenes;
 import Orden.Orden;
 
 public class OpcionesModOrden extends javax.swing.JFrame {

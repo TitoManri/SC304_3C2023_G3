@@ -2,17 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
-import javax.swing.*;
-import java.awt.*;
-import Personas.Cliente;
-import Personas.Cola;
+package Interfaz.Cliente;
+import Interfaz.Administrador.PaginaInicio;
 /**
  *
  * @author manri
  */
 public class LogIn extends javax.swing.JFrame {
-    private static Cliente cliente = new Cliente();
     
     
     /**
@@ -24,26 +20,9 @@ public class LogIn extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public static Cliente getCliente() {
-        return cliente;
-    }
-
-    public static void setCliente(Cliente cliente) {
-        LogIn.cliente = cliente;
-    }
     
     //validar si el usuario corresponde a un usuario en la lista de usuarios. 
-    public void usuarioACtual(){
-        String usuario = nombreUsuarioTexto.getText();
-        Cola c = new Cola();
-        Cliente clienteActual = c.buscarCliente(usuario);
-        if (clienteActual.getPasssword().equals(contrasenaTexto.getText())) {
-            setCliente(clienteActual);
-            //y se mueve a la pantalla del menu 
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay usuarios que con ese nombre de usuario o contraseña en el sistema.");
-        }
-    }
+   
     
 
     /**
@@ -57,6 +36,7 @@ public class LogIn extends javax.swing.JFrame {
 
         nombreUsuarioTexto = new javax.swing.JTextField();
         contrasenaTexto = new javax.swing.JTextField();
+        botonRegistro = new javax.swing.JButton();
         botonIngresar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
@@ -78,7 +58,24 @@ public class LogIn extends javax.swing.JFrame {
         contrasenaTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         contrasenaTexto.setForeground(new java.awt.Color(0, 0, 0));
         contrasenaTexto.setBorder(null);
+        contrasenaTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contrasenaTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(contrasenaTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 390, 40));
+
+        botonRegistro.setBackground(new java.awt.Color(245, 222, 180));
+        botonRegistro.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        botonRegistro.setForeground(new java.awt.Color(0, 0, 0));
+        botonRegistro.setText("Registro");
+        botonRegistro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 520, 110, -1));
 
         botonIngresar.setBackground(new java.awt.Color(245, 222, 180));
         botonIngresar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -92,7 +89,7 @@ public class LogIn extends javax.swing.JFrame {
         });
         getContentPane().add(botonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 450, 130, 60));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/InicioSesion.png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InicioSesion.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -103,9 +100,29 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreUsuarioTextoActionPerformed
 
+    private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
+
+    }//GEN-LAST:event_botonRegistroActionPerformed
+
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
-        usuarioACtual();
+        String usuario = nombreUsuarioTexto.getText();
+        String contrasena = contrasenaTexto.getText();
+        if(usuario.equals("Admin") || contrasena.equals("123")){
+            PaginaInicio x = new PaginaInicio();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
+        } else {
+            
+        }
+            
+        
     }//GEN-LAST:event_botonIngresarActionPerformed
+
+    private void contrasenaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contrasenaTextoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +162,7 @@ public class LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresar;
+    private javax.swing.JButton botonRegistro;
     private javax.swing.JTextField contrasenaTexto;
     private javax.swing.JLabel fondo;
     private javax.swing.JTextField nombreUsuarioTexto;
