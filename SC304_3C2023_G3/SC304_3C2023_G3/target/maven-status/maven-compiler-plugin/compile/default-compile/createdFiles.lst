@@ -2,6 +2,7 @@ Interfaz/Administrador/Platillos/CatalogoPlatillos$4.class
 Interfaz/Cliente/SignIn.class
 Interfaz/Cliente/Ordenes/AgregarBebCliente$2.class
 Interfaz/Cliente/LogIn$3.class
+Interfaz/Cliente/Ordenes/EliminarProducto$5.class
 Interfaz/Cliente/Ordenes/AgregarPostCliente$1.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$6.class
 Interfaz/Cliente/Ordenes/MenuComidas$5.class
@@ -76,6 +77,7 @@ Interfaz/Cliente/SignIn$3.class
 Interfaz/Administrador/Postres/CatalogoPostres$2.class
 Interfaz/Cliente/Ordenes/EliminarProducto$4.class
 Interfaz/Cliente/Ordenes/AgregarPlatCliente$5.class
+Interfaz/Cliente/Transaccion$7.class
 Interfaz/Cliente/Ordenes/MenuComidas$6.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$5.class
 Interfaz/Cliente/Ordenes/EliminarProducto.class
@@ -91,6 +93,7 @@ Interfaz/Cliente/Ordenes/Producto.class
 Interfaz/Cliente/LogIn$1.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$9.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$9.class
+Interfaz/Cliente/Transaccion$6.class
 Interfaz/Cliente/Ordenes/AgregarPlatCliente$4.class
 Interfaz/Cliente/Ordenes/MenuComidas.class
 Interfaz/Administrador/Postres/CatalogoPostres$6.class

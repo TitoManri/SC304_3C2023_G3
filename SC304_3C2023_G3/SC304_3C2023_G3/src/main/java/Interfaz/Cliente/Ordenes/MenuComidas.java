@@ -1,16 +1,17 @@
 package Interfaz.Cliente.Ordenes;
 
+/*
+ *Clase Menu Comidas: Conexión para agregar los diferente productos
+ */
+
+
 import Interfaz.Cliente.Transaccion;
 
 public class MenuComidas extends javax.swing.JFrame {
-    
-    private Transaccion transaccionInstance;
-    
-    public MenuComidas(Transaccion transaccionInstance) {
-        this.transaccionInstance = transaccionInstance;
-        this.setLocationRelativeTo(null);
-        setSize(1000,600);
+        
+    public MenuComidas() {
         initComponents();
+        setSize(1000, 600); 
     }
 
     @SuppressWarnings("unchecked")
@@ -26,7 +27,8 @@ public class MenuComidas extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AgregarPlatillo.setBorderPainted(false);
         AgregarPlatillo.setContentAreaFilled(false);
@@ -35,8 +37,7 @@ public class MenuComidas extends javax.swing.JFrame {
                 AgregarPlatilloActionPerformed(evt);
             }
         });
-        getContentPane().add(AgregarPlatillo);
-        AgregarPlatillo.setBounds(40, 170, 250, 100);
+        getContentPane().add(AgregarPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, 100));
 
         AgregarBebida.setBorderPainted(false);
         AgregarBebida.setContentAreaFilled(false);
@@ -45,8 +46,7 @@ public class MenuComidas extends javax.swing.JFrame {
                 AgregarBebidaActionPerformed(evt);
             }
         });
-        getContentPane().add(AgregarBebida);
-        AgregarBebida.setBounds(350, 170, 240, 100);
+        getContentPane().add(AgregarBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 240, 100));
 
         AgregarPostre.setBorderPainted(false);
         AgregarPostre.setContentAreaFilled(false);
@@ -55,8 +55,7 @@ public class MenuComidas extends javax.swing.JFrame {
                 AgregarPostreActionPerformed(evt);
             }
         });
-        getContentPane().add(AgregarPostre);
-        AgregarPostre.setBounds(200, 320, 240, 100);
+        getContentPane().add(AgregarPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 240, 100));
 
         EliminarProducto.setBorderPainted(false);
         EliminarProducto.setContentAreaFilled(false);
@@ -65,8 +64,7 @@ public class MenuComidas extends javax.swing.JFrame {
                 EliminarProductoActionPerformed(evt);
             }
         });
-        getContentPane().add(EliminarProducto);
-        EliminarProducto.setBounds(520, 330, 250, 90);
+        getContentPane().add(EliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, 250, 90));
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
@@ -75,8 +73,7 @@ public class MenuComidas extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver);
-        volver.setBounds(290, 500, 330, 60);
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 330, 60));
 
         terminarOrden.setBorderPainted(false);
         terminarOrden.setContentAreaFilled(false);
@@ -85,19 +82,18 @@ public class MenuComidas extends javax.swing.JFrame {
                 terminarOrdenActionPerformed(evt);
             }
         });
-        getContentPane().add(terminarOrden);
-        terminarOrden.setBounds(640, 500, 290, 70);
+        getContentPane().add(terminarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, 290, 70));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MenuComidas.png"))); // NOI18N
         fondo.setText("jLabel1");
-        getContentPane().add(fondo);
-        fondo.setBounds(0, 0, 1000, 600);
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBebidaActionPerformed
-        AgregarBebCliente x = new AgregarBebCliente(transaccionInstance);
+       //Boton para Agregar Bebida
+        AgregarBebCliente x = new AgregarBebCliente();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -105,7 +101,8 @@ public class MenuComidas extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarBebidaActionPerformed
 
     private void AgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPlatilloActionPerformed
-         AgregarPlatCliente x = new AgregarPlatCliente(transaccionInstance);
+        //Boton para Agregar Platillo
+        AgregarPlatCliente x = new AgregarPlatCliente();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -113,7 +110,8 @@ public class MenuComidas extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarPlatilloActionPerformed
 
     private void AgregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostreActionPerformed
-        AgregarPostCliente x = new AgregarPostCliente(transaccionInstance);
+        //Boton para Agregar Postre
+        AgregarPostCliente x = new AgregarPostCliente();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -121,7 +119,8 @@ public class MenuComidas extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarPostreActionPerformed
 
     private void EliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProductoActionPerformed
-        EliminarProducto x = new EliminarProducto(transaccionInstance);
+        //Boton para Eliminar Producto
+        EliminarProducto x = new EliminarProducto();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -137,10 +136,6 @@ public class MenuComidas extends javax.swing.JFrame {
         x.setVisible(true);
         x.pack();
         x.setLocationRelativeTo(null); 
-        this.dispose();
-        transaccionInstance.setVisible(true);
-        transaccionInstance.pack();
-        transaccionInstance.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_terminarOrdenActionPerformed
 

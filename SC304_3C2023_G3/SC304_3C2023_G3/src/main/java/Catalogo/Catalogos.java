@@ -5,8 +5,7 @@
 package Catalogo;
 
 /**
- *
- * @author manri
+ *Clase no utilizada.
  */
 public class Catalogos {
     

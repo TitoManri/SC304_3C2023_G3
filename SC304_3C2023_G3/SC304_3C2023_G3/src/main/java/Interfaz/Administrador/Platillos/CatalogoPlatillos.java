@@ -15,8 +15,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author manri
+ *Clase CatalogoPlatillos: sirve para guardar toda la informacion nueva sobre un platillos que quiera implementar el administrador 
  */
 public class CatalogoPlatillos extends javax.swing.JFrame {
 

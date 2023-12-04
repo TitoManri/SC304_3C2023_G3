@@ -12,14 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author manri
+ *Clase CatalogoProvedores: sirve para guardar toda la informacion nueva sobre un provedor que quiera implementar el administrador 
  */
 public class CatalogoProvedores extends javax.swing.JFrame {
-    
-    //Provedores Doble Lista Circular
+
     NodoProvedores inicioProvedores;
     NodoProvedores finProvedores;
+    //Ruta Catalogo Provedorees
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoProvedorees.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
     /**

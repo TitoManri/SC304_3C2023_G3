@@ -1,7 +1,7 @@
 package Personas;
 
 /**
- *
+ * Clase Cliente: Todos los datos que tiene un cliente
  */
 public class Cliente {
     private String nombre;

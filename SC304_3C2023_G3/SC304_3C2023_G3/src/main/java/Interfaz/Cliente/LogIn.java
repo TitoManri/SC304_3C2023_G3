@@ -103,7 +103,7 @@ public class LogIn extends javax.swing.JFrame {
     private void nombreUsuarioTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreUsuarioTextoActionPerformed
-
+    //  Boton para ir a registro
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
         SignIn x = new SignIn();
             x.setVisible(true);
@@ -112,6 +112,7 @@ public class LogIn extends javax.swing.JFrame {
             this.dispose();
     }//GEN-LAST:event_botonRegistroActionPerformed
 
+    //Boton para verificar los clientes y administradores
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
         String usuario = nombreUsuarioTexto.getText();
         String contrasena = contrasenaTexto.getText();
@@ -130,7 +131,8 @@ public class LogIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario y/o contrasena incorrectas");
         }
     }//GEN-LAST:event_botonIngresarActionPerformed
-
+    
+    //Metodo para validar el usuario
     private boolean validarUsuario(String usuario, String contrasena) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -163,6 +165,7 @@ public class LogIn extends javax.swing.JFrame {
         }
     }
     
+    //Metodo de errores
     private void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }

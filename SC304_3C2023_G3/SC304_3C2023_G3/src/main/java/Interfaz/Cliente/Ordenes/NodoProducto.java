@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Clase NodoProducto: Nodo para el producto que es una lista simple enlazada
  */
 package Interfaz.Cliente.Ordenes;
 

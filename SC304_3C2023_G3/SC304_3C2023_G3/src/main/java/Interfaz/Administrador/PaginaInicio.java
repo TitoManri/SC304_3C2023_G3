@@ -109,7 +109,7 @@ public class PaginaInicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Boton Catalogo Platillos
     private void botonCatalogoPlatillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoPlatillosActionPerformed
         CatalogoPlatillos x = new CatalogoPlatillos();
         x.setVisible(true);
@@ -117,7 +117,7 @@ public class PaginaInicio extends javax.swing.JFrame {
         x.setLocationRelativeTo(null); 
         this.dispose();
     }//GEN-LAST:event_botonCatalogoPlatillosActionPerformed
-
+    //Volver a LogIn
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         LogIn x = new LogIn();
         x.setVisible(true);
@@ -125,7 +125,7 @@ public class PaginaInicio extends javax.swing.JFrame {
         x.setLocationRelativeTo(null); 
         this.dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
-
+    //Boton Catalogo Bebidas
     private void botonCatalogoBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoBebidasActionPerformed
         CatalogoBebidas x = new CatalogoBebidas();
         x.setVisible(true);
@@ -133,7 +133,7 @@ public class PaginaInicio extends javax.swing.JFrame {
         x.setLocationRelativeTo(null); 
         this.dispose();
     }//GEN-LAST:event_botonCatalogoBebidasActionPerformed
-
+    //Boton Catalogo Postres
     private void botonCatalogoPostresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoPostresActionPerformed
         CatalogoPostres x = new CatalogoPostres();
         x.setVisible(true);
@@ -141,7 +141,7 @@ public class PaginaInicio extends javax.swing.JFrame {
         x.setLocationRelativeTo(null); 
         this.dispose();
     }//GEN-LAST:event_botonCatalogoPostresActionPerformed
-
+    //Boton Catalogo Provedorees
     private void botonCatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoProveedoresActionPerformed
         CatalogoProvedores x = new CatalogoProvedores();
         x.setVisible(true);

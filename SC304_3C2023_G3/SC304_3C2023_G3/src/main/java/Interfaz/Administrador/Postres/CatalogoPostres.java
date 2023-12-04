@@ -15,14 +15,9 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author manri
+ *Clase CatalogoPostres: sirve para guardar toda la informacion nueva sobre un postres que quiera implementar el administrador 
  */
 public class CatalogoPostres extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CatalogoPostres
-     */
     
     //Postres Doble Lista Enlazada
     NodoPostre inicioPostre;

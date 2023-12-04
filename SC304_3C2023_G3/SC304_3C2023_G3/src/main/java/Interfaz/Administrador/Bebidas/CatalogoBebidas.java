@@ -16,19 +16,17 @@ import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+
 /**
- *
- * @author manri
+ * Clase CatalogoBebidas: sirve para guardar toda la informacion nueva sobre una bebida que quiera implementar el administrador 
  */
 public class CatalogoBebidas extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CatalogoBebidas
-     */
     NodoBebida inicioBebida;
     NodoBebida finBebida;
+    //Ruta archivo Catalogo Bebidas
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;  
+    
     public CatalogoBebidas() {
         initComponents();
         inicioBebida = null; 

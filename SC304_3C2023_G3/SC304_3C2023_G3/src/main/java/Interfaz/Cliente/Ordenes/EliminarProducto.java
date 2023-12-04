@@ -1,30 +1,62 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * 
  */
 package Interfaz.Cliente.Ordenes;
 
 import Interfaz.Cliente.Transaccion;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Clase ELiminarProducto: Esta clase elimina cualquier producto que se agregue a la orden del cliente
+ */
+
 public class EliminarProducto extends javax.swing.JFrame {
-    
-    private Transaccion transaccionInstance;
+    //Ruta Orden
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
     private NodoProducto inicioProducto;
-    public EliminarProducto(Transaccion transaccionInstance) {
+    public EliminarProducto() {
         initComponents();
         cargarProductosDesdeArchivo();
-         this.transaccionInstance = transaccionInstance;
-         cargarProductosEnTabla();
+        cargarProductosEnTabla();
 
+    }
+    //Metodos Iniciales
+    private void cargarProductosDesdeArchivo() {
+        inicioProducto = null;
+
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Producto producto = partesProducto(linea);
+                if (producto != null) {
+                    inicioProducto = agregarNodo(inicioProducto, producto);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void cargarProductosEnTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio");
+
+        NodoProducto aux = inicioProducto;
+        while (aux != null) {
+            Producto producto = aux.getProducto();
+            modelo.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
+            aux = aux.getSiguiente();
+        }
+
+        tabla.setModel(modelo);
     }
 
     /**
@@ -46,7 +78,13 @@ public class EliminarProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        volver.setText("Volver");
+        volver.setBorderPainted(false);
+        volver.setContentAreaFilled(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 190, 70));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -72,15 +110,17 @@ public class EliminarProducto extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 380, -1));
 
-        nombreText.setBackground(new java.awt.Color(60, 63, 65));
+        nombreText.setBackground(new java.awt.Color(0, 0, 49));
+        nombreText.setBorder(null);
         nombreText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreTextActionPerformed(evt);
             }
         });
-        getContentPane().add(nombreText, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 380, 40));
+        getContentPane().add(nombreText, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 350, 30));
 
-        eliminar.setText("Eliminar");
+        eliminar.setBorderPainted(false);
+        eliminar.setContentAreaFilled(false);
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
@@ -98,6 +138,8 @@ public class EliminarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreTextActionPerformed
 
+    //Boton de Eliminar Producto
+    
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
     String nombreProducto = nombreText.getText().trim();
     if (!nombreProducto.isEmpty()) {
@@ -109,23 +151,17 @@ public class EliminarProducto extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+      MenuComidas x = new MenuComidas();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
+
     
-    private void cargarProductosDesdeArchivo() {
-        inicioProducto = null;
-
-        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
-            String linea;
-            while ((linea = archivo.readLine()) != null) {
-                Producto producto = partesProducto(linea);
-                if (producto != null) {
-                    inicioProducto = agregarNodo(inicioProducto, producto);
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
+    //Metodos para eliminar productos
+    
     private Producto partesProducto(String linea) {
         String[] partes = linea.split(",");
         try {
@@ -157,11 +193,12 @@ public class EliminarProducto extends javax.swing.JFrame {
     }
 
     private void guardarProductosEnArchivo() {
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(RUTA_ARCHIVO))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(RUTA_ARCHIVO))) {
             NodoProducto aux = inicioProducto;
             while (aux != null) {
                 Producto producto = aux.getProducto();
-                printWriter.println(producto.getNombre() + "," + producto.getPrecio());
+                bufferedWriter.write(producto.getNombre() + "," + producto.getPrecio());
+                bufferedWriter.newLine();
                 aux = aux.getSiguiente();
             }
         } catch (IOException e) {
@@ -197,20 +234,9 @@ public class EliminarProducto extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "El producto no existe en la lista.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
-    private void cargarProductosEnTabla() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Precio");
-
-        NodoProducto aux = inicioProducto;
-        while (aux != null) {
-            Producto producto = aux.getProducto();
-            modelo.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
-            aux = aux.getSiguiente();
-        }
-
-        tabla.setModel(modelo);
-    }
+    
+    
+    
     
     /**
      * @param args the command line arguments
@@ -243,7 +269,7 @@ public class EliminarProducto extends javax.swing.JFrame {
         Transaccion transaccionInstance = new Transaccion();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarProducto(transaccionInstance).setVisible(true);
+                new EliminarProducto().setVisible(true);
             }
         });
     }

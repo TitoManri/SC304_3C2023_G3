@@ -1,5 +1,7 @@
 package Catalogo.Bebidas;
-
+/**
+ * Todo lo necesario para una bebida
+ */
 public class Bebida {
     private String nombre;
     private String categoria;

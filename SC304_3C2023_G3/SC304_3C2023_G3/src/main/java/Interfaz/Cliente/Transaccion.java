@@ -1,62 +1,66 @@
 package Interfaz.Cliente;
 
+import Interfaz.Cliente.Ordenes.MenuComidas;
 import Interfaz.Cliente.Ordenes.NodoProducto;
 import Interfaz.Cliente.Ordenes.Producto;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
- * @author marip
+ *Clase Transaccion: Clase para confirmar todas las ordenes
  */
 public class Transaccion extends javax.swing.JFrame {
-    DefaultTableModel model = new DefaultTableModel();
+DefaultTableModel model;
+
+    private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
+    String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     private NodoProducto inicioProductos;
+
     public Transaccion() {
         initComponents();
-        
+        model = new DefaultTableModel(new Object[]{"Nombre", "Precio"}, 0);
+        tabla.setModel(model);
+        cargarOrdenDesdeArchivo(rutaArchivo);
         setResizable(false);
         this.setLocationRelativeTo(null);
-        String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
-        model.setColumnIdentifiers(titulo);
-        tabla.setModel(model);
-        mostrarOrdenYTotal();
     }
 
+    //Metodos Iniciales
     
-
-    private void mostrarOrdenYTotal(){
     
-    int rowCount = model.getRowCount();
-
-    if (rowCount > 0) {
-        double total = 0;
-
-        StringBuilder ordenStringBuilder = new StringBuilder("Orden:\n");
-
-        for (int i = 0; i < rowCount; i++) {
-            String nombre = (String) model.getValueAt(i, 0);
-            String categoria = (String) model.getValueAt(i, 1);
-            double precio = (double) model.getValueAt(i, 2);
-
-            total += precio;
-
-            ordenStringBuilder.append(String.format("%s - %s - $%.2f\n", nombre, categoria, precio));
+    private void cargarOrdenDesdeArchivo(String rutaArchivo) {
+        try (BufferedReader archivo = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                procesarLineaOrden(linea);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo de orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        totalText.setText(String.format("Total: $%.2f", total));
-
-        JOptionPane.showMessageDialog(this, ordenStringBuilder.toString(), "Orden Completa", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, "La orden está vacía.", "Orden Vacía", JOptionPane.INFORMATION_MESSAGE);
     }
-}
+
+    //Cargar Tabla y Actualizar Tabla
     
+    private void procesarLineaOrden(String linea) {
+        String[] partes = linea.split(",");
+        if (partes.length == 2) {
+            String nombreProducto = partes[0];
+            String precioProducto = partes[1];
+            Producto producto = new Producto(nombreProducto, precioProducto);
+            agregarProductoATransaccion(producto);
+        } else {
+            System.out.println("Error en el formato de línea de orden: " + linea);
+        }
+    }
+
     public void agregarProductoATransaccion(Producto producto) {
         agregarProducto(producto);
     }
-    
+
     private void agregarProducto(Producto producto) {
         NodoProducto nuevoNodo = new NodoProducto(producto);
 
@@ -72,23 +76,21 @@ public class Transaccion extends javax.swing.JFrame {
 
         actualizarTabla();
     }
-    
+
     private void actualizarTabla() {
         model.setRowCount(0);
-
         NodoProducto aux = inicioProductos;
         while (aux != null) {
             Producto producto = aux.getProducto();
             model.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
             aux = aux.getSiguiente();
         }
-    }
+    } 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pagar = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         fechaText = new javax.swing.JTextField();
         clienteText = new javax.swing.JTextField();
@@ -97,6 +99,9 @@ public class Transaccion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        volver = new javax.swing.JButton();
+        pagarOrden = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
@@ -104,29 +109,11 @@ public class Transaccion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pagar.setBorderPainted(false);
-        pagar.setContentAreaFilled(false);
-        pagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pagarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 90));
-
-        cancelar.setBorderPainted(false);
-        cancelar.setContentAreaFilled(false);
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 200, 80));
-
         jLabel1.setBackground(new java.awt.Color(0, 0, 51));
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel1.setText("Cliente: ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, 80, 20));
+        jLabel1.setText("Cliente");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 80, 20));
 
         fechaText.setEditable(false);
         fechaText.setBackground(new java.awt.Color(204, 204, 204));
@@ -135,39 +122,71 @@ public class Transaccion extends javax.swing.JFrame {
                 fechaTextActionPerformed(evt);
             }
         });
-        getContentPane().add(fechaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 220, -1));
+        getContentPane().add(fechaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 220, -1));
 
         clienteText.setEditable(false);
         clienteText.setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().add(clienteText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, 220, -1));
+        clienteText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteTextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(clienteText, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 220, -1));
 
         totalText.setEditable(false);
         totalText.setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().add(totalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 220, -1));
+        totalText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalTextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(totalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 220, -1));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 51));
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel2.setText("Lista de la Orden");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 340, 20));
+        jLabel2.setText("Confirmación");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 180, -1));
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 51));
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel3.setText("Total:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 250, 20));
+        jLabel3.setText("Total");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 90, 20));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 51));
         jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel4.setText("Fecha: ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 70, 20));
+        jLabel4.setText("Fecha ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 70, 20));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 51));
         jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 51));
         jLabel5.setText("Detalles de la transacción");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 340, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 340, 20));
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 51));
+        jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel6.setText("Lista de la Orden");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 150, 210, 20));
+
+        volver.setText("Volver a Menu Orden");
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 300, 50));
+
+        pagarOrden.setText("Pagar Orden");
+        pagarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagarOrdenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pagarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 130, 50));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,7 +213,7 @@ public class Transaccion extends javax.swing.JFrame {
             tabla.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 260, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 260, 270));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Facturacion.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -202,17 +221,30 @@ public class Transaccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
-        
-    }//GEN-LAST:event_pagarActionPerformed
-
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        
-    }//GEN-LAST:event_cancelarActionPerformed
-
     private void fechaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaTextActionPerformed
+
+    private void clienteTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clienteTextActionPerformed
+
+    private void totalTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalTextActionPerformed
+
+    //Boton para pagar orden
+    private void pagarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarOrdenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pagarOrdenActionPerformed
+    //Boton para volver a Menu Comidas
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        MenuComidas x = new MenuComidas();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -247,7 +279,6 @@ public class Transaccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelar;
     private javax.swing.JTextField clienteText;
     private javax.swing.JTextField fechaText;
     private javax.swing.JLabel fondo;
@@ -256,9 +287,11 @@ public class Transaccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton pagar;
+    private javax.swing.JButton pagarOrden;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField totalText;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

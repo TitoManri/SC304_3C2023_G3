@@ -11,7 +11,6 @@ import Interfaz.Cliente.Ordenes.MenuComidas;
  * @author manri
  */
 public class MenuInicial extends javax.swing.JFrame {
-    private Transaccion transaccionInstance;
     /**
      * Creates new form MenuInicial
      */
@@ -65,12 +64,17 @@ public class MenuInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Boton para Volver a Inicio de Sesion
     private void volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverInicioActionPerformed
-        // TODO add your handling code here:
+      LogIn x = new LogIn();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();  
     }//GEN-LAST:event_volverInicioActionPerformed
-
+    //Boton para ir al Menu de Comidas
     private void ingresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarMenuActionPerformed
-        MenuComidas x = new MenuComidas(transaccionInstance);
+        MenuComidas x = new MenuComidas();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 

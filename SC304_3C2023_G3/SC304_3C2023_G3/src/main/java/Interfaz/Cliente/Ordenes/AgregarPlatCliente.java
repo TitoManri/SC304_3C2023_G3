@@ -2,7 +2,6 @@ package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
-import Interfaz.Cliente.Transaccion;
 import javax.swing.table.DefaultTableModel;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
@@ -13,22 +12,22 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author marip
+ *Clase AgregarPlatCliente: Esta clase funciona para agregar platillos dentro del Catalogo Platillos en una orden como cliente
  */
 public class AgregarPlatCliente extends javax.swing.JFrame {
 
     DefaultTableModel tab = new DefaultTableModel();
+    
     private NodoPlatillo inicioPlatillo;
+    //Ruta Catalogo Bebidas
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
+    //Ruta Orden
     private static final String rutao = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
-    String rutaArchivoOrden = System.getProperty("user.dir") + "/" + ruta; 
-    private Transaccion transaccionInstance;
+    String rutaArchivoOrden = System.getProperty("user.dir") + "/" + rutao; 
     
-    public AgregarPlatCliente(Transaccion transaccionInstance) {
+    public AgregarPlatCliente() {
         initComponents();
-        this.transaccionInstance = transaccionInstance;
         setResizable(false);
         this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
@@ -78,76 +77,8 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
             } while (aux != inicioPlatillo);
         }
 
-    private Platillo partesPlatillo(String linea) {
-        String[] partes = linea.split(",");
-        try {
-            if (partes.length == 4) {
-                String nombre = partes[0];
-                String descripcion = partes[1];
-                String categoria = partes[2];
-                String precio = partes[3];
-
-                return new Platillo(nombre, categoria, descripcion, precio);
-            } else {
-                return null;
-            }
-        } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
-            return null;
-        }
-    }
     
-    private void agregarPlatillo(Platillo platillo) {
-        try {
-            if (!platilloYaExiste(platillo.getNombre())) {
-                NodoPlatillo nuevoNodo = new NodoPlatillo();
-                nuevoNodo.setPlatillo(platillo);
-
-                if (inicioPlatillo == null) {
-                    inicioPlatillo = nuevoNodo;
-                } else {
-                    NodoPlatillo aux = inicioPlatillo;
-                    while (aux.getSiguiente() != null) {
-                        aux = aux.getSiguiente();
-                    }
-                    aux.setSiguiente(nuevoNodo);
-                }
-            } else {
-                mostrarError("El platillo ya existe en el catálogo.");
-            }
-
-        } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
-        } catch (HeadlessException e) {
-            mostrarError("Error al agregar los datos: " + e.getMessage());
-        }
-    }
     
-    private boolean platilloYaExiste(String nombre) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
-        }
-        return false;
-    }
-    
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
-        private boolean platilloExistsInCatalog(String nombrePlatillo) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
-        }
-        return false;
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -245,8 +176,10 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Boton para Agregar Platillo
+    
     private void agregarPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatActionPerformed
-     String nombrePlatillo = nombrePlatText.getText();
+    String nombrePlatillo = nombrePlatText.getText();
 
     if (platilloExisteEnCatalogo(nombrePlatillo)) {
         JOptionPane.showMessageDialog(this, "El platillo ya existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -254,18 +187,74 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         Platillo platillo = obtenerPlatilloPorNombre(nombrePlatillo);
 
         if (platillo != null) {
-            Producto producto = new Producto(platillo.getNombre(), platillo.getPrecio());
-            transaccionInstance.agregarProductoATransaccion(producto);
+            guardarOrden(platillo.getNombre(), platillo.getPrecio());
+
             nombrePlatText.setText("");
-
-            guardarOrden(producto);
-
             JOptionPane.showMessageDialog(this, "Platillo agregado a la orden.");
         } else {
             JOptionPane.showMessageDialog(this, "El platillo no existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     }//GEN-LAST:event_agregarPlatActionPerformed
+    
+    //Metodos para agregar Platillos
+    private Platillo partesPlatillo(String linea) {
+        String[] partes = linea.split(",");
+        try {
+            if (partes.length == 4) {
+                String nombre = partes[0];
+                String descripcion = partes[1];
+                String categoria = partes[2];
+                String precio = partes[3];
+
+                return new Platillo(nombre, categoria, descripcion, precio);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+            return null;
+        }
+    }
+    
+    private void agregarPlatillo(Platillo platillo) {
+        try {
+            if (!platilloYaExiste(platillo.getNombre())) {
+                NodoPlatillo nuevoNodo = new NodoPlatillo();
+                nuevoNodo.setPlatillo(platillo);
+
+                if (inicioPlatillo == null) {
+                    inicioPlatillo = nuevoNodo;
+                } else {
+                    NodoPlatillo aux = inicioPlatillo;
+                    while (aux.getSiguiente() != null) {
+                        aux = aux.getSiguiente();
+                    }
+                    aux.setSiguiente(nuevoNodo);
+                }
+            } else {
+                mostrarError("El platillo ya existe en el catálogo.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error al convertir el precio a un número.");
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos: " + e.getMessage());
+        }
+    }
+    
+    private boolean platilloYaExiste(String nombre) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    
+    
     
     private boolean platilloExisteEnCatalogo(String nombrePlatillo) {
         NodoPlatillo aux = inicioPlatillo;
@@ -296,24 +285,31 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         return null;
     }
     
+    //Metodo para guardar la orden
+    private void guardarOrden(String nombre, String precio) {
+    try {
+        try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            printWriter.println(nombre + "," + precio);
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    //Metodo par mostrar errores
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    //Volver a Menu Comidas
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        MenuComidas x = new MenuComidas(transaccionInstance);
-            x.setVisible(true);
+        MenuComidas x = new MenuComidas();
             x.pack();
             x.setLocationRelativeTo(null); 
             this.dispose();
     }//GEN-LAST:event_volverActionPerformed
-    private void guardarOrden(Producto producto) {
-            try {
-
-                try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true); PrintWriter printWriter = new PrintWriter(fileWriter)) {
-                    printWriter.println(producto.getNombre() + "," + producto.getPrecio());
-
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+    
+    
     private void nombrePlatTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePlatTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombrePlatTextActionPerformed
@@ -338,12 +334,10 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         
         //</editor-fold>
 
-        
-        Transaccion transaccionInstance = new Transaccion();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarPlatCliente(transaccionInstance).setVisible(true);
+                new AgregarPlatCliente().setVisible(true);
             }
         });
     }

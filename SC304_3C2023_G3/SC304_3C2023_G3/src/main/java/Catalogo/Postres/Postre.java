@@ -5,8 +5,7 @@
 package Catalogo.Postres;
 
 /**
- *
- * @author manri
+ *Todo lo necesario para un postre
  */
 public class Postre {
    String nombre;

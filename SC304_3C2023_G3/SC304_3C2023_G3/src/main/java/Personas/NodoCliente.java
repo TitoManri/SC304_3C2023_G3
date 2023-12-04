@@ -1,9 +1,7 @@
 package Personas;
 
-import Personas.Cliente;
-
 /**
- *
+ * NodoCliente: Nodo para una Cola
  */
 public class NodoCliente {
 
