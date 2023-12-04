@@ -1,15 +1,15 @@
 package Interfaz.Cliente.Ordenes;
-import Interfaz.Cliente.SignIn;
-import Orden.Orden;
 
-public class OpcionesModOrden extends javax.swing.JFrame {
+import Interfaz.Cliente.Transaccion;
 
-    private Orden orden;
+public class MenuComidas extends javax.swing.JFrame {
     
-    public OpcionesModOrden(Orden orden) {
-        this.orden = orden;
+    private Transaccion transaccionInstance;
+    
+    public MenuComidas(Transaccion transaccionInstance) {
+        this.transaccionInstance = transaccionInstance;
         this.setLocationRelativeTo(null);
-        setResizable(false);
+        setSize(1000,600);
         initComponents();
     }
 
@@ -20,11 +20,10 @@ public class OpcionesModOrden extends javax.swing.JFrame {
         AgregarPlatillo = new javax.swing.JButton();
         AgregarBebida = new javax.swing.JButton();
         AgregarPostre = new javax.swing.JButton();
-        EliminarPlatillo = new javax.swing.JButton();
-        EliminarBebida = new javax.swing.JButton();
-        EliminarPostre = new javax.swing.JButton();
+        EliminarProducto = new javax.swing.JButton();
         volver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        terminarOrden = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -37,7 +36,7 @@ public class OpcionesModOrden extends javax.swing.JFrame {
             }
         });
         getContentPane().add(AgregarPlatillo);
-        AgregarPlatillo.setBounds(50, 180, 260, 110);
+        AgregarPlatillo.setBounds(40, 170, 250, 100);
 
         AgregarBebida.setBorderPainted(false);
         AgregarBebida.setContentAreaFilled(false);
@@ -47,7 +46,7 @@ public class OpcionesModOrden extends javax.swing.JFrame {
             }
         });
         getContentPane().add(AgregarBebida);
-        AgregarBebida.setBounds(375, 183, 270, 110);
+        AgregarBebida.setBounds(350, 170, 240, 100);
 
         AgregarPostre.setBorderPainted(false);
         AgregarPostre.setContentAreaFilled(false);
@@ -57,37 +56,17 @@ public class OpcionesModOrden extends javax.swing.JFrame {
             }
         });
         getContentPane().add(AgregarPostre);
-        AgregarPostre.setBounds(705, 183, 270, 110);
+        AgregarPostre.setBounds(200, 320, 240, 100);
 
-        EliminarPlatillo.setBorderPainted(false);
-        EliminarPlatillo.setContentAreaFilled(false);
-        EliminarPlatillo.addActionListener(new java.awt.event.ActionListener() {
+        EliminarProducto.setBorderPainted(false);
+        EliminarProducto.setContentAreaFilled(false);
+        EliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarPlatilloActionPerformed(evt);
+                EliminarProductoActionPerformed(evt);
             }
         });
-        getContentPane().add(EliminarPlatillo);
-        EliminarPlatillo.setBounds(45, 353, 270, 110);
-
-        EliminarBebida.setBorderPainted(false);
-        EliminarBebida.setContentAreaFilled(false);
-        EliminarBebida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarBebidaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(EliminarBebida);
-        EliminarBebida.setBounds(375, 353, 270, 110);
-
-        EliminarPostre.setBorderPainted(false);
-        EliminarPostre.setContentAreaFilled(false);
-        EliminarPostre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarPostreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(EliminarPostre);
-        EliminarPostre.setBounds(705, 353, 270, 110);
+        getContentPane().add(EliminarProducto);
+        EliminarProducto.setBounds(520, 330, 250, 90);
 
         volver.setBorderPainted(false);
         volver.setContentAreaFilled(false);
@@ -97,18 +76,28 @@ public class OpcionesModOrden extends javax.swing.JFrame {
             }
         });
         getContentPane().add(volver);
-        volver.setBounds(805, 513, 200, 70);
+        volver.setBounds(290, 500, 330, 60);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OpcionesModOrden.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 600);
+        terminarOrden.setBorderPainted(false);
+        terminarOrden.setContentAreaFilled(false);
+        terminarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminarOrdenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(terminarOrden);
+        terminarOrden.setBounds(640, 500, 290, 70);
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MenuComidas.png"))); // NOI18N
+        fondo.setText("jLabel1");
+        getContentPane().add(fondo);
+        fondo.setBounds(0, 0, 1000, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBebidaActionPerformed
-        AgregarBebCliente x = new AgregarBebCliente();
+        AgregarBebCliente x = new AgregarBebCliente(transaccionInstance);
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -116,7 +105,7 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarBebidaActionPerformed
 
     private void AgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPlatilloActionPerformed
-         AgregarPlatCliente x = new AgregarPlatCliente();
+         AgregarPlatCliente x = new AgregarPlatCliente(transaccionInstance);
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -124,40 +113,36 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarPlatilloActionPerformed
 
     private void AgregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostreActionPerformed
-        AgregarPostCliente x = new AgregarPostCliente();
+        AgregarPostCliente x = new AgregarPostCliente(transaccionInstance);
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
             this.dispose();
     }//GEN-LAST:event_AgregarPostreActionPerformed
 
-    private void EliminarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPlatilloActionPerformed
-        EliminarPlatCliente x = new EliminarPlatCliente(orden);
-        x.setVisible(true);
-        x.pack();
-        x.setLocationRelativeTo(null); 
-        this.dispose();
-    }//GEN-LAST:event_EliminarPlatilloActionPerformed
-
-    private void EliminarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBebidaActionPerformed
-        EliminarBebCliente x = new EliminarBebCliente(orden);
-        x.setVisible(true);
-        x.pack();
-        x.setLocationRelativeTo(null); 
-        this.dispose();
-    }//GEN-LAST:event_EliminarBebidaActionPerformed
-
-    private void EliminarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPostreActionPerformed
-        EliminarPostCliente x = new EliminarPostCliente(orden);
-        x.setVisible(true);
-        x.pack();
-        x.setLocationRelativeTo(null); 
-        this.dispose();
-    }//GEN-LAST:event_EliminarPostreActionPerformed
+    private void EliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProductoActionPerformed
+        EliminarProducto x = new EliminarProducto(transaccionInstance);
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
+    }//GEN-LAST:event_EliminarProductoActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         //volver al menú 
     }//GEN-LAST:event_volverActionPerformed
+
+    private void terminarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarOrdenActionPerformed
+    Transaccion x = new Transaccion();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null); 
+        this.dispose();
+        transaccionInstance.setVisible(true);
+        transaccionInstance.pack();
+        transaccionInstance.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_terminarOrdenActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -173,20 +158,51 @@ public class OpcionesModOrden extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OpcionesModOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuComidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OpcionesModOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuComidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OpcionesModOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuComidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OpcionesModOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuComidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new OpcionesModOrden().setVisible(true);
+//                new MenuComidas().setVisible(true);
             }
         });
     }
@@ -195,10 +211,9 @@ public class OpcionesModOrden extends javax.swing.JFrame {
     private javax.swing.JButton AgregarBebida;
     private javax.swing.JButton AgregarPlatillo;
     private javax.swing.JButton AgregarPostre;
-    private javax.swing.JButton EliminarBebida;
-    private javax.swing.JButton EliminarPlatillo;
-    private javax.swing.JButton EliminarPostre;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton EliminarProducto;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JButton terminarOrden;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

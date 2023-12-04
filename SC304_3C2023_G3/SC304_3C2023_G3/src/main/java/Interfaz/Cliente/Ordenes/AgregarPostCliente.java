@@ -2,12 +2,12 @@ package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoPostre;
 import Catalogo.Postres.Postre;
-import Interfaz.Administrador.Postres.CatalogoPostres;
-import Orden.LesOrden;
-import Orden.Orden;
+import Interfaz.Cliente.Transaccion;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,17 +16,19 @@ import javax.swing.table.DefaultTableModel;
  * @author marip
  */
 public class AgregarPostCliente extends javax.swing.JFrame {
-    
     NodoPostre inicioPostre;
     NodoPostre finPostre;
+    private Transaccion transaccionInstance;
     
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPostres.txt";
     String RUTA_ARCHIVO_POSTRES = System.getProperty("user.dir") + "/" + ruta;
-    
+    private static final String rutao = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
+    String rutaArchivoOrden = System.getProperty("user.dir") + "/" + ruta; 
     DefaultTableModel tab = new DefaultTableModel();
     
-    public AgregarPostCliente() {
+    public AgregarPostCliente(Transaccion transaccionInstance) {
         initComponents();
+        this.transaccionInstance = transaccionInstance;
         setResizable(false);
         this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
@@ -147,7 +149,7 @@ public class AgregarPostCliente extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 170, 30));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 170, 50));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,16 +187,74 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostActionPerformed
-        Orden orden = Ordenes.getOrden();
-        orden.getPostres().agregarPostre(postNomText.getText());
+    String nombrePostre = postNomText.getText();
+
+    if (postreExisteEnCatalogo(nombrePostre)) {
+        JOptionPane.showMessageDialog(this, "El postre ya existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        Postre postre = obtenerPostrePorNombre(nombrePostre);
+
+        if (postre != null) {
+            Producto producto = new Producto(postre.getNombre(), postre.getPrecio());
+            transaccionInstance.agregarProductoATransaccion(producto);
+
+            postNomText.setText("");
+
+            guardarOrden(producto);
+
+            JOptionPane.showMessageDialog(this, "Postre agregado a la orden.");
+        } else {
+            JOptionPane.showMessageDialog(this, "El postre no existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_AgregarPostActionPerformed
+    
+    
+    private boolean postreExisteEnCatalogo(String nombrePostre) {
+        NodoPostre aux = inicioPostre;
+        while (aux != null) {
+            if (aux.getPostre().getNombre().equalsIgnoreCase(nombrePostre)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    private Postre obtenerPostrePorNombre(String nombrePostre) {
+           NodoPostre aux = inicioPostre;
 
+           do {
+               if (aux != null) {
+                   Postre postre = aux.getPostre();
+                   if (postre != null && postre.getNombre().equalsIgnoreCase(nombrePostre)) {
+                       return postre;
+                   }
+               } else {
+                   break;
+               }
+               aux = aux.getSiguiente();
+           } while (aux != inicioPostre);
+
+           return null;
+       }
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        Ordenes apc=new Ordenes();
-        apc.setVisible(true);
-        this.dispose();
+        MenuComidas x = new MenuComidas(transaccionInstance);
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_volverActionPerformed
+    private void guardarOrden(Producto producto) {
+            try {
 
+                try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                    printWriter.println(producto.getNombre() + "," + producto.getPrecio());
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -219,10 +279,12 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        Transaccion transaccionInstance = new Transaccion();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarPostCliente().setVisible(true);
+                new AgregarPostCliente(transaccionInstance).setVisible(true);
             }
         });
     }

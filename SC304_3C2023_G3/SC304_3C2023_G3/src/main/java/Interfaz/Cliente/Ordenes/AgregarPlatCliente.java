@@ -1,15 +1,15 @@
 package Interfaz.Cliente.Ordenes;
 
-import Orden.LesOrden;
 import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
+import Interfaz.Cliente.Transaccion;
 import javax.swing.table.DefaultTableModel;
-import Interfaz.Administrador.Platillos.CatalogoPlatillos;
-import Orden.Orden;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,11 +22,15 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     private NodoPlatillo inicioPlatillo;
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoPlatillos.txt";
     String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
-
-    public AgregarPlatCliente() {
+    private static final String rutao = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
+    String rutaArchivoOrden = System.getProperty("user.dir") + "/" + ruta; 
+    private Transaccion transaccionInstance;
+    
+    public AgregarPlatCliente(Transaccion transaccionInstance) {
         initComponents();
+        this.transaccionInstance = transaccionInstance;
         setResizable(false);
-        this.setLocationRelativeTo(null); //solo para que este centrada en la pantalla
+        this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Descripción", "Categoría", "Precio"};
         tab.setColumnIdentifiers(titulo);
         tabla.setModel(tab);
@@ -133,6 +137,18 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     private void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+        private boolean platilloExistsInCatalog(String nombrePlatillo) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -230,16 +246,74 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatActionPerformed
-        Orden orden = Ordenes.getOrden();
-        orden.getPlatillos().agregarPlatillo(nombrePlatText.getText());
+     String nombrePlatillo = nombrePlatText.getText();
+
+    if (platilloExisteEnCatalogo(nombrePlatillo)) {
+        JOptionPane.showMessageDialog(this, "El platillo ya existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        Platillo platillo = obtenerPlatilloPorNombre(nombrePlatillo);
+
+        if (platillo != null) {
+            Producto producto = new Producto(platillo.getNombre(), platillo.getPrecio());
+            transaccionInstance.agregarProductoATransaccion(producto);
+            nombrePlatText.setText("");
+
+            guardarOrden(producto);
+
+            JOptionPane.showMessageDialog(this, "Platillo agregado a la orden.");
+        } else {
+            JOptionPane.showMessageDialog(this, "El platillo no existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_agregarPlatActionPerformed
+    
+    private boolean platilloExisteEnCatalogo(String nombrePlatillo) {
+        NodoPlatillo aux = inicioPlatillo;
+        while (aux != null) {
+            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+    
+    private Platillo obtenerPlatilloPorNombre(String nombrePlatillo) {
+        NodoPlatillo aux = inicioPlatillo;
 
+        do {
+            if (aux != null) {
+                Platillo platillo = aux.getPlatillo();
+                if (platillo != null && platillo.getNombre().equalsIgnoreCase(nombrePlatillo)) {
+                    return platillo;
+                }
+            } else {
+                break;
+            }
+            aux = aux.getSiguiente();
+        } while (aux != inicioPlatillo);
+
+        return null;
+    }
+    
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        Ordenes apc=new Ordenes();
-        apc.setVisible(true);
-        this.dispose();
+        MenuComidas x = new MenuComidas(transaccionInstance);
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_volverActionPerformed
+    private void guardarOrden(Producto producto) {
+            try {
 
+                try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                    printWriter.println(producto.getNombre() + "," + producto.getPrecio());
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     private void nombrePlatTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePlatTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombrePlatTextActionPerformed
@@ -257,21 +331,19 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AgregarPlatCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
+        
+        Transaccion transaccionInstance = new Transaccion();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarPlatCliente().setVisible(true);
+                new AgregarPlatCliente(transaccionInstance).setVisible(true);
             }
         });
     }

@@ -2,10 +2,12 @@ package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Bebidas.Bebida;
 import Catalogo.Nodos.NodoBebida;
-import Orden.Orden;
+import Interfaz.Cliente.Transaccion;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,13 +17,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AgregarBebCliente extends javax.swing.JFrame {
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/CatalogoBebidas.txt";
-    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta; 
+    String RUTA_ARCHIVO = System.getProperty("user.dir") + "/" + ruta;
+    private static final String rutao = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
+    String rutaArchivoOrden = System.getProperty("user.dir") + "/" + ruta; 
     NodoBebida inicioBebida;
     NodoBebida finBebida;
     DefaultTableModel tab = new DefaultTableModel();
+    private Transaccion transaccionInstance;
     
-    public AgregarBebCliente() {
+    public AgregarBebCliente(Transaccion transaccionInstance) {
         initComponents();
+        this.transaccionInstance = transaccionInstance;
         setResizable(false);
         this.setLocationRelativeTo(null);
         String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
@@ -31,6 +37,7 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         llenarTabla();
     }
     
+
     private void cargarDesdeArchivo() {
         try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
             String linea;
@@ -86,23 +93,23 @@ public class AgregarBebCliente extends javax.swing.JFrame {
         return fin;
     }  
     
-     private Bebida partesBebida(String linea) {
-        String[] partes = linea.split(",");
-        try {
-            if (partes.length == 3) {
-                String nombre = partes[0];
-                String categoria = partes[1];
-                String precio = partes[2];
-                return new Bebida(nombre, categoria, precio);
-            } else {
-                return null;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
+    private Bebida partesBebida(String linea) {
+    String[] partes = linea.split(",");
+    try {
+        if (partes.length == 3) {
+            String nombre = partes[0];
+            String categoria = partes[1];
+            String precio = partes[2];
+
+            return new Bebida(nombre, categoria, precio);
+        } else {
             return null;
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
     }
-    
+}
     
     
     @SuppressWarnings("unchecked")
@@ -167,7 +174,7 @@ public class AgregarBebCliente extends javax.swing.JFrame {
             tabla.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, 430));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarBebCliente.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
@@ -176,14 +183,77 @@ public class AgregarBebCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarBebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBebActionPerformed
-        Orden orden = Ordenes.getOrden();
-        orden.getBebidas().agregarBebida(nombreBebText.getText());
-    }//GEN-LAST:event_agregarBebActionPerformed
 
+    String nombreBebida = nombreBebText.getText();
+
+    if (bebidaExisteEnCatalogo(nombreBebida)) {
+        Bebida bebida = obtenerBebidaPorNombre(nombreBebida);
+
+        Producto producto = new Producto(bebida.getNombre(), bebida.getPrecio());
+        transaccionInstance.agregarProductoATransaccion(producto);
+
+        guardarOrden(producto);
+
+        nombreBebText.setText("");
+        JOptionPane.showMessageDialog(this, "Bebida agregada a la orden.");
+    } else {
+        JOptionPane.showMessageDialog(this, "La bebida no existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_agregarBebActionPerformed
+    private Bebida obtenerBebidaPorNombre(String nombreBebida) {
+        NodoBebida aux = inicioBebida;
+
+        do {
+            if (aux != null) {
+                Bebida bebida = aux.getBebida();
+                if (bebida != null && bebida.getNombre().equalsIgnoreCase(nombreBebida)) {
+                    return bebida;
+                }
+            } else {
+                break;
+            }
+            aux = aux.getSiguiente();
+        } while (aux != inicioBebida);
+
+        return null;
+    }
+private boolean bebidaExisteEnCatalogo(String nombreBebida){
+    NodoBebida aux = inicioBebida;
+    do {
+        if (aux != null) {
+            Bebida bebida = aux.getBebida();
+            if (bebida != null && bebida.getNombre().equalsIgnoreCase(nombreBebida)) {
+                return true;
+            }
+        } else {
+            break;
+        }
+        aux = aux.getSiguiente();
+    } while (aux != inicioBebida);
+
+    return false;
+}
+
+    private void guardarOrden(Producto producto) {
+        try {
+            
+            try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                printWriter.println(producto.getNombre() + "," + producto.getPrecio());
+                
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        Ordenes apc=new Ordenes();
-        apc.setVisible(true);
-        this.dispose();
+        MenuComidas x = new MenuComidas(transaccionInstance);
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
@@ -209,11 +279,14 @@ public class AgregarBebCliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AgregarBebCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        Transaccion transaccionInstance = new Transaccion();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarBebCliente().setVisible(true);
+            AgregarBebCliente agregarBebCliente = new AgregarBebCliente(transaccionInstance);
+                agregarBebCliente.setVisible(true);
             }
         });
     }

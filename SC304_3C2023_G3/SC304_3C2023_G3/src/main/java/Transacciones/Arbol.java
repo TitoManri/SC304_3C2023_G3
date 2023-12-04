@@ -1,6 +1,5 @@
 package Transacciones;
 
-import Orden.Orden;
 import Personas.Cliente;
 import java.io.*;
 import java.time.LocalDateTime;
@@ -27,7 +26,7 @@ public class Arbol {
         }
     }
     
-    public void agregarAArbol(Orden orden){
+    /*public void agregarAArbol(Orden orden){
         Transaccion t = new Transaccion();   
         t.setFechaHora(orden.getFechaHora());
         t.setNombreCliente(orden.getCliente().getNombre() + orden.getCliente().getApellidos());
@@ -41,7 +40,7 @@ public class Arbol {
         } else {
             agregarNuevo(raiz, nuevo);
         }
-    }
+    }*/
     
     public void agregarNuevo(NodoArb raiz, NodoArb nuevo){
         if (nuevo.getTransaccion().getMontoPagar() <= raiz.getTransaccion().getMontoPagar()) {

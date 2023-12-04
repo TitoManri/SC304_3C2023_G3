@@ -1,3 +1,4 @@
 cola loca,Gaseosas,2500
 coca cola,Gaseosas,5000
 pepsi,Gaseosas,1000
+te frio,Otras Bebidas,2500

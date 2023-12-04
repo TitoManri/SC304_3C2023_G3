@@ -1,41 +1,88 @@
 package Interfaz.Cliente;
 
-import Transacciones.Arbol;
-import Interfaz.Cliente.Ordenes.Ordenes;
-import Orden.Orden;
+import Interfaz.Cliente.Ordenes.NodoProducto;
+import Interfaz.Cliente.Ordenes.Producto;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author marip
  */
 public class Transaccion extends javax.swing.JFrame {
-
+    DefaultTableModel model = new DefaultTableModel();
+    private NodoProducto inicioProductos;
     public Transaccion() {
         initComponents();
-        mostrarDatos();
+        
         setResizable(false);
         this.setLocationRelativeTo(null);
+        String[] titulo = new String[]{"Nombre", "Categoría", "Precio"};
+        model.setColumnIdentifiers(titulo);
+        tabla.setModel(model);
+        mostrarOrdenYTotal();
     }
 
-    public void mostrarDatos() {
-        Orden orden = Ordenes.getOrden();
+    
 
-        if (orden != null) {
-            fechaText.setText(orden.getFechaHora().toString());
-            fechaText.setEditable(false);
+    private void mostrarOrdenYTotal(){
+    
+    int rowCount = model.getRowCount();
 
-            String nombre = orden.getCliente().getNombre() + " " + orden.getCliente().getApellidos();
-            clienteText.setText(nombre);
-            clienteText.setEditable(false);
+    if (rowCount > 0) {
+        double total = 0;
 
-            totalText.setText(String.valueOf(orden.getTotal()));
-            totalText.setEditable(false);
+        StringBuilder ordenStringBuilder = new StringBuilder("Orden:\n");
+
+        for (int i = 0; i < rowCount; i++) {
+            String nombre = (String) model.getValueAt(i, 0);
+            String categoria = (String) model.getValueAt(i, 1);
+            double precio = (double) model.getValueAt(i, 2);
+
+            total += precio;
+
+            ordenStringBuilder.append(String.format("%s - %s - $%.2f\n", nombre, categoria, precio));
+        }
+
+        totalText.setText(String.format("Total: $%.2f", total));
+
+        JOptionPane.showMessageDialog(this, ordenStringBuilder.toString(), "Orden Completa", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "La orden está vacía.", "Orden Vacía", JOptionPane.INFORMATION_MESSAGE);
+    }
+}
+    
+    public void agregarProductoATransaccion(Producto producto) {
+        agregarProducto(producto);
+    }
+    
+    private void agregarProducto(Producto producto) {
+        NodoProducto nuevoNodo = new NodoProducto(producto);
+
+        if (inicioProductos == null) {
+            inicioProductos = nuevoNodo;
         } else {
-            JOptionPane.showMessageDialog(null, "Error al localizar la orden");
+            NodoProducto aux = inicioProductos;
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nuevoNodo);
+        }
+
+        actualizarTabla();
+    }
+    
+    private void actualizarTabla() {
+        model.setRowCount(0);
+
+        NodoProducto aux = inicioProductos;
+        while (aux != null) {
+            Producto producto = aux.getProducto();
+            model.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
+            aux = aux.getSiguiente();
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,6 +96,9 @@ public class Transaccion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,39 +126,75 @@ public class Transaccion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setText("Cliente: ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 80, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, 80, 20));
 
+        fechaText.setEditable(false);
         fechaText.setBackground(new java.awt.Color(204, 204, 204));
         fechaText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechaTextActionPerformed(evt);
             }
         });
-        getContentPane().add(fechaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 220, -1));
+        getContentPane().add(fechaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 220, -1));
 
+        clienteText.setEditable(false);
         clienteText.setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().add(clienteText, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 220, -1));
+        getContentPane().add(clienteText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, 220, -1));
 
+        totalText.setEditable(false);
         totalText.setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().add(totalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 220, -1));
+        getContentPane().add(totalText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 220, -1));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 51));
         jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel2.setText("Detalles de la transacción");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 340, 20));
+        jLabel2.setText("Lista de la Orden");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 340, 20));
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 51));
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("Total:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 340, 250, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 250, 20));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 51));
         jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 51));
         jLabel4.setText("Fecha: ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 70, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 70, 20));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 51));
+        jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel5.setText("Detalles de la transacción");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 340, 20));
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 260, 290));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Facturacion.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -117,20 +203,11 @@ public class Transaccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
-        Arbol a = new Arbol();
-        Orden orden = Ordenes.getOrden();
-        if (orden != null) {
-            a.agregarAArbol(orden);
-            a.guardarTransaccionArchivo(orden.getFechaHora(), orden.getCliente(), orden.getTotal());
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al localizar la orden");
-        }
+        
     }//GEN-LAST:event_pagarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        Ordenes o = new Ordenes();
-        o.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void fechaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaTextActionPerformed
@@ -178,7 +255,10 @@ public class Transaccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton pagar;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField totalText;
     // End of variables declaration//GEN-END:variables
 }

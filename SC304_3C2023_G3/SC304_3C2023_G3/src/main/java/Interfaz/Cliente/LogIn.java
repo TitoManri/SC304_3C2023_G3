@@ -4,8 +4,8 @@
  */
 package Interfaz.Cliente;
 import Interfaz.Administrador.PaginaInicio;
-import Interfaz.Cliente.Ordenes.Ordenes;
 import Personas.Cliente;
+import com.sun.tools.javac.Main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class LogIn extends javax.swing.JFrame {
             x.pack();
             x.setLocationRelativeTo(null); 
         } else if (validarUsuario(usuario, contrasena)){
-            Ordenes x = new Ordenes();
+            MenuInicial x = new MenuInicial();
             x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
@@ -174,7 +174,7 @@ public class LogIn extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
