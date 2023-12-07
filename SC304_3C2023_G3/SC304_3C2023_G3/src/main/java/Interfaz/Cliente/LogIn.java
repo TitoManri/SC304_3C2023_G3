@@ -16,12 +16,22 @@ import javax.swing.JOptionPane;
  */
 public class LogIn extends javax.swing.JFrame {
     
+    private static String usuarioActual;
+    
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Usuarios.txt";
     String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     public LogIn() {
         initComponents();
         setResizable(false);
         this.setLocationRelativeTo(null);
+    }
+
+    public static String getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public static void setUsuarioActual(String usuarioActual) {
+        LogIn.usuarioActual = usuarioActual;
     }
 
     
@@ -116,6 +126,7 @@ public class LogIn extends javax.swing.JFrame {
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
         String usuario = nombreUsuarioTexto.getText();
         String contrasena = contrasenaTexto.getText();
+        setUsuarioActual(usuario);
         if(usuario.equals("Admin") && contrasena.equals("123")){
             PaginaInicio x = new PaginaInicio();
             x.setVisible(true);

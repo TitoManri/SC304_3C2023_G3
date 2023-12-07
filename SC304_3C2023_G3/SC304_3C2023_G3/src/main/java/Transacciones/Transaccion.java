@@ -18,6 +18,12 @@ public class Transaccion {
         this.nombreCliente = "";
     }
 
+    public Transaccion(LocalDateTime fechaHora, String nombreCliente, double montoPagar) {
+        this.fechaHora = fechaHora;
+        this.nombreCliente = nombreCliente;
+        this.montoPagar = montoPagar;
+    }
+
     public LocalDateTime getFechaHora() {
         return fechaHora;
     }

@@ -5,6 +5,7 @@
 package Interfaz.Administrador;
 
 import Interfaz.Administrador.Bebidas.CatalogoBebidas;
+import Interfaz.Administrador.Cajas.Caja;
 import Interfaz.Administrador.Platillos.CatalogoPlatillos;
 import Interfaz.Administrador.Postres.CatalogoPostres;
 import Interfaz.Administrador.Proovedores.CatalogoProvedores;
@@ -35,9 +36,10 @@ public class PaginaInicio extends javax.swing.JFrame {
 
         botonVolver = new javax.swing.JButton();
         botonCatalogoPlatillos = new javax.swing.JButton();
-        botonCatalogoBebidas = new javax.swing.JButton();
+        botonCajas = new javax.swing.JButton();
         botonCatalogoPostres = new javax.swing.JButton();
         botonCatalogoProveedores = new javax.swing.JButton();
+        botonCatalogoBebidas1 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,19 +67,19 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoPlatillosActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 200, 80));
+        getContentPane().add(botonCatalogoPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 200, 80));
 
-        botonCatalogoBebidas.setBackground(new java.awt.Color(255, 255, 255));
-        botonCatalogoBebidas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        botonCatalogoBebidas.setForeground(new java.awt.Color(0, 0, 0));
-        botonCatalogoBebidas.setText("Catalogo Bebidas");
-        botonCatalogoBebidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
-        botonCatalogoBebidas.addActionListener(new java.awt.event.ActionListener() {
+        botonCajas.setBackground(new java.awt.Color(255, 255, 255));
+        botonCajas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCajas.setForeground(new java.awt.Color(0, 0, 0));
+        botonCajas.setText("Cajas");
+        botonCajas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCatalogoBebidasActionPerformed(evt);
+                botonCajasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 200, 80));
+        getContentPane().add(botonCajas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 200, 80));
 
         botonCatalogoPostres.setBackground(new java.awt.Color(255, 255, 255));
         botonCatalogoPostres.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -89,7 +91,7 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoPostresActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoPostres, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 200, 80));
+        getContentPane().add(botonCatalogoPostres, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 200, 80));
 
         botonCatalogoProveedores.setBackground(new java.awt.Color(255, 255, 255));
         botonCatalogoProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -101,7 +103,19 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoProveedoresActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 200, 80));
+        getContentPane().add(botonCatalogoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 200, 80));
+
+        botonCatalogoBebidas1.setBackground(new java.awt.Color(255, 255, 255));
+        botonCatalogoBebidas1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        botonCatalogoBebidas1.setForeground(new java.awt.Color(0, 0, 0));
+        botonCatalogoBebidas1.setText("Catalogo Bebidas");
+        botonCatalogoBebidas1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(77, 130, 188), 3));
+        botonCatalogoBebidas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCatalogoBebidas1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCatalogoBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 200, 80));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/catalogoimagen.png"))); // NOI18N
         fondo.setToolTipText("");
@@ -126,13 +140,13 @@ public class PaginaInicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
     //Boton Catalogo Bebidas
-    private void botonCatalogoBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoBebidasActionPerformed
+    private void botonCajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCajasActionPerformed
         CatalogoBebidas x = new CatalogoBebidas();
         x.setVisible(true);
         x.pack();
         x.setLocationRelativeTo(null); 
         this.dispose();
-    }//GEN-LAST:event_botonCatalogoBebidasActionPerformed
+    }//GEN-LAST:event_botonCajasActionPerformed
     //Boton Catalogo Postres
     private void botonCatalogoPostresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoPostresActionPerformed
         CatalogoPostres x = new CatalogoPostres();
@@ -149,6 +163,14 @@ public class PaginaInicio extends javax.swing.JFrame {
         x.setLocationRelativeTo(null); 
         this.dispose();
     }//GEN-LAST:event_botonCatalogoProveedoresActionPerformed
+
+    private void botonCatalogoBebidas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCatalogoBebidas1ActionPerformed
+        Caja x = new Caja();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_botonCatalogoBebidas1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,7 +208,8 @@ public class PaginaInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCatalogoBebidas;
+    private javax.swing.JButton botonCajas;
+    private javax.swing.JButton botonCatalogoBebidas1;
     private javax.swing.JButton botonCatalogoPlatillos;
     private javax.swing.JButton botonCatalogoPostres;
     private javax.swing.JButton botonCatalogoProveedores;

@@ -25,7 +25,7 @@ public class SignIn extends javax.swing.JFrame {
     String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     private NodoCliente inicio;
     private NodoCliente fin;
-    
+
     public SignIn() {
         initComponents();
         cargarDesdeArchivo();
@@ -139,12 +139,12 @@ public class SignIn extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         LogIn x = new LogIn();
-            x.setVisible(true);
-            x.pack();
-            x.setLocationRelativeTo(null); 
-            this.dispose();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     private void cargarDesdeArchivo() {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -159,7 +159,7 @@ public class SignIn extends javax.swing.JFrame {
             mostrarError("Error al cargar desde el archivo: " + e.getMessage());
         }
     }
-    
+
     public boolean esVaciaCliente() {
         return inicio == null || fin == null;
     }
@@ -200,24 +200,24 @@ public class SignIn extends javax.swing.JFrame {
         worker.execute();
     }//GEN-LAST:event_registroBotonActionPerformed
     private void agregarClienteInBackground(String nombre, String apellidos, String nombreUsuario, String contrasena, String confirmarContrasena) {
-    try {
-        Cliente cliente = new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
-        
-        if (!clienteYaExiste(cliente.getNombreUsuario())) {
-            encolarCliente(cliente);
-            
-            guardarEnArchivo();
-            JOptionPane.showMessageDialog(null, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            mostrarError("El cliente ya existe en la base de datos.");
-        }
+        try {
+            Cliente cliente = new Cliente(nombre, apellidos, nombreUsuario, contrasena, confirmarContrasena, true);
 
-    } catch (HeadlessException e) {
-        mostrarError("Error al agregar los datos del cliente: " + e.getMessage());
+            if (!clienteYaExiste(cliente.getNombreUsuario())) {
+                encolarCliente(cliente);
+
+                guardarEnArchivo();
+                JOptionPane.showMessageDialog(null, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                mostrarError("El cliente ya existe en la base de datos.");
+            }
+
+        } catch (HeadlessException e) {
+            mostrarError("Error al agregar los datos del cliente: " + e.getMessage());
+        }
     }
-}
-    
-     public boolean clienteYaExiste(String nombreUsuario) {
+
+    public boolean clienteYaExiste(String nombreUsuario) {
         NodoCliente aux = inicio;
         while (aux != null) {
             if (aux.getElementoC() != null && aux.getElementoC().getNombreUsuario().equalsIgnoreCase(nombreUsuario)) {
@@ -227,7 +227,7 @@ public class SignIn extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     public void encolarCliente(Cliente cliente) {
         NodoCliente nuevo = new NodoCliente();
         nuevo.setElementoC(cliente);
@@ -240,11 +240,11 @@ public class SignIn extends javax.swing.JFrame {
             fin = nuevo;
         }
     }
-    
-        private Cliente partesCliente(String linea) {
+
+    private Cliente partesCliente(String linea) {
         String[] partes = linea.split(",");
 
-        if (partes.length == 5) { 
+        if (partes.length == 5) {
             String nombre = partes[0].trim();
             String apellidos = partes[1].trim();
             String nombreUsuario = partes[2].trim();
@@ -257,26 +257,41 @@ public class SignIn extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     private void guardarEnArchivo() {
-    try (PrintWriter archivo = new PrintWriter(new FileWriter(rutaArchivo))) {
-        NodoCliente aux = inicio;
-        while (aux != null) {
-            Cliente cliente = aux.getElementoC();
-            if (cliente != null) {
-                archivo.println(formatoCliente(cliente));
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(rutaArchivo))) {
+            NodoCliente aux = inicio;
+            while (aux != null) {
+                Cliente cliente = aux.getElementoC();
+                if (cliente != null) {
+                    archivo.println(formatoCliente(cliente));
+                }
+                aux = aux.getSiguiente();
             }
-            aux = aux.getSiguiente();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
+
+    public String buscarUsuarioEnArchivo(String nombreUsuario) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                Cliente cliente = partesCliente(linea);
+                if (cliente != null && cliente.getNombreUsuario().equals(nombreUsuario)) {
+                    return cliente.getNombre() + " " + cliente.getApellidos();
+                }
+            }
+        } catch (IOException e) {
+            mostrarError("Error al buscar en el archivo de usuarios: " + e.getMessage());
+        }
+        return "";
+    }
 
     private String formatoCliente(Cliente cliente) {
-    return cliente.getNombre() + "," + cliente.getApellidos() + "," + cliente.getNombreUsuario() + "," + cliente.getContrasena() + "," + cliente.getConfirmarContrasena();
-}
-    
+        return cliente.getNombre() + "," + cliente.getApellidos() + "," + cliente.getNombreUsuario() + "," + cliente.getContrasena() + "," + cliente.getConfirmarContrasena();
+    }
+
     //Metodos Mensaje y Error
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -285,7 +300,7 @@ public class SignIn extends javax.swing.JFrame {
     private void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void apellidosTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_apellidosTextoActionPerformed

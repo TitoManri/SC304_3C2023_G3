@@ -25,24 +25,18 @@ public class Arbol {
             return false;
         }
     }
-    
-    /*public void agregarAArbol(Orden orden){
-        Transaccion t = new Transaccion();   
-        t.setFechaHora(orden.getFechaHora());
-        t.setNombreCliente(orden.getCliente().getNombre() + orden.getCliente().getApellidos());
-        t.setMontoPagar(orden.getTotal());
-        
+    public void agregar(Transaccion transaccion) {
         NodoArb nuevo = new NodoArb();
-        nuevo.setTransaccion(t);
-        
+        nuevo.setTransaccion(transaccion);
+
         if (esVacia()) {
             raiz = nuevo;
         } else {
             agregarNuevo(raiz, nuevo);
         }
-    }*/
-    
-    public void agregarNuevo(NodoArb raiz, NodoArb nuevo){
+    }
+
+    private void agregarNuevo(NodoArb raiz, NodoArb nuevo) {
         if (nuevo.getTransaccion().getMontoPagar() <= raiz.getTransaccion().getMontoPagar()) {
             if (raiz.getEnlaceIzq() == null) {
                 raiz.setEnlaceIzq(nuevo);
@@ -77,4 +71,9 @@ public class Arbol {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
+    public NodoArb getRaiz() {
+        return raiz;
+    }
+  
 }

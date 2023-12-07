@@ -4,21 +4,30 @@ import Interfaz.Cliente.Ordenes.MenuComidas;
 import Interfaz.Cliente.Ordenes.NodoProducto;
 import Interfaz.Cliente.Ordenes.Producto;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
- *Clase Transaccion: Clase para confirmar todas las ordenes
+ * Clase Transaccion: Clase para confirmar todas las ordenes
  */
 public class Transaccion extends javax.swing.JFrame {
-DefaultTableModel model;
+
+    DefaultTableModel model;
 
     private static final String ruta = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Orden.txt";
     String rutaArchivo = System.getProperty("user.dir") + "/" + ruta;
     private NodoProducto inicioProductos;
+
+    //archivo transacciones
+    private static final String rutaTr = "SC304_3C2023_G3/src/main/java/BaseDeDatos/Transaccion.txt";
+    String rutaArchivoTr = System.getProperty("user.dir") + "/" + rutaTr;
 
     public Transaccion() {
         initComponents();
@@ -30,8 +39,6 @@ DefaultTableModel model;
     }
 
     //Metodos Iniciales
-    
-    
     private void cargarOrdenDesdeArchivo(String rutaArchivo) {
         try (BufferedReader archivo = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -44,7 +51,6 @@ DefaultTableModel model;
     }
 
     //Cargar Tabla y Actualizar Tabla
-    
     private void procesarLineaOrden(String linea) {
         String[] partes = linea.split(",");
         if (partes.length == 2) {
@@ -85,8 +91,80 @@ DefaultTableModel model;
             model.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
             aux = aux.getSiguiente();
         }
-    } 
+    }
+
+    private String obtenerFecha() {
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String fechaFormateada = fechaHoraActual.format(formatoFechaHora);
+        return fechaFormateada;
+    }
+
+    private void transaccionAArchivo(String clienteNom, double total) {
+        String fecha = obtenerFecha();
+        try {
+            try (FileWriter fileWriter = new FileWriter(rutaArchivoTr, true); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                printWriter.println(clienteNom + "," + total + "," + fecha);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Transaccion.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private double calcularTotal() {
+        double total = 0.0;
+
+        try (BufferedReader archivo = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                total += obtenerPrecioDeLineaOrden(linea);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al calcular el total: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return total;
+    }
+
+    private double obtenerPrecioDeLineaOrden(String linea) {
+        String[] partes = linea.split(",");
+        if (partes.length == 2) {
+            try {
+                return Double.parseDouble(partes[1].trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Error al convertir el precio a double: " + e.getMessage());
+            }
+        }
+        return 0.0;
+    }
+
+    private String clienteNom() {
+        SignIn si = new SignIn();
+        String nombreCliente = si.buscarUsuarioEnArchivo(LogIn.getUsuarioActual());
+        return nombreCliente;
+    }
     
+    private void registrarTransaccion(){
+        String cliente = clienteNom();
+        double total = calcularTotal();
+        if (!cliente.equals("") && total != 0.0) {
+            fechaText.setText(obtenerFecha());
+            clienteText.setText(cliente);
+            totalText.setText(Double.toString(total));
+            transaccionAArchivo(cliente, total);
+            JOptionPane.showMessageDialog(null, "Transacción registrada correctamente", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+          JOptionPane.showMessageDialog(null, "Error al registrar cliente o total en la transacción.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void limpiarArchivoOrden() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar el archivo de orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -235,15 +313,16 @@ DefaultTableModel model;
 
     //Boton para pagar orden
     private void pagarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarOrdenActionPerformed
-        // TODO add your handling code here:
+        registrarTransaccion();
+        limpiarArchivoOrden();
     }//GEN-LAST:event_pagarOrdenActionPerformed
     //Boton para volver a Menu Comidas
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         MenuComidas x = new MenuComidas();
-            x.setVisible(true);
-            x.pack();
-            x.setLocationRelativeTo(null); 
-            this.dispose();
+        x.setVisible(true);
+        x.pack();
+        x.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
     public static void main(String args[]) {
