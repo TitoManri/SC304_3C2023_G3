@@ -58,7 +58,7 @@ public class LogIn extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombreUsuarioTexto.setBackground(new java.awt.Color(245, 222, 180));
-        nombreUsuarioTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        nombreUsuarioTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         nombreUsuarioTexto.setForeground(new java.awt.Color(0, 0, 0));
         nombreUsuarioTexto.setBorder(null);
         nombreUsuarioTexto.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class LogIn extends javax.swing.JFrame {
         getContentPane().add(nombreUsuarioTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 410, 40));
 
         contrasenaTexto.setBackground(new java.awt.Color(245, 222, 180));
-        contrasenaTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        contrasenaTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         contrasenaTexto.setForeground(new java.awt.Color(0, 0, 0));
         contrasenaTexto.setBorder(null);
         contrasenaTexto.addActionListener(new java.awt.event.ActionListener() {

@@ -1,3 +1,0 @@
-jugo naranja,500
-coca cola,5000
-pepsi,1000

@@ -250,6 +250,9 @@ public class Transaccion extends javax.swing.JFrame {
         jLabel6.setText("Lista de la Orden");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 150, 210, 20));
 
+        volver.setBackground(new java.awt.Color(0, 0, 102));
+        volver.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        volver.setForeground(new java.awt.Color(255, 255, 255));
         volver.setText("Volver a Menu Orden");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,14 +261,18 @@ public class Transaccion extends javax.swing.JFrame {
         });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 300, 50));
 
+        pagarOrden.setBackground(new java.awt.Color(0, 0, 102));
+        pagarOrden.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        pagarOrden.setForeground(new java.awt.Color(255, 255, 255));
         pagarOrden.setText("Pagar Orden");
         pagarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pagarOrdenActionPerformed(evt);
             }
         });
-        getContentPane().add(pagarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 130, 50));
+        getContentPane().add(pagarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 200, 50));
 
+        tabla.setBackground(new java.awt.Color(60, 63, 65));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

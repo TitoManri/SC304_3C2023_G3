@@ -1,5 +1,4 @@
-cola loca,Gaseosas,2500
-coca cola,Gaseosas,5000
-pepsi,Gaseosas,1000
-te frio,Otras Bebidas,2500
-jugo naranja,Jugos Naturales,500
+Coca Cola,Gaseosas,1500
+Fresco de frutas,Jugos Naturales,1000
+Agua Embotellada,Otras Bebidas,200
+Vodka,Licores,1500

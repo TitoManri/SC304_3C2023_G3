@@ -135,7 +135,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 430, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 430, -1));
 
         buttonGroup1.add(otrasBebidasRadioButton);
         otrasBebidasRadioButton.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -181,7 +181,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         });
         getContentPane().add(licoresRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
-        limpiar.setBackground(new java.awt.Color(45, 62, 80));
+        limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +191,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         });
         getContentPane().add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 160, 40));
 
-        agregarBebida.setBackground(new java.awt.Color(45, 62, 80));
+        agregarBebida.setBackground(new java.awt.Color(7, 0, 63));
         agregarBebida.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarBebida.setText("Agregar Bebida");
         agregarBebida.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         });
         getContentPane().add(agregarBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 160, 40));
 
-        editarBebida.setBackground(new java.awt.Color(45, 62, 80));
+        editarBebida.setBackground(new java.awt.Color(7, 0, 63));
         editarBebida.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarBebida.setText("Editar Bebida");
         editarBebida.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
         });
         getContentPane().add(editarBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, 150, 50));
 
-        volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
+        volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
                 volverPantallaPrincipalActionPerformed(evt);
             }
         });
-        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 300, 60));
+        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 300, 40));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarBebidas.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

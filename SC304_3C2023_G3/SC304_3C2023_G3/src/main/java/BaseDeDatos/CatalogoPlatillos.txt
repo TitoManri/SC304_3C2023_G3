@@ -1,3 +1,6 @@
-holasda,Ensaladas,dasda,1000
-holasdaaa,Ensaladas,dasda,1000
-holasdaaafdfdf,Ensaladas,dasda,1000
+Lasagna,Tomate y pollo,xxxx,10000
+Carne,Platos Fuertes,En salsa,3000
+Nuggets,Platos Fuertes,De pollo con papas a la francesa,3000
+Ensalada Cesar,Ensaladas,Lechuga y Crotones,1500
+Sopa Azteca,Sopas,Tomate,4000
+Patacones,Entradas,Platano,500

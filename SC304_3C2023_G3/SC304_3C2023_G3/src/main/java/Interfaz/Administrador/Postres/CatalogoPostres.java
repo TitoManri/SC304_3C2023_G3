@@ -94,7 +94,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
         nombrePostreTexto.setBorder(null);
         getContentPane().add(nombrePostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 340, 20));
 
-        limpiar.setBackground(new java.awt.Color(45, 62, 80));
+        limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +104,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
         });
         getContentPane().add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 160, 40));
 
-        agregarPostre.setBackground(new java.awt.Color(45, 62, 80));
+        agregarPostre.setBackground(new java.awt.Color(7, 0, 63));
         agregarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarPostre.setText("Agregar Postre");
         agregarPostre.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 430, 400));
 
-        editarPostre.setBackground(new java.awt.Color(45, 62, 80));
+        editarPostre.setBackground(new java.awt.Color(7, 0, 63));
         editarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarPostre.setText("Editar Postre");
         editarPostre.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
         });
         getContentPane().add(editarPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 150, 40));
 
-        volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
+        volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
                 volverPantallaPrincipalActionPerformed(evt);
             }
         });
-        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, 300, 60));
+        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 530, 300, 40));
 
         ingredientesPostreTexto.setBackground(new java.awt.Color(7, 0, 63));
         ingredientesPostreTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N

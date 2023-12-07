@@ -51,7 +51,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        limpiar.setBackground(new java.awt.Color(45, 62, 80));
+        limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +61,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         });
         getContentPane().add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 160, 40));
 
-        volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
+        volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -69,9 +69,9 @@ public class CatalogoProvedores extends javax.swing.JFrame {
                 volverPantallaPrincipalActionPerformed(evt);
             }
         });
-        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, 300, 60));
+        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 530, 300, 40));
 
-        agregarProveedores.setBackground(new java.awt.Color(45, 62, 80));
+        agregarProveedores.setBackground(new java.awt.Color(7, 0, 63));
         agregarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarProveedores.setText("Agregar Proveedores");
         agregarProveedores.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +81,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
         });
         getContentPane().add(agregarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 200, 40));
 
-        editarProveedores.setBackground(new java.awt.Color(45, 62, 80));
+        editarProveedores.setBackground(new java.awt.Color(7, 0, 63));
         editarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarProveedores.setText("Editar Proveedores");
         editarProveedores.addActionListener(new java.awt.event.ActionListener() {

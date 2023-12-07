@@ -1,7 +1,4 @@
-a,a,Dulce,1000
-aa,a,Dulce,1000
-aaaaaa,Salado,a,1000
-asdas,dadsasd,Dulce,1000
-chiasd,Salado,asdasd,19000
-picha,a,Dulce,1000
-pichasasas,a,Dulce,1000
+Pastel,Chocolate,Dulce,1500
+Pastel,Chocolate,Dulce,1500
+Crepas,Pollo,Salado,7000
+Crepas,Pollo,Salado,7000

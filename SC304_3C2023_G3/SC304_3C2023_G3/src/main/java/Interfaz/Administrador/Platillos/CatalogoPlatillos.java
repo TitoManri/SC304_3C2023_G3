@@ -122,7 +122,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         nombrePlatilloTexto.setBorder(null);
         getContentPane().add(nombrePlatilloTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 340, 20));
 
-        limpiar.setBackground(new java.awt.Color(45, 62, 80));
+        limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 430, 400));
 
-        agregarPlatillo.setBackground(new java.awt.Color(45, 62, 80));
+        agregarPlatillo.setBackground(new java.awt.Color(7, 0, 63));
         agregarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
         agregarPlatillo.setText("Agregar Platillo");
         agregarPlatillo.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +267,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         });
         getContentPane().add(agregarPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 160, 40));
 
-        editarPlatillo.setBackground(new java.awt.Color(45, 62, 80));
+        editarPlatillo.setBackground(new java.awt.Color(7, 0, 63));
         editarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         editarPlatillo.setText("Editar Platillo");
         editarPlatillo.addActionListener(new java.awt.event.ActionListener() {
@@ -277,7 +277,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         });
         getContentPane().add(editarPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 550, 150, 40));
 
-        volverPantallaPrincipal.setBackground(new java.awt.Color(45, 62, 80));
+        volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +285,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
                 volverPantallaPrincipalActionPerformed(evt);
             }
         });
-        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 300, 60));
+        getContentPane().add(volverPantallaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 520, 300, 40));
 
         ingredientesPlatilloTexto.setBackground(new java.awt.Color(7, 0, 63));
         ingredientesPlatilloTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N

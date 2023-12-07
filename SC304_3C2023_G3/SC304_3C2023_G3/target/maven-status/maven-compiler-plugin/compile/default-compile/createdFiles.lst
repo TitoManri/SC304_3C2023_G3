@@ -1,13 +1,16 @@
 Interfaz/Administrador/Platillos/CatalogoPlatillos$4.class
+Interfaz/Administrador/Cajas/Caja.class
 Interfaz/Cliente/SignIn.class
 Interfaz/Cliente/Ordenes/AgregarBebCliente$2.class
 Interfaz/Cliente/LogIn$3.class
 Interfaz/Cliente/Ordenes/EliminarProducto$5.class
 Interfaz/Cliente/Ordenes/AgregarPostCliente$1.class
+Interfaz/Administrador/Cajas/Caja$1.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$6.class
 Interfaz/Cliente/Ordenes/MenuComidas$5.class
 Interfaz/Cliente/Transaccion$5.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$7.class
+Interfaz/Administrador/Cajas/Caja$4.class
 Interfaz/Administrador/Postres/CatalogoPostres$1.class
 Catalogo/Nodos/NodoPlatillo.class
 Interfaz/Administrador/PaginaInicio$6.class
@@ -53,10 +56,12 @@ Interfaz/Cliente/SignIn$1.class
 Interfaz/Cliente/Transaccion$2.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$4.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$1.class
+Interfaz/Administrador/Cajas/Caja$5.class
 Interfaz/Cliente/SignIn$7.class
 Interfaz/Administrador/Postres/CatalogoPostres.class
 Interfaz/Cliente/Ordenes/AgregarBebCliente$4.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$7.class
+Interfaz/Administrador/PaginaInicio$7.class
 Interfaz/Cliente/Transaccion$1.class
 Catalogo/Platillo/Platillo.class
 Transacciones/Arbol.class
@@ -86,6 +91,7 @@ Interfaz/Cliente/SignIn$6.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$8.class
 Interfaz/Administrador/Postres/CatalogoPostres$5.class
 Interfaz/Cliente/Transaccion$4.class
+Interfaz/Administrador/Cajas/Caja$3.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$4.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas.class
 Interfaz/Cliente/Ordenes/AgregarPostCliente$3.class
@@ -111,6 +117,7 @@ Interfaz/Administrador/Bebidas/CatalogoBebidas$8.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$5.class
 Interfaz/Cliente/Ordenes/AgregarBebCliente$1.class
 Interfaz/Administrador/Postres/CatalogoPostres$7.class
+Interfaz/Administrador/Cajas/Caja$2.class
 Interfaz/Cliente/MenuInicial$3.class
 Interfaz/Cliente/Ordenes/MenuComidas$7.class
 Interfaz/Cliente/Ordenes/AgregarPlatCliente$3.class

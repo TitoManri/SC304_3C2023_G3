@@ -67,7 +67,7 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoPlatillosActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 200, 80));
+        getContentPane().add(botonCatalogoPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 200, 80));
 
         botonCajas.setBackground(new java.awt.Color(255, 255, 255));
         botonCajas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -91,7 +91,7 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoPostresActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoPostres, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 200, 80));
+        getContentPane().add(botonCatalogoPostres, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 200, 80));
 
         botonCatalogoProveedores.setBackground(new java.awt.Color(255, 255, 255));
         botonCatalogoProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -103,7 +103,7 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoProveedoresActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 200, 80));
+        getContentPane().add(botonCatalogoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 200, 80));
 
         botonCatalogoBebidas1.setBackground(new java.awt.Color(255, 255, 255));
         botonCatalogoBebidas1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -115,7 +115,7 @@ public class PaginaInicio extends javax.swing.JFrame {
                 botonCatalogoBebidas1ActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCatalogoBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 200, 80));
+        getContentPane().add(botonCatalogoBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 80));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/catalogoimagen.png"))); // NOI18N
         fondo.setToolTipText("");
