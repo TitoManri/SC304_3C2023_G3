@@ -3,13 +3,9 @@ package Interfaz.Cliente.Ordenes;
 import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
 import javax.swing.table.DefaultTableModel;
-import java.awt.HeadlessException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *Clase AgregarPlatCliente: Esta clase funciona para agregar platillos dentro del Catalogo Platillos en una orden como cliente
@@ -39,24 +35,37 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
 
      //Metodos Iniciales
     private void cargarDesdeArchivo() {
-        inicioPlatillo = null;
-
         try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
             String linea;
             while ((linea = archivo.readLine()) != null) {
                 Platillo platillo = partesPlatillo(linea);
                 if (platillo != null) {
-                    agregarPlatillo(platillo);
+                    inicioPlatillo = agregarPlatillo(inicioPlatillo, platillo);
                 }
             }
 
             if (inicioPlatillo != null) {
                 llenarTabla();
-            } 
-
+            }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error loading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private NodoPlatillo agregarPlatillo(NodoPlatillo inicio, Platillo platillo) {
+        NodoPlatillo nuevoNodo = new NodoPlatillo();
+        nuevoNodo.setPlatillo(platillo);
+
+        if (inicio == null) {
+            inicio = nuevoNodo;
+            nuevoNodo.setSiguiente(nuevoNodo);
+        } else {
+            nuevoNodo.setSiguiente(inicio.getSiguiente());
+            inicio.setSiguiente(nuevoNodo);
+            inicio = nuevoNodo;
+        }
+
+        return inicio;
     }
     
     private void llenarTabla() {
@@ -181,8 +190,8 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     private void agregarPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatActionPerformed
     String nombrePlatillo = nombrePlatText.getText();
 
-    if (platilloExisteEnCatalogo(nombrePlatillo)) {
-        JOptionPane.showMessageDialog(this, "El platillo ya existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
+    if (!platilloExisteEnCatalogo(nombrePlatillo)) {
+        JOptionPane.showMessageDialog(this, "El platillo ya existe en la orden.", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
         Platillo platillo = obtenerPlatilloPorNombre(nombrePlatillo);
 
@@ -212,60 +221,22 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
                 return null;
             }
         } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
+            JOptionPane.showMessageDialog(null, "Error al convertir el precio a un número.", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
     
-    private void agregarPlatillo(Platillo platillo) {
-        try {
-            if (!platilloYaExiste(platillo.getNombre())) {
-                NodoPlatillo nuevoNodo = new NodoPlatillo();
-                nuevoNodo.setPlatillo(platillo);
-
-                if (inicioPlatillo == null) {
-                    inicioPlatillo = nuevoNodo;
-                } else {
-                    NodoPlatillo aux = inicioPlatillo;
-                    while (aux.getSiguiente() != null) {
-                        aux = aux.getSiguiente();
-                    }
-                    aux.setSiguiente(nuevoNodo);
-                }
-            } else {
-                mostrarError("El platillo ya existe en el catálogo.");
-            }
-
-        } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
-        } catch (HeadlessException e) {
-            mostrarError("Error al agregar los datos: " + e.getMessage());
-        }
-    }
-    
-    private boolean platilloYaExiste(String nombre) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombre)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
-        }
-        return false;
-    }
-    
-    
-    
+        
     private boolean platilloExisteEnCatalogo(String nombrePlatillo) {
-        NodoPlatillo aux = inicioPlatillo;
-        while (aux != null) {
-            if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
+    NodoPlatillo aux = inicioPlatillo;
+    while (aux != null) {
+        if (aux.getPlatillo().getNombre().equalsIgnoreCase(nombrePlatillo)) {
+            return true;
         }
-        return false;
+        aux = aux.getSiguiente();
     }
+    return false;
+}
     
     private Platillo obtenerPlatilloPorNombre(String nombrePlatillo) {
         NodoPlatillo aux = inicioPlatillo;
@@ -291,7 +262,9 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
         try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.println(nombre + "," + precio);
+            printWriter.flush(); // Flush changes to the file
         }
+        JOptionPane.showMessageDialog(null, "Platillo agregado a la orden.");
     } catch (IOException e) {
         JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -304,6 +277,7 @@ public class AgregarPlatCliente extends javax.swing.JFrame {
     //Volver a Menu Comidas
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         MenuComidas x = new MenuComidas();
+            x.setVisible(true);
             x.pack();
             x.setLocationRelativeTo(null); 
             this.dispose();

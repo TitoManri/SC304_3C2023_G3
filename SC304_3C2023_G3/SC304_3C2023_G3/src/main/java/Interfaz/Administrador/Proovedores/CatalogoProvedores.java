@@ -8,7 +8,7 @@ import Catalogo.Nodos.NodoProvedores;
 import Catalogo.Provedores.Provedores;
 import Interfaz.Administrador.PaginaInicio;
 import java.io.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,6 +53,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
 
         limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        limpiar.setForeground(new java.awt.Color(255, 255, 255));
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +64,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        volverPantallaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +75,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
 
         agregarProveedores.setBackground(new java.awt.Color(7, 0, 63));
         agregarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        agregarProveedores.setForeground(new java.awt.Color(255, 255, 255));
         agregarProveedores.setText("Agregar Proveedores");
         agregarProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +86,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
 
         editarProveedores.setBackground(new java.awt.Color(7, 0, 63));
         editarProveedores.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        editarProveedores.setForeground(new java.awt.Color(255, 255, 255));
         editarProveedores.setText("Editar Proveedores");
         editarProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +235,7 @@ public class CatalogoProvedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed

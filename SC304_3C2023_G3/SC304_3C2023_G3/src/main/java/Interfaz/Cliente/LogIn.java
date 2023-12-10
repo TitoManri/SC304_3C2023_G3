@@ -5,11 +5,8 @@
 package Interfaz.Cliente;
 import Interfaz.Administrador.PaginaInicio;
 import Personas.Cliente;
-import com.sun.tools.javac.Main;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JOptionPane;
+import java.io.*;
+import javax.swing.*;
 /**
  *
  * @author manri

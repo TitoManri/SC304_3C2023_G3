@@ -9,9 +9,7 @@ import Catalogo.Postres.Postre;
 import Interfaz.Administrador.PaginaInicio;
 import java.awt.*;
 import java.io.*;
-import javax.swing.ButtonModel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,12 +25,13 @@ public class CatalogoPostres extends javax.swing.JFrame {
     String RUTA_ARCHIVO_POSTRES = System.getProperty("user.dir") + "/" + ruta; 
     public CatalogoPostres() {
         initComponents();
+        llenarTabla();
         cargarDesdeArchivo();
         buttonGroup1.add(dulceRadioButton);
         buttonGroup1.add(saladoRadioButton);
         dulceRadioButton.setActionCommand("Dulce");
         saladoRadioButton.setActionCommand("Salado");
-        llenarTabla();
+        
 
     }
 
@@ -41,11 +40,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
     }
     
     public boolean esVaciaPostres(){
-        if (inicioPostre == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return inicioPostre == null;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,10 +87,16 @@ public class CatalogoPostres extends javax.swing.JFrame {
         nombrePostreTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nombrePostreTexto.setForeground(new java.awt.Color(255, 255, 255));
         nombrePostreTexto.setBorder(null);
+        nombrePostreTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePostreTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombrePostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 340, 20));
 
         limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        limpiar.setForeground(new java.awt.Color(255, 255, 255));
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
 
         agregarPostre.setBackground(new java.awt.Color(7, 0, 63));
         agregarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        agregarPostre.setForeground(new java.awt.Color(255, 255, 255));
         agregarPostre.setText("Agregar Postre");
         agregarPostre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,11 +220,11 @@ public class CatalogoPostres extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Categoria", "Ingredientes", "Precio"
+                "Nombres", "Ingredientes", "Categorias", "Precios"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -241,6 +243,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
 
         editarPostre.setBackground(new java.awt.Color(7, 0, 63));
         editarPostre.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        editarPostre.setForeground(new java.awt.Color(255, 255, 255));
         editarPostre.setText("Editar Postre");
         editarPostre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,6 +254,7 @@ public class CatalogoPostres extends javax.swing.JFrame {
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        volverPantallaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,11 +267,21 @@ public class CatalogoPostres extends javax.swing.JFrame {
         ingredientesPostreTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         ingredientesPostreTexto.setForeground(new java.awt.Color(255, 255, 255));
         ingredientesPostreTexto.setBorder(null);
+        ingredientesPostreTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingredientesPostreTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(ingredientesPostreTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 288, 340, 20));
 
         precioPostre.setBackground(new java.awt.Color(7, 0, 63));
         precioPostre.setForeground(new java.awt.Color(255, 255, 255));
         precioPostre.setBorder(null);
+        precioPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioPostreActionPerformed(evt);
+            }
+        });
         getContentPane().add(precioPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 120, 30));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarPostres.png"))); // NOI18N
@@ -281,7 +295,9 @@ public class CatalogoPostres extends javax.swing.JFrame {
     }//GEN-LAST:event_dulceRadioButtonActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
+        nombrePostreTexto.setText("");
+        ingredientesPostreTexto.setText("");
+        precioPostre.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
@@ -298,17 +314,17 @@ public class CatalogoPostres extends javax.swing.JFrame {
     try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO_POSTRES))) {
         String linea;
         while ((linea = archivo.readLine()) != null) {
-            Postre bebida = partesPostre(linea);
-            if (bebida != null) {
-                finPostre = agregarNodo(finPostre, bebida);
+            Postre postre = partesPostre(linea);
+            if (postre != null && !postreYaExiste(postre.getNombre())) {
+                finPostre = agregarNodo(finPostre, postre);
                 if (inicioPostre == null) {
-                    inicioPostre= finPostre;
+                    inicioPostre = finPostre;
                 }
             }
         }
 
         if (finPostre != null) {
-           llenarTabla();
+            llenarTabla();
         }
 
     } catch (IOException e) {
@@ -316,23 +332,35 @@ public class CatalogoPostres extends javax.swing.JFrame {
     }
 }
     private void llenarTabla() {
-            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-            model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        model.setRowCount(0);
 
+        if (inicioPostre != null) {
             NodoPostre aux = inicioPostre;
+
             do {
-                if (aux != null) {
-                    Postre postre = aux.getPostre();
-                    if (postre != null) {
-                        model.addRow(new Object[]{postre.getNombre(), postre.getCategoria(), postre.getDescripcion(),postre.getPrecio()});
-                    } else {
+                Postre postre = aux.getPostre();
+                if (postre != null) {
+                    String nombrePostre = postre.getNombre();
+
+                    if (!existeNombreEnTabla(model, nombrePostre)) {
+                        model.addRow(new Object[]{postre.getNombre(), postre.getCategoria(), postre.getDescripcion(), postre.getPrecio()});
                     }
-                } else {
-                    break;
                 }
                 aux = aux.getSiguiente();
             } while (aux != inicioPostre);
         }
+    }
+    private boolean existeNombreEnTabla(DefaultTableModel model, String nombre) {
+        int rowCount = model.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            if (model.getValueAt(i, 0).equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Metodos para Agregar
     
     private void agregarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPostreActionPerformed
@@ -364,51 +392,53 @@ public class CatalogoPostres extends javax.swing.JFrame {
     worker.execute();
     }//GEN-LAST:event_agregarPostreActionPerformed
 
-    private void agregarPostreInBackground(String nombrePostre,String descripcion, String categoria, String precio) {
-        try {
-            if (nombrePostre.isEmpty() || categoria.isEmpty() || precio.isEmpty()) {
-                mostrarError("Alguno de los campos requeridos no fue completado.");
-                return;
-            }
-
-            if (postreYaExiste(nombrePostre)) {
-                mostrarError("Ya existe un postre con el mismo nombre.");
-                return;
-            }
-
-            Postre postre = new Postre(nombrePostre, descripcion ,categoria,precio);
-            NodoPostre nuevoNodo = new NodoPostre();
-            nuevoNodo.setPostre(postre);
-
-            if (finPostre == null) {
-                finPostre = nuevoNodo;
-                inicioPostre = nuevoNodo;
-                nuevoNodo.setSiguiente(nuevoNodo);
-            } else {
-                nuevoNodo.setSiguiente(finPostre.getSiguiente());
-                finPostre.setSiguiente(nuevoNodo);
-                finPostre = nuevoNodo;
-            }
-
-            finPostre = agregarNodo(finPostre, postre);
-
-            try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO_POSTRES, true))) {
-                archivo.println(formatoPostre(postre));
-            } catch (IOException e) {
-                mostrarError("Error al guardar en el archivo: " + e.getMessage());
-            }
-
-            guardarListaEnArchivo(inicioPostre);
-            llenarTabla();
-            JOptionPane.showMessageDialog(null, "Postre agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (NumberFormatException e) {
-            mostrarError("Error al convertir el precio a un número.");
-        } catch (HeadlessException e) {
-            mostrarError("Error al agregar los datos: " + e.getMessage());
-        }
-    }
     
+private void agregarPostreInBackground(String nombrePostre, String descripcion, String categoria, String precio) {
+    try {
+        if (nombrePostre.isEmpty() || categoria.isEmpty() || precio.isEmpty()) {
+            mostrarError("Alguno de los campos requeridos no fue completado.");
+            return;
+        }
+
+        if (postreYaExiste(nombrePostre)) {
+            mostrarError("Ya existe un postre con el mismo nombre.");
+            return;
+        }
+
+        Postre postre = new Postre(nombrePostre, descripcion, categoria, precio);
+        NodoPostre nuevoNodo = new NodoPostre();
+        nuevoNodo.setPostre(postre);
+
+        if (finPostre == null) {
+            finPostre = nuevoNodo;
+            inicioPostre = nuevoNodo;
+        } else {
+            nuevoNodo.setSiguiente(finPostre.getSiguiente());
+            finPostre.setSiguiente(nuevoNodo);
+            finPostre = nuevoNodo;
+        }
+
+        finPostre = agregarNodo(finPostre, postre);
+
+        try (PrintWriter archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO_POSTRES, true))) {
+            archivo.println(formatoPostre(postre));
+        } catch (IOException e) {
+            mostrarError("Error al guardar en el archivo: " + e.getMessage());
+        }
+
+        guardarListaEnArchivo(inicioPostre);
+        llenarTabla();
+        nombrePostreTexto.setText("");
+        ingredientesPostreTexto.setText("");
+        precioPostre.setText("");
+        JOptionPane.showMessageDialog(null, "Postre agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (NumberFormatException e) {
+        mostrarError("Error al convertir el precio a un número.");
+    } catch (HeadlessException e) {
+        mostrarError("Error al agregar los datos: " + e.getMessage());
+    }
+}
     private boolean postreYaExiste(String nombre) {
         NodoPostre aux = inicioPostre;
         while (aux != finPostre) {
@@ -469,6 +499,18 @@ public class CatalogoPostres extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_editarPostreActionPerformed
+
+    private void nombrePostreTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePostreTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrePostreTextoActionPerformed
+
+    private void ingredientesPostreTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingredientesPostreTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingredientesPostreTextoActionPerformed
+
+    private void precioPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioPostreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioPostreActionPerformed
    
     public NodoPostre buscarPostre(String nombre) {
         NodoPostre aux = inicioPostre;
@@ -495,28 +537,46 @@ public class CatalogoPostres extends javax.swing.JFrame {
     //Metodos para guardar en el Archivo
     
     private void guardarListaEnArchivo(NodoPostre inicio) {
-        PrintWriter archivo = null;
-        try {
-            archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO_POSTRES));
+    String[] nombresGuardados = new String[100]; 
 
-            NodoPostre aux = inicio;
-            do {
-                Postre bebida = aux.getPostre();
-                if (bebida != null) {
-                    archivo.println(formatoPostre(bebida));
-                } else {
-                    System.out.println("Advertencia: Se encontró un nodo con bebida nula.");
+    PrintWriter archivo = null;
+    int index = 0;
+
+    try {
+        archivo = new PrintWriter(new FileWriter(RUTA_ARCHIVO_POSTRES));
+
+        NodoPostre aux = inicio;
+        do {
+            Postre postre = aux.getPostre();
+            if (postre != null) {
+                String nombrePostre = postre.getNombre();
+
+                
+                if (!contieneNombre(nombresGuardados, index, nombrePostre)) {
+                    archivo.println(formatoPostre(postre));
+                    nombresGuardados[index++] = nombrePostre;
                 }
-                aux = aux.getSiguiente();
-            } while (aux != inicio);
-        } catch (IOException e) {
-            mostrarError("Error al guardar en el archivo: " + e.getMessage());
-        } finally {
-            if (archivo != null) {
-                archivo.close();
+            } else {
             }
+            aux = aux.getSiguiente();
+        } while (aux != inicio);
+    } catch (IOException e) {
+        mostrarError("Error al guardar en el archivo: " + e.getMessage());
+    } finally {
+        if (archivo != null) {
+            archivo.close();
         }
     }
+}
+    
+    private boolean contieneNombre(String[] nombres, int index, String nombre) {
+    for (int i = 0; i < index; i++) {
+        if (nombre.equals(nombres[i])) {
+            return true; 
+        }
+    }
+    return false;
+}
 
 
 

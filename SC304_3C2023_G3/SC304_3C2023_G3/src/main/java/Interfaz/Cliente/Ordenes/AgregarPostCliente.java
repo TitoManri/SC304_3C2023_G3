@@ -2,12 +2,8 @@ package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Nodos.NodoPostre;
 import Catalogo.Postres.Postre;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
+import java.io.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,46 +35,47 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     
     //Metodos Iniciales
     
-    private void cargarDesdeArchivo() {
-    try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO_POSTRES))) {
-        String linea;
-        while ((linea = archivo.readLine()) != null) {
-            Postre bebida = partesPostre(linea);
-            if (bebida != null) {
-                finPostre = agregarNodo(finPostre, bebida);
-                if (inicioPostre == null) {
-                    inicioPostre= finPostre;
+     private void cargarDesdeArchivo() {
+        try (BufferedReader archivo = new BufferedReader(new FileReader(RUTA_ARCHIVO_POSTRES))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                Postre postre = partesPostre(linea);
+                if (postre != null) {
+                    finPostre = agregarNodo(finPostre, postre);
+                    if (inicioPostre == null) {
+                        inicioPostre = finPostre;
+                    }
                 }
             }
-        }
 
-        if (finPostre != null) {
-           llenarTabla();
-        }
+            if (finPostre != null) {
+                llenarTabla();
+            }
 
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
+     
     private void llenarTabla() {
-            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-            model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        model.setRowCount(0);
 
-            NodoPostre aux = inicioPostre;
-            do {
-                if (aux != null) {
-                    Postre postre = aux.getPostre();
-                    if (postre != null) {
-                        model.addRow(new Object[]{postre.getNombre(), postre.getCategoria(), postre.getDescripcion(),postre.getPrecio()});
-                    } else {
-                    }
-                } else {
-                    break;
+        NodoPostre aux = inicioPostre;
+        do {
+            if (aux != null) {
+                Postre postre = aux.getPostre();
+                if (postre != null) {
+                    model.addRow(new Object[] { postre.getNombre(), postre.getDescripcion(), postre.getCategoria(),
+                            postre.getPrecio() });
                 }
-                aux = aux.getSiguiente();
-            } while (aux != inicioPostre);
-        }
-    
+            } else {
+                break;
+            }
+            aux = aux.getSiguiente();
+        } while (aux != inicioPostre);
+    }
     
    
     
@@ -157,7 +154,7 @@ public class AgregarPostCliente extends javax.swing.JFrame {
     private void AgregarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPostActionPerformed
     String nombrePostre = postNomText.getText();
 
-    if (postreExisteEnCatalogo(nombrePostre)) {
+    if (!postreExisteEnCatalogo(nombrePostre)) {
         JOptionPane.showMessageDialog(this, "El postre ya existe en el catálogo.", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
         Postre postre = obtenerPostrePorNombre(nombrePostre);
@@ -184,6 +181,8 @@ public class AgregarPostCliente extends javax.swing.JFrame {
         }
         return false;
     }
+    
+    
     private Postre obtenerPostrePorNombre(String nombrePostre) {
            NodoPostre aux = inicioPostre;
 
@@ -249,15 +248,17 @@ public class AgregarPostCliente extends javax.swing.JFrame {
    
     //Metodo para guardar la orden
     private void guardarOrden(String nombre, String precio) {
-    try {
-        try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true);
-             PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            printWriter.println(nombre + "," + precio);
+        try {
+            try (FileWriter fileWriter = new FileWriter(rutaArchivoOrden, true);
+                    PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                printWriter.println(nombre + "," + precio);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al guardar en el archivo Orden.txt: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -4,12 +4,8 @@
 package Interfaz.Cliente.Ordenes;
 
 import Interfaz.Cliente.Transaccion;
-import javax.swing.JOptionPane;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,6 +107,7 @@ public class EliminarProducto extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 380, -1));
 
         nombreText.setBackground(new java.awt.Color(0, 0, 49));
+        nombreText.setForeground(new java.awt.Color(255, 255, 255));
         nombreText.setBorder(null);
         nombreText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

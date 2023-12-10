@@ -2,12 +2,8 @@ package Interfaz.Cliente.Ordenes;
 
 import Catalogo.Bebidas.Bebida;
 import Catalogo.Nodos.NodoBebida;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
+import java.io.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**

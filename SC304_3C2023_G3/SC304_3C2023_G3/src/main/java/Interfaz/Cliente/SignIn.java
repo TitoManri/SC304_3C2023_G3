@@ -7,13 +7,8 @@ package Interfaz.Cliente;
 import Personas.Cliente;
 import Personas.NodoCliente;
 import java.awt.HeadlessException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *

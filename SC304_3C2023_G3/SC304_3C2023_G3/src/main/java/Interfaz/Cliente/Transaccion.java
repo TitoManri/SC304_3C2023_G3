@@ -3,15 +3,12 @@ package Interfaz.Cliente;
 import Interfaz.Cliente.Ordenes.MenuComidas;
 import Interfaz.Cliente.Ordenes.NodoProducto;
 import Interfaz.Cliente.Ordenes.Producto;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
+import java.io.*;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -272,7 +269,9 @@ public class Transaccion extends javax.swing.JFrame {
         });
         getContentPane().add(pagarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 200, 50));
 
-        tabla.setBackground(new java.awt.Color(60, 63, 65));
+        tabla.setBackground(new java.awt.Color(102, 102, 102));
+        tabla.setFont(tabla.getFont().deriveFont(tabla.getFont().getSize()+3f));
+        tabla.setForeground(new java.awt.Color(255, 255, 255));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -292,6 +291,9 @@ public class Transaccion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.setGridColor(new java.awt.Color(204, 204, 204));
+        tabla.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        tabla.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
             tabla.getColumnModel().getColumn(0).setResizable(false);

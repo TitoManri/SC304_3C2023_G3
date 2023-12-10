@@ -3,8 +3,7 @@ package Interfaz.Cliente.Ordenes;
 /*
  *Clase Menu Comidas: Conexión para agregar los diferente productos
  */
-
-
+import Interfaz.Cliente.MenuInicial;
 import Interfaz.Cliente.Transaccion;
 
 public class MenuComidas extends javax.swing.JFrame {
@@ -128,7 +127,11 @@ public class MenuComidas extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarProductoActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        //volver al menú 
+        MenuInicial x = new MenuInicial();
+            x.setVisible(true);
+            x.pack();
+            x.setLocationRelativeTo(null); 
+            this.dispose(); 
     }//GEN-LAST:event_volverActionPerformed
 
     private void terminarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarOrdenActionPerformed

@@ -1,4 +1,4 @@
-Pastel,Chocolate,Dulce,1500
-Pastel,Chocolate,Dulce,1500
-Crepas,Pollo,Salado,7000
-Crepas,Pollo,Salado,7000
+Pastel,Chocolate,Dulce,1000
+QueQue,De Vainilla,Dulce,1000
+Chocolate,Dulce,Con leche,500
+

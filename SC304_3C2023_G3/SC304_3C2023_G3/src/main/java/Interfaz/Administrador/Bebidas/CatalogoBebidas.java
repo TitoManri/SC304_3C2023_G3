@@ -183,6 +183,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
         limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        limpiar.setForeground(new java.awt.Color(255, 255, 255));
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +194,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
         agregarBebida.setBackground(new java.awt.Color(7, 0, 63));
         agregarBebida.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        agregarBebida.setForeground(new java.awt.Color(255, 255, 255));
         agregarBebida.setText("Agregar Bebida");
         agregarBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +205,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
         editarBebida.setBackground(new java.awt.Color(7, 0, 63));
         editarBebida.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        editarBebida.setForeground(new java.awt.Color(255, 255, 255));
         editarBebida.setText("Editar Bebida");
         editarBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +216,7 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        volverPantallaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +245,8 @@ public class CatalogoBebidas extends javax.swing.JFrame {
     }//GEN-LAST:event_licoresRadioButtonActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
+        nombreBebidaTexto.setText("");
+        precioBebida.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void nombreBebidaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreBebidaTextoActionPerformed
@@ -367,6 +372,8 @@ public class CatalogoBebidas extends javax.swing.JFrame {
 
             guardarListaEnArchivo(inicioBebida);
             llenarTabla();
+            nombreBebidaTexto.setText("");
+            precioBebida.setText("");
             JOptionPane.showMessageDialog(null, "Bebida agregada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (NumberFormatException e) {

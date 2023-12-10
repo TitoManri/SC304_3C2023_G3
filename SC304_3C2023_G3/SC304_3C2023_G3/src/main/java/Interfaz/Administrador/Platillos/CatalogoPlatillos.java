@@ -7,10 +7,8 @@ package Interfaz.Administrador.Platillos;
 import Catalogo.Nodos.NodoPlatillo;
 import Catalogo.Platillo.Platillo;
 import Interfaz.Administrador.PaginaInicio;
-import java.awt.HeadlessException;
+import java.awt.*;
 import java.io.*;
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -120,10 +118,16 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         nombrePlatilloTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nombrePlatilloTexto.setForeground(new java.awt.Color(255, 255, 255));
         nombrePlatilloTexto.setBorder(null);
+        nombrePlatilloTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePlatilloTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombrePlatilloTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 340, 20));
 
         limpiar.setBackground(new java.awt.Color(7, 0, 63));
         limpiar.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        limpiar.setForeground(new java.awt.Color(255, 255, 255));
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +240,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Categoria", "Ingredientes", "Precio"
+                "Nombres", "Ingredientes", "Categorias", "Precios"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -259,6 +263,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         agregarPlatillo.setBackground(new java.awt.Color(7, 0, 63));
         agregarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+        agregarPlatillo.setForeground(new java.awt.Color(255, 255, 255));
         agregarPlatillo.setText("Agregar Platillo");
         agregarPlatillo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +274,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         editarPlatillo.setBackground(new java.awt.Color(7, 0, 63));
         editarPlatillo.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        editarPlatillo.setForeground(new java.awt.Color(255, 255, 255));
         editarPlatillo.setText("Editar Platillo");
         editarPlatillo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +285,7 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
 
         volverPantallaPrincipal.setBackground(new java.awt.Color(7, 0, 63));
         volverPantallaPrincipal.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        volverPantallaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         volverPantallaPrincipal.setText("Volver a la pantalla principal");
         volverPantallaPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,11 +298,21 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
         ingredientesPlatilloTexto.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         ingredientesPlatilloTexto.setForeground(new java.awt.Color(255, 255, 255));
         ingredientesPlatilloTexto.setBorder(null);
+        ingredientesPlatilloTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingredientesPlatilloTextoActionPerformed(evt);
+            }
+        });
         getContentPane().add(ingredientesPlatilloTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 340, -1));
 
         precioPlatillo.setBackground(new java.awt.Color(7, 0, 63));
         precioPlatillo.setForeground(new java.awt.Color(255, 255, 255));
         precioPlatillo.setBorder(null);
+        precioPlatillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioPlatilloActionPerformed(evt);
+            }
+        });
         getContentPane().add(precioPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 120, 30));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AgregarYEditarPlatillos.png"))); // NOI18N
@@ -318,7 +335,9 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_entradasRadioButtonActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
+        nombrePlatilloTexto.setText("");
+        ingredientesPlatilloTexto.setText("");
+        precioPlatillo.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volverPantallaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverPantallaPrincipalActionPerformed
@@ -417,6 +436,9 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
                 agregarPlatillo(platillo);
                 guardarEnArchivo();
                 llenarTabla();
+                nombrePlatilloTexto.setText("");
+                ingredientesPlatilloTexto.setText("");
+                precioPlatillo.setText("");
                 JOptionPane.showMessageDialog(null, "Platillo agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 mostrarError("El platillo ya existe en el catálogo.");
@@ -468,18 +490,18 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
     
     private void editarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPlatilloActionPerformed
         try {
-            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la bebida que desea modificar:");
+            String platilloNom = JOptionPane.showInputDialog("Ingrese el nombre de la platillo que desea modificar:");
 
             if (platilloNom != null) {
                 NodoPlatillo aux = buscarPlatillo(platilloNom);
 
                 if (aux != null) {
-                    Platillo bebidaActual = aux.getPlatillo();
+                    Platillo platilloActual = aux.getPlatillo();
 
-                    String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre de la bebida:", bebidaActual.getNombre());
-                    String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes de la bebida:", bebidaActual.getNombre());
-                    String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría de la bebida:", bebidaActual.getCategoria());
-                    String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio de la bebida:", bebidaActual.getPrecio());
+                    String nuevoNom = JOptionPane.showInputDialog("Nuevo nombre del platillo:", platilloActual.getNombre());
+                    String nuevaDescripcion = JOptionPane.showInputDialog("Nuevos ingredientes del platillo:", platilloActual.getNombre());
+                    String nuevaCateg = JOptionPane.showInputDialog("Nueva categoría del platillo:", platilloActual.getCategoria());
+                    String nuevoPrecio = JOptionPane.showInputDialog("Nuevo precio del platillo:", platilloActual.getPrecio());
 
                     if (nuevoNom != null && nuevaDescripcion != null && nuevaCateg != null && nuevoPrecio != null) {
                         Platillo nuevoPlatillo = new Platillo(nuevoNom, nuevaDescripcion, nuevaCateg, nuevoPrecio);
@@ -500,6 +522,18 @@ public class CatalogoPlatillos extends javax.swing.JFrame {
             mostrarError("Error al editar el platillo: " + e.getMessage());
         }
     }//GEN-LAST:event_editarPlatilloActionPerformed
+
+    private void nombrePlatilloTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePlatilloTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrePlatilloTextoActionPerformed
+
+    private void ingredientesPlatilloTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingredientesPlatilloTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingredientesPlatilloTextoActionPerformed
+
+    private void precioPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioPlatilloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioPlatilloActionPerformed
     
     public NodoPlatillo buscarPlatillo(String nombrePlatillo) {
         NodoPlatillo aux = inicioPlatillo;
