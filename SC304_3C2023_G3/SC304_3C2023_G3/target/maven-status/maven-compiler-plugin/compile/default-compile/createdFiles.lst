@@ -12,6 +12,7 @@ Interfaz/Cliente/Transaccion$5.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$7.class
 Interfaz/Administrador/Cajas/Caja$4.class
 Interfaz/Administrador/Postres/CatalogoPostres$1.class
+Interfaz/Administrador/Postres/CatalogoPostres$9.class
 Catalogo/Nodos/NodoPlatillo.class
 Interfaz/Administrador/PaginaInicio$6.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores.class
@@ -21,9 +22,11 @@ Interfaz/Administrador/PaginaInicio$3.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$1.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$11.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$3.class
+Interfaz/Administrador/Platillos/CatalogoPlatillos$13.class
 Interfaz/Cliente/Ordenes/AgregarPostCliente.class
 Interfaz/Cliente/Ordenes/AgregarPostCliente$4.class
 Interfaz/Administrador/Platillos/CatalogoPlatillos$10.class
+Interfaz/Administrador/Postres/CatalogoPostres$10.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$6.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$3.class
 Catalogo/Postres/Postre.class
@@ -53,6 +56,7 @@ Interfaz/Administrador/Postres/CatalogoPostres$4.class
 Interfaz/Cliente/Ordenes/AgregarPlatCliente.class
 Interfaz/Cliente/LogIn$4.class
 Interfaz/Cliente/SignIn$1.class
+Interfaz/Administrador/Platillos/CatalogoPlatillos$12.class
 Interfaz/Cliente/Transaccion$2.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$4.class
 Interfaz/Administrador/Proovedores/CatalogoProvedores$1.class
@@ -60,7 +64,9 @@ Interfaz/Administrador/Cajas/Caja$5.class
 Interfaz/Cliente/SignIn$7.class
 Interfaz/Administrador/Postres/CatalogoPostres.class
 Interfaz/Cliente/Ordenes/AgregarBebCliente$4.class
+Interfaz/Administrador/Postres/CatalogoPostres$11.class
 Interfaz/Administrador/Bebidas/CatalogoBebidas$7.class
+Interfaz/Administrador/Platillos/CatalogoPlatillos$11.class
 Interfaz/Administrador/PaginaInicio$7.class
 Interfaz/Cliente/Transaccion$1.class
 Catalogo/Platillo/Platillo.class

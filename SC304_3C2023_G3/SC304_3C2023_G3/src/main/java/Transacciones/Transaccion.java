@@ -12,7 +12,7 @@ public class Transaccion {
     private String nombreCliente;
     private double montoPagar;
 
-    public Transaccion() {
+    public Transaccion(String nombreCliente1, double total, LocalDateTime fecha) {
         this.fechaHora = null;
         this.montoPagar = 0.0;
         this.nombreCliente = "";
